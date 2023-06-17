@@ -14,7 +14,7 @@ protocol NetworkServiceType: AnyObject {
 /// Defines the Network service errors.
 enum NetworkError: Error {
     
-    /// When netowrk cannot be established
+    /// When network cannot be established
     case networkFailure
     
     /// When network request has timed out
@@ -25,13 +25,13 @@ enum NetworkError: Error {
     /// When returns 5xx family of server errors
     case server
     
-    /// When service is unaavailable. i.e. 503
-    case seviceUnavailable
+    /// When service is unavailable. i.e. 503
+    case serviceUnavailable
     
     /// When api returns rate limited error. i.e. 429
     case apiRateLimited
     
-    /// When unauthoized due to bad credentials. i.e. 401
+    /// When unauthorized due to bad credentials. i.e. 401
     case unAuthorized
     
     /// When access is forbidden i.e. 403

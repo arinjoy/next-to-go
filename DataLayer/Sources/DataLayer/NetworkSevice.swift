@@ -89,7 +89,7 @@ final class NetworkService: NetworkServiceType {
         case 429:
             return .apiRateLimited
         case 503:
-            return .seviceUnavailable
+            return .serviceUnavailable
         case 500 ... 599:
             return .server
         default:

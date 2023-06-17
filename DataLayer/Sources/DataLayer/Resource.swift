@@ -5,10 +5,25 @@
 import Foundation
 
 struct Resource<T: Decodable> {
+    
+    // MARK: - Properties
+    
     let url: URL
     let parameters: [String: CustomStringConvertible]
+    
+    // MARK: - Initializer
+    
+    init(url: URL, parameters: [String: CustomStringConvertible] = [:]) {
+        self.url = url
+        self.parameters = parameters
+    }
+    
+    // MARK: - Helper
+    
     var request: URLRequest? {
-        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+        guard
+            var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        else {
             return nil
         }
         components.queryItems = parameters.keys.map { key in
@@ -20,9 +35,5 @@ struct Resource<T: Decodable> {
         return URLRequest(url: url)
     }
 
-    init(url: URL, parameters: [String: CustomStringConvertible] = [:]) {
-        self.url = url
-        self.parameters = parameters
-    }
 }
 
