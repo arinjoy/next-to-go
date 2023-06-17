@@ -11,18 +11,7 @@
 		35182CB32A3D3B62004571DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35182CB22A3D3B62004571DB /* ContentView.swift */; };
 		35182CB52A3D3B64004571DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35182CB42A3D3B64004571DB /* Assets.xcassets */; };
 		35182CB82A3D3B64004571DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35182CB72A3D3B64004571DB /* Preview Assets.xcassets */; };
-		35182CC22A3D3B64004571DB /* NextToGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35182CC12A3D3B64004571DB /* NextToGoTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		35182CBE2A3D3B64004571DB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 35182CA52A3D3B62004571DB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 35182CAC2A3D3B62004571DB;
-			remoteInfo = NextToGo;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		35182CAD2A3D3B62004571DB /* NextToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,19 +19,12 @@
 		35182CB22A3D3B62004571DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35182CB42A3D3B64004571DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35182CB72A3D3B64004571DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		35182CBD2A3D3B64004571DB /* NextToGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextToGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		35182CC12A3D3B64004571DB /* NextToGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextToGoTests.swift; sourceTree = "<group>"; };
+		35B4771F2A3D4C45004FA345 /* DataLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataLayer; sourceTree = "<group>"; };
+		35B598AD2A3D4E1D00ABBD71 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DomainLayer; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		35182CAA2A3D3B62004571DB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		35182CBA2A3D3B64004571DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -55,8 +37,9 @@
 		35182CA42A3D3B62004571DB = {
 			isa = PBXGroup;
 			children = (
+				35B598AD2A3D4E1D00ABBD71 /* DomainLayer */,
+				35B4771F2A3D4C45004FA345 /* DataLayer */,
 				35182CAF2A3D3B62004571DB /* NextToGo */,
-				35182CC02A3D3B64004571DB /* NextToGoTests */,
 				35182CAE2A3D3B62004571DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,7 +48,6 @@
 			isa = PBXGroup;
 			children = (
 				35182CAD2A3D3B62004571DB /* NextToGo.app */,
-				35182CBD2A3D3B64004571DB /* NextToGoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,14 +71,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		35182CC02A3D3B64004571DB /* NextToGoTests */ = {
-			isa = PBXGroup;
-			children = (
-				35182CC12A3D3B64004571DB /* NextToGoTests.swift */,
-			);
-			path = NextToGoTests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -118,25 +92,6 @@
 			productReference = 35182CAD2A3D3B62004571DB /* NextToGo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		35182CBC2A3D3B64004571DB /* NextToGoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 35182CD42A3D3B64004571DB /* Build configuration list for PBXNativeTarget "NextToGoTests" */;
-			buildPhases = (
-				35182CB92A3D3B64004571DB /* Sources */,
-				35182CBA2A3D3B64004571DB /* Frameworks */,
-				35182CBB2A3D3B64004571DB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				35E939B42A3D42F400C1B3A5 /* PBXTargetDependency */,
-				35182CBF2A3D3B64004571DB /* PBXTargetDependency */,
-			);
-			name = NextToGoTests;
-			productName = NextToGoTests;
-			productReference = 35182CBD2A3D3B64004571DB /* NextToGoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -149,10 +104,6 @@
 				TargetAttributes = {
 					35182CAC2A3D3B62004571DB = {
 						CreatedOnToolsVersion = 14.2;
-					};
-					35182CBC2A3D3B64004571DB = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 35182CAC2A3D3B62004571DB;
 					};
 				};
 			};
@@ -173,7 +124,6 @@
 			projectRoot = "";
 			targets = (
 				35182CAC2A3D3B62004571DB /* NextToGo */,
-				35182CBC2A3D3B64004571DB /* NextToGoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -185,13 +135,6 @@
 			files = (
 				35182CB82A3D3B64004571DB /* Preview Assets.xcassets in Resources */,
 				35182CB52A3D3B64004571DB /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		35182CBB2A3D3B64004571DB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,29 +150,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35182CB92A3D3B64004571DB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				35182CC22A3D3B64004571DB /* NextToGoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		35182CBF2A3D3B64004571DB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 35182CAC2A3D3B62004571DB /* NextToGo */;
-			targetProxy = 35182CBE2A3D3B64004571DB /* PBXContainerItemProxy */;
-		};
 		35E939B12A3D42B000C1B3A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = 35E939B02A3D42B000C1B3A5 /* SwiftLint */;
-		};
-		35E939B42A3D42F400C1B3A5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 35E939B32A3D42F400C1B3A5 /* SwiftLint */;
 		};
 /* End PBXTargetDependency section */
 
@@ -406,46 +332,6 @@
 			};
 			name = Release;
 		};
-		35182CD52A3D3B64004571DB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9D2CDZVV47;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = arin.appy.com.NextToGoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextToGo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NextToGo";
-			};
-			name = Debug;
-		};
-		35182CD62A3D3B64004571DB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9D2CDZVV47;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = arin.appy.com.NextToGoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextToGo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NextToGo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -467,15 +353,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		35182CD42A3D3B64004571DB /* Build configuration list for PBXNativeTarget "NextToGoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				35182CD52A3D3B64004571DB /* Debug */,
-				35182CD62A3D3B64004571DB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -491,11 +368,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		35E939B02A3D42B000C1B3A5 /* SwiftLint */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
-			productName = "plugin:SwiftLint";
-		};
-		35E939B32A3D42F400C1B3A5 /* SwiftLint */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
 			productName = "plugin:SwiftLint";
