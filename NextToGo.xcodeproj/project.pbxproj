@@ -111,6 +111,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				35E939B12A3D42B000C1B3A5 /* PBXTargetDependency */,
 			);
 			name = NextToGo;
 			productName = NextToGo;
@@ -128,6 +129,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				35E939B42A3D42F400C1B3A5 /* PBXTargetDependency */,
 				35182CBF2A3D3B64004571DB /* PBXTargetDependency */,
 			);
 			name = NextToGoTests;
@@ -163,6 +165,9 @@
 				Base,
 			);
 			mainGroup = 35182CA42A3D3B62004571DB;
+			packageReferences = (
+				35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */,
+			);
 			productRefGroup = 35182CAE2A3D3B62004571DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -217,6 +222,14 @@
 			isa = PBXTargetDependency;
 			target = 35182CAC2A3D3B62004571DB /* NextToGo */;
 			targetProxy = 35182CBE2A3D3B64004571DB /* PBXContainerItemProxy */;
+		};
+		35E939B12A3D42B000C1B3A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 35E939B02A3D42B000C1B3A5 /* SwiftLint */;
+		};
+		35E939B42A3D42F400C1B3A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 35E939B32A3D42F400C1B3A5 /* SwiftLint */;
 		};
 /* End PBXTargetDependency section */
 
@@ -464,6 +477,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lukepistrol/SwiftLintPlugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35E939B02A3D42B000C1B3A5 /* SwiftLint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
+			productName = "plugin:SwiftLint";
+		};
+		35E939B32A3D42F400C1B3A5 /* SwiftLint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;
+			productName = "plugin:SwiftLint";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35182CA52A3D3B62004571DB /* Project object */;
 }
