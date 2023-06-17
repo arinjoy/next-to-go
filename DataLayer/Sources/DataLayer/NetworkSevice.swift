@@ -6,16 +6,16 @@ import Foundation
 import Combine
 import SharedUtils
 
-final class NetworkService: NetworkServiceType {
+final public class NetworkService: NetworkServiceType {
 
     private let session: URLSession
 
-    init(with configuration: URLSessionConfiguration) {
+    public init(with configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
     }
 
     @discardableResult
-    func load<T>(_ resource: Resource<T>) -> AnyPublisher<T, NetworkError> {
+    public func load<T>(_ resource: Resource<T>) -> AnyPublisher<T, NetworkError> {
         
         guard let request = resource.request else {
             return .fail(NetworkError.unknown)

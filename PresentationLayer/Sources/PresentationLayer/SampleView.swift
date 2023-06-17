@@ -6,10 +6,29 @@
 //
 
 import SwiftUI
+import DataLayer
+import SharedUtils
+import Combine
 
 public struct SampleView: View {
     
-    public init() {}
+    var cancellables = Set<AnyCancellable>()
+    
+    public init() {
+        let networkService: NetworkServiceType = NetworkService(with: URLSessionConfiguration.ephemeral)
+        
+        networkService
+            .load(Resource<RacesListData>.nextFiveRaces())
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    print(error)
+                }
+            } receiveValue: { moviesResponse in
+                print(moviesResponse)
+            }
+            .store(in: &cancellables)
+        
+    }
     
     public var body: some View {
         VStack {

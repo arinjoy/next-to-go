@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Resource<T: Decodable> {
+public struct Resource<T: Decodable> {
     
     // MARK: - Properties
     
@@ -13,7 +13,7 @@ struct Resource<T: Decodable> {
     
     // MARK: - Initializer
     
-    init(url: URL, parameters: [String: CustomStringConvertible] = [:]) {
+    public init(url: URL, parameters: [String: CustomStringConvertible] = [:]) {
         self.url = url
         self.parameters = parameters
     }

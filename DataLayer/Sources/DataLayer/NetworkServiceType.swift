@@ -5,14 +5,14 @@
 import Foundation
 import Combine
 
-protocol NetworkServiceType: AnyObject {
+public protocol NetworkServiceType: AnyObject {
 
     @discardableResult
     func load<T: Decodable>(_ resource: Resource<T>) -> AnyPublisher<T, NetworkError>
 }
 
 /// Defines the Network service errors.
-enum NetworkError: Error {
+public enum NetworkError: Error {
     
     /// When network cannot be established
     case networkFailure

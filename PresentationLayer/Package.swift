@@ -14,7 +14,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../SharedUtils"),
-        .package(path: "../DomainLayer")
+        .package(path: "../DomainLayer"),
+        .package(path: "../DataLayer")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -22,7 +23,7 @@ let package = Package(
         .target(
             name: "PresentationLayer",
             dependencies: ["SharedUtils",
-                           "DomainLayer"],
+                           "DomainLayer", "DataLayer"],
             path: "Sources"),
         .testTarget(
             name: "PresentationLayerTests",
