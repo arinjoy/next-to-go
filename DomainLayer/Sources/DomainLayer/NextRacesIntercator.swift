@@ -23,9 +23,12 @@ public final class NextRacesInteractor: NextRacesInteracting {
     
     // MARK: - NextRacesInteracting
     
-    public func nextFiveRaces(for category: Race.Category) -> AnyPublisher<[Race], DataLayer.NetworkError> {
+    public func nextRaces(
+        for category: Race.Category = .all,   // Defaults to all races
+        pollEvery interval: TimeInterval = 5  // Defaults to 5 seconds polling
+    ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         
-       let timer = Timer.publish(every: 5, on: .main, in: .common)
+       let timer = Timer.publish(every: interval, on: .main, in: .common)
             .autoconnect()
             .prepend(Date.now)
             .setFailureType(to: NetworkError.self)
@@ -38,13 +41,13 @@ public final class NextRacesInteractor: NextRacesInteracting {
             targetCategoryId = category.rawValue
         }
         
-        let nextFivePublisher = networkService.load(
-            Resource<RacesListResponse>.nextFiveRaces(forCategory: targetCategoryId)
+        let nextRacesPublisher = networkService.load(
+            Resource<RacesListResponse>.nextRaces(forCategory: targetCategoryId)
         )
             .compactMap { $0.races.compactMap { Race(from: $0) } }
    
         
-        return Publishers.CombineLatest(timer, nextFivePublisher)
+        return Publishers.CombineLatest(timer, nextRacesPublisher)
             .map { _, results in
                 return results
             }

@@ -20,7 +20,7 @@ public struct SampleView: View {
         let interactor = NextRacesInteractor()
         
         interactor
-            .nextFiveRaces(for: .horse)
+            .nextRaces(pollEvery: 3)
             .sink { completion in
                 if case .failure(let error) = completion {
                     print(error)
