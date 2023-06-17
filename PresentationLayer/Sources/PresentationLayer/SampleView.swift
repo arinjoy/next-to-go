@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SampleView.swift
 //  NextToGo
 //
 //  Created by Arinjoy Biswas on 17/6/2023.
@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
+public struct SampleView: View {
+    
+    public init() {}
+    
+    public var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
@@ -21,6 +24,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SampleView()
     }
 }

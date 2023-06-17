@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-import DataLayer
+import PresentationLayer
 
 @main
 struct NextToGoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SampleView()
         }
     }
 }

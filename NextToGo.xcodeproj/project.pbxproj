@@ -8,17 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		35182CB12A3D3B62004571DB /* NextToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35182CB02A3D3B62004571DB /* NextToGoApp.swift */; };
-		35182CB32A3D3B62004571DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35182CB22A3D3B62004571DB /* ContentView.swift */; };
 		35182CB52A3D3B64004571DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35182CB42A3D3B64004571DB /* Assets.xcassets */; };
+		35B598B22A3D4FC000ABBD71 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B12A3D4FC000ABBD71 /* DataLayer */; };
+		35B598B42A3D4FC500ABBD71 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B32A3D4FC500ABBD71 /* DomainLayer */; };
+		35B598B82A3D502800ABBD71 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B72A3D502800ABBD71 /* PresentationLayer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35182CAD2A3D3B62004571DB /* NextToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35182CB02A3D3B62004571DB /* NextToGoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextToGoApp.swift; sourceTree = "<group>"; };
-		35182CB22A3D3B62004571DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35182CB42A3D3B64004571DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B4771F2A3D4C45004FA345 /* DataLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataLayer; sourceTree = "<group>"; };
 		35B598AD2A3D4E1D00ABBD71 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DomainLayer; sourceTree = "<group>"; };
+		35B598B62A3D501600ABBD71 /* PresentationLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PresentationLayer; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +28,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B598B42A3D4FC500ABBD71 /* DomainLayer in Frameworks */,
+				35B598B82A3D502800ABBD71 /* PresentationLayer in Frameworks */,
+				35B598B22A3D4FC000ABBD71 /* DataLayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,10 +40,12 @@
 		35182CA42A3D3B62004571DB = {
 			isa = PBXGroup;
 			children = (
+				35B598B62A3D501600ABBD71 /* PresentationLayer */,
 				35B598AD2A3D4E1D00ABBD71 /* DomainLayer */,
 				35B4771F2A3D4C45004FA345 /* DataLayer */,
 				35182CAF2A3D3B62004571DB /* NextToGo */,
 				35182CAE2A3D3B62004571DB /* Products */,
+				35B598B02A3D4FC000ABBD71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,10 +61,16 @@
 			isa = PBXGroup;
 			children = (
 				35182CB02A3D3B62004571DB /* NextToGoApp.swift */,
-				35182CB22A3D3B62004571DB /* ContentView.swift */,
 				35182CB42A3D3B64004571DB /* Assets.xcassets */,
 			);
 			path = NextToGo;
+			sourceTree = "<group>";
+		};
+		35B598B02A3D4FC000ABBD71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +90,11 @@
 				35E939B12A3D42B000C1B3A5 /* PBXTargetDependency */,
 			);
 			name = NextToGo;
+			packageProductDependencies = (
+				35B598B12A3D4FC000ABBD71 /* DataLayer */,
+				35B598B32A3D4FC500ABBD71 /* DomainLayer */,
+				35B598B72A3D502800ABBD71 /* PresentationLayer */,
+			);
 			productName = NextToGo;
 			productReference = 35182CAD2A3D3B62004571DB /* NextToGo.app */;
 			productType = "com.apple.product-type.application";
@@ -133,7 +151,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35182CB32A3D3B62004571DB /* ContentView.swift in Sources */,
 				35182CB12A3D3B62004571DB /* NextToGoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +286,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NextToGo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9D2CDZVV47;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -298,7 +315,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NextToGo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9D2CDZVV47;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -355,6 +372,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		35B598B12A3D4FC000ABBD71 /* DataLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataLayer;
+		};
+		35B598B32A3D4FC500ABBD71 /* DomainLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainLayer;
+		};
+		35B598B72A3D502800ABBD71 /* PresentationLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PresentationLayer;
+		};
 		35E939B02A3D42B000C1B3A5 /* SwiftLint */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35E939AF2A3D413000C1B3A5 /* XCRemoteSwiftPackageReference "SwiftLintPlugin" */;

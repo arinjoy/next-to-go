@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "DataLayer",
-    platforms: [.iOS(.v16)],
+    name: "PresentationLayer",
+    platforms: [.iOS(.v16), .watchOS(.v8)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "DataLayer",
-            targets: ["DataLayer"]),
+            name: "PresentationLayer",
+            targets: ["PresentationLayer"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -20,10 +20,10 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "DataLayer",
+            name: "PresentationLayer",
             dependencies: []),
         .testTarget(
-            name: "DataLayerTests",
-            dependencies: ["DataLayer"]),
+            name: "PresentationLayerTests",
+            dependencies: ["PresentationLayer"]),
     ]
 )
