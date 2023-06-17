@@ -35,8 +35,10 @@ class NextToGoViewModel: ObservableObject {
         isLoading = true
         
         interactor
-            .nextRaces(for: .all, pollEvery: 5)
+            .nextRaces(for: .all, pollEvery: 30)
             .receive(on: Scheduler.main)
+            // TODO: remove forced delay
+            .delay(for: .seconds(1), scheduler: Scheduler.main)
             .sink { [unowned self] completion in
                 isLoading = false
                 if case .failure(let error) = completion {

@@ -18,9 +18,14 @@ public struct NextToGoView: View {
     }
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
+            
             Group {
+                
+                Spacer().frame(height: 20)
+                
                 if let items = viewModel.raceItems {
+                    
                     List(items) { item in
                         HStack(spacing: 16) {
                             Text(item.number)
@@ -28,7 +33,10 @@ public struct NextToGoView: View {
                             Text(item.name)
                             Text(item.venu.country)
                         }
-                        
+                    }
+                    .listStyle(.inset)
+                    .refreshable {
+                        viewModel.loadNextRaces()
                     }
                 } else {
                     LoadingView(
@@ -40,16 +48,7 @@ public struct NextToGoView: View {
                 }
             }
             .navigationBarTitle("Next to Go 🏇🏻 ")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    HStack{
-                        Image(systemName: "hare")
-                        Image(systemName: "tortoise")
-                    }
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                }
-            }
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             viewModel.loadNextRaces()

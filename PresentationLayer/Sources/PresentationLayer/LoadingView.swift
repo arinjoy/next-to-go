@@ -14,36 +14,45 @@ struct LoadingView: View {
     let retryAction: (() -> ())?
     
     var body: some View {
-        Group {
-            if isLoading {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                    Spacer()
-                }
-            } else if error != nil {
-                HStack {
+            GeometryReader { geo in
+                
+                VStack {
                     
-                    Spacer()
+                    Spacer().frame(height: geo.size.height / 3)
                     
-                    VStack(spacing: 4) {
+                    if isLoading {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                            Spacer()
+                        }
+                    } else if error != nil {
                         
-                        // TODO: Use custom error message mapped from the error code
-                        Text("Something went wrong!")
-                            .font(.headline)
-                        
-                        if let retryAction {
-                            Button(action: retryAction) {
-                                Text("Retry")
+                        HStack {
+                            
+                            Spacer()
+                            
+                            VStack(spacing: 16) {
+                                
+                                // TODO: Use custom error message mapped from the error code
+                                Text("Something went wrong!")
+                                    .font(.headline)
+                                
+                                if let retryAction {
+                                    Button(action: retryAction) {
+                                        Text("Retry")
+                                    }
+                                    .foregroundColor(Color.blue)
+                                    .buttonStyle(PlainButtonStyle())
+                                }
                             }
-                            .foregroundColor(Color.blue)
-                            .buttonStyle(PlainButtonStyle())
+                            
+                            Spacer()
                         }
                     }
-                    Spacer()
                 }
+                
             }
-        }
     }
 }
