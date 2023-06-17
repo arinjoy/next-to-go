@@ -12,12 +12,19 @@ public extension Publisher {
     }
 
     static func just(_ output: Output) -> AnyPublisher<Output, Failure> {
+        // By definition `Just` should never fail, but some syntax sugar has been
+        // added to make it usable conveniently to avoid an Apple's warning
         return Just(output)
+            .setFailureType(to: Failure.self)
             .catch { _ in AnyPublisher<Output, Failure>.empty() }
             .eraseToAnyPublisher()
     }
 
     static func fail(_ error: Failure) -> AnyPublisher<Output, Failure> {
+        let xx: Int? = 22
+        let ss = xx!
+        // By definition `Just` should never fail, but some syntax sugar has been
+        // added to make it usable conveniently to avoid an Apple's warning
         return Fail(error: error).eraseToAnyPublisher()
     }
 }
@@ -35,4 +42,3 @@ public extension Publisher {
         map(transform).switchToLatest()
     }
 }
-
