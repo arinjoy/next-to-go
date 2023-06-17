@@ -22,7 +22,7 @@ public class ServicesProvider {
         // Set 10 seconds timeout for the request,
         // otherwise defaults to 60 seconds which is too long.
         // This helps in network disconnection and error testing.
-        sessionConfig.timeoutIntervalForRequest = 10
+        sessionConfig.timeoutIntervalForRequest = 5
         sessionConfig.waitsForConnectivity = true
         sessionConfig.allowsConstrainedNetworkAccess = true
         sessionConfig.allowsExpensiveNetworkAccess = true
