@@ -18,7 +18,7 @@ public struct SampleView: View {
         let networkService: NetworkServiceType = NetworkService(with: URLSessionConfiguration.ephemeral)
         
         networkService
-            .load(Resource<RacesListData>.nextFiveRaces())
+            .load(Resource<RacesListResponse>.nextFiveRaces())
             .sink { completion in
                 if case .failure(let error) = completion {
                     print(error)
