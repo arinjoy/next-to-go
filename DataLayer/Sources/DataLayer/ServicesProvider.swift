@@ -27,8 +27,6 @@ public class ServicesProvider {
         sessionConfig.allowsConstrainedNetworkAccess = true
         sessionConfig.allowsExpensiveNetworkAccess = true
         
-        //sessionConfig.timeoutIntervalForResource = 10
-        
         let network = NetworkService(with: sessionConfig)
         
         return ServicesProvider(network: network)
