@@ -23,7 +23,11 @@ public class ServicesProvider {
         // otherwise defaults to 60 seconds which is too long.
         // This helps in network disconnection and error testing.
         sessionConfig.timeoutIntervalForRequest = 10
-        sessionConfig.timeoutIntervalForResource = 10
+        sessionConfig.waitsForConnectivity = true
+        sessionConfig.allowsConstrainedNetworkAccess = true
+        sessionConfig.allowsExpensiveNetworkAccess = true
+        
+        //sessionConfig.timeoutIntervalForResource = 10
         
         let network = NetworkService(with: sessionConfig)
         

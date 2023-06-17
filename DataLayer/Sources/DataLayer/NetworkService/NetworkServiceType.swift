@@ -14,7 +14,7 @@ public protocol NetworkServiceType: AnyObject {
 /// Defines the Network service errors.
 public enum NetworkError: Error {
     
-    /// When network cannot be established
+    /// When network connection cannot be established
     case networkFailure
     
     /// When network request has timed out

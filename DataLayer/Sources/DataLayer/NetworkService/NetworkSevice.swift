@@ -62,23 +62,14 @@ final public class NetworkService: NetworkServiceType {
             .eraseToAnyPublisher()
     }
     
-    // MARK: - Custom Error Mapping Helpers
-    
-    /// Maps an Error from potential NSError from network connectivity issues
-    private func mapConnectivityError(_ error: Error) -> NetworkError {
-        let networkError: NSError = error as NSError
-        switch networkError.code {
-        case NSURLErrorNotConnectedToInternet:
-            return .networkFailure
-        case NSURLErrorTimedOut:
-            return .timeout
-        default:
-            return .unknown
-        }
-    }
+}
+
+// MARK: - Custom Error Mapping Helpers
+
+private extension NetworkService {
     
     /// Maps an HTTP negative status code into an custom error enum via `NetworkError`
-    private func mapHTTPStatusError(statusCode: Int) -> NetworkError {
+    func mapHTTPStatusError(statusCode: Int) -> NetworkError {
         switch statusCode {
         case 401:
             return .unAuthorized
@@ -95,5 +86,33 @@ final public class NetworkService: NetworkServiceType {
         default:
             return .unknown
         }
+    }
+    
+    /// Maps an error from potential network connectivity related issues
+    func mapConnectivityError(_ error: Error) -> NetworkError {
+        let errorCode = (error as NSError).code
+        
+        if NSURLErrorConnectionFailureCodes.contains(errorCode) {
+            return .networkFailure
+        } else if errorCode == NSURLErrorTimedOut {
+            return .timeout
+        } else {
+            return .unknown
+        }
+    }
+    
+    ///
+    /// A collection of error codes that related to network connection failures.
+    /// 🙏🏽 https://www.avanderlee.com/swift/optimizing-network-reachability/
+    ///
+    var NSURLErrorConnectionFailureCodes: [Int] {
+        [
+            NSURLErrorBackgroundSessionInUseByAnotherProcess, /// Error Code: `-996`
+            NSURLErrorCannotFindHost, /// Error Code: ` -1003`
+            NSURLErrorCannotConnectToHost, /// Error Code: ` -1004`
+            NSURLErrorNetworkConnectionLost, /// Error Code: ` -1005`
+            NSURLErrorNotConnectedToInternet, /// Error Code: ` -1009`
+            NSURLErrorSecureConnectionFailed /// Error Code: ` -1200`
+        ]
     }
 }
