@@ -5,9 +5,7 @@
 import Foundation
 
 struct ApiConstants {
-    
     static let baseURL = URL(string: "https://api.neds.com.au/rest/v1/racing/")!
-    
 }
 
 public struct RacesListResponse: Decodable {

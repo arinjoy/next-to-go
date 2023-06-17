@@ -4,14 +4,14 @@
 
 import Foundation
 
-final class Scheduler {
+public final class Scheduler {
 
-    static var background: OperationQueue = {
+    public static var background: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 5
         operationQueue.qualityOfService = QualityOfService.userInitiated
         return operationQueue
     }()
 
-    static let main = RunLoop.main
+    public static let main = RunLoop.main
 }

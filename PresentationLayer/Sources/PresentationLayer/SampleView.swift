@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DataLayer
+import DomainLayer
 import SharedUtils
 import Combine
 
@@ -15,10 +16,11 @@ public struct SampleView: View {
     var cancellables = Set<AnyCancellable>()
     
     public init() {
-        let networkService: NetworkServiceType = NetworkService(with: URLSessionConfiguration.ephemeral)
         
-        networkService
-            .load(Resource<RacesListResponse>.nextFiveRaces())
+        let interactor = NextRacesInteractor()
+        
+        interactor
+            .nextFiveRaces(for: .horse)
             .sink { completion in
                 if case .failure(let error) = completion {
                     print(error)

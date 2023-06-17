@@ -7,12 +7,15 @@ import Foundation
 
 extension Resource {
     
-    public static func nextFiveRaces() -> Resource<RacesListResponse> {
+    public static func nextFiveRaces(forCategory categoryId: String? = nil) -> Resource<RacesListResponse> {
         let baseURL = ApiConstants.baseURL
-        let parameters: [String : CustomStringConvertible] = [
+        var parameters: [String : CustomStringConvertible] = [
             "method": "nextraces",
             "count": "5"
         ]
+        if let categoryId {
+            parameters["category_id"] = categoryId
+        }
         return Resource<RacesListResponse>(url: baseURL, parameters: parameters)
     }
     

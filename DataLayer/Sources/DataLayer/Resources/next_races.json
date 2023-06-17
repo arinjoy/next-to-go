@@ -1,0 +1,211 @@
+{
+    "status": 200,
+    "data": {
+        "next_to_go_ids": [
+            "ade1ea4a-6ecc-4491-95da-be5b1655a7ff",
+            "a98d8015-7e70-4fb7-a341-4db5c781a0c2",
+            "909329c7-322b-4039-bba9-2885c35bf0d0",
+            "6af53891-77a2-489b-bd91-5f7cc584c0c3",
+            "84b6abbc-167c-4448-a18d-0b08f440b1b2"
+        ],
+        "race_summaries": {
+            "6af53891-77a2-489b-bd91-5f7cc584c0c3": {
+                "race_id": "6af53891-77a2-489b-bd91-5f7cc584c0c3",
+                "race_name": "Kcr Pet Transport",
+                "race_number": 6,
+                "meeting_id": "0042297d-d647-4e0e-97ac-68e100159ccf",
+                "meeting_name": "The Meadows",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1686996960
+                },
+                "race_form": {
+                    "distance": 600,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "5ba75165-3cec-11eb-88bb-36fbfdf5d97f",
+                        "name": "OCAST",
+                        "short_name": "ocast",
+                        "icon_uri": "OCAST"
+                    },
+                    "weather_id": "5ba75165-3cec-11eb-88bb-36fbfdf5d97f",
+                    "race_comment": "LORNETT EXPRESS (1) is progressing well scoring last time out (33.92) at Sandown and bringing up his 7th career win. Form at the trip excellent including two wins. Comes out of a solid form race last start. Shapes as a top winning chance on latest effort. OSPREY WARRIOR (3) showed little early speed at his last couple, the latest finishing eighth (30.49) in a Grade 5 at this track. Comes through a solid form race last start. Should be in this for a long way. STARBURST CANDY (2) profiles nicely here at this trip.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"The Meadows\",\"state\":\"VIC\",\"country\":\"AUS\",\"number\":6,\"race_name\":\"Kcr Pet Transport\",\"time\":\"2023-06-17T10:16:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "LORNETT EXPRESS (1) is progressing well scoring last time out (33.92) at Sandown and bringing up his 7th career win. Form at the trip excellent including two wins. Comes out of a solid form race last start. Shapes as a top winning chance on latest effort. OSPREY WARRIOR (3) showed little early speed at his last couple, the latest finishing eighth (30.49) in a Grade 5 at this track. Comes through a solid form race last start. Should be in this for a long way. STARBURST CANDY (2) profiles nicely here at this trip."
+                },
+                "venue_id": "0cf981d5-327c-4fe2-ba13-576abf0622d2",
+                "venue_name": "The Meadows",
+                "venue_state": "VIC",
+                "venue_country": "AUS"
+            },
+            "84b6abbc-167c-4448-a18d-0b08f440b1b2": {
+                "race_id": "84b6abbc-167c-4448-a18d-0b08f440b1b2",
+                "race_name": "400Mtrs (A8)",
+                "race_number": 5,
+                "meeting_id": "9ceb710a-8e3e-46f5-bbca-d90b7cb7902e",
+                "meeting_name": "Romford Bags",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1686996960
+                },
+                "race_form": {
+                    "distance": 400,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "GLORY JUSTINE (2) latest effort finished 2nd on June 10 over 400m at this track behind Dacroppyboy beaten 3.5 lengths (24.53) in an A8. Looks suited here and rates on top. TIME FOR BAILEYS (5) is a talented type and proved too classy last time to win by 4 lengths at this track in a handy 24.62 beating Swift Janice. Can measure up again. DROMULTON SONIC (4) has been out of the placings at her last couple but on the winners' heels when placing three back (24.89) in an A7 at this track. Key player on best and worth another try. TO TONE CHLOE (1) is in the mix despite missing out at this track last time.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Romford Bags\",\"state\":\"UK\",\"country\":\"UK\",\"number\":5,\"race_name\":\"400Mtrs (A8)\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "GLORY JUSTINE (2) latest effort finished 2nd on June 10 over 400m at this track behind Dacroppyboy beaten 3.5 lengths (24.53) in an A8. Looks suited here and rates on top. TIME FOR BAILEYS (5) is a talented type and proved too classy last time to win by 4 lengths at this track in a handy 24.62 beating Swift Janice. Can measure up again. DROMULTON SONIC (4) has been out of the placings at her last couple but on the winners' heels when placing three back (24.89) in an A7 at this track. Key player on best and worth another try. TO TONE CHLOE (1) is in the mix despite missing out at this track last time."
+                },
+                "venue_id": "559f865c-f6e5-47e0-8881-fe6c92f4a508",
+                "venue_name": "Romford Bags",
+                "venue_state": "UK",
+                "venue_country": "UK"
+            },
+            "909329c7-322b-4039-bba9-2885c35bf0d0": {
+                "race_id": "909329c7-322b-4039-bba9-2885c35bf0d0",
+                "race_name": "Lv Forklifts",
+                "race_number": 11,
+                "meeting_id": "11095128-67c5-4141-872b-8d91e71b2deb",
+                "meeting_name": "Traralgon",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1686996720
+                },
+                "race_form": {
+                    "distance": 350,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                        "name": "FINE",
+                        "short_name": "fine",
+                        "icon_uri": "FINE"
+                    },
+                    "weather_id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                    "race_comment": "SKINNY OLIVE (2) is a consistent dog overall, in the frame at five of 15 starts including nine wins but missed the frame latest when fifth (23.00) over 400m at Geelong. Strike rate this course and distance strong having won two of four tries. Has the ability and expected to prove tough to beat again. LITTLE EDWARD (1) recorded a nose win (23.05) in a Grade 5 last time at Warragul. Has two wins already from this draw. Suited here and expected to run well. LAKEVIEW DOZER (6) won again in another strong performance making it three straight when scoring by 5.5 lengths (19.82) at this track over 350. One of main contenders. SPLITS TO BURN (10) was out of the money at this circuit last start but can turn the form around.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Traralgon\",\"state\":\"VIC\",\"country\":\"AUS\",\"number\":11,\"race_name\":\"Lv Forklifts\",\"time\":\"2023-06-17T10:12:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "SKINNY OLIVE (2) is a consistent dog overall, in the frame at five of 15 starts including nine wins but missed the frame latest when fifth (23.00) over 400m at Geelong. Strike rate this course and distance strong having won two of four tries. Has the ability and expected to prove tough to beat again. LITTLE EDWARD (1) recorded a nose win (23.05) in a Grade 5 last time at Warragul. Has two wins already from this draw. Suited here and expected to run well. LAKEVIEW DOZER (6) won again in another strong performance making it three straight when scoring by 5.5 lengths (19.82) at this track over 350. One of main contenders. SPLITS TO BURN (10) was out of the money at this circuit last start but can turn the form around."
+                },
+                "venue_id": "deece3ec-e060-4add-a7de-367863a26a0d",
+                "venue_name": "Traralgon",
+                "venue_state": "VIC",
+                "venue_country": "AUS"
+            },
+            "a98d8015-7e70-4fb7-a341-4db5c781a0c2": {
+                "race_id": "a98d8015-7e70-4fb7-a341-4db5c781a0c2",
+                "race_name": "Changeover @ Burwood Stud Mares Band 5 Pace",
+                "race_number": 7,
+                "meeting_id": "8ec2d385-9dfd-4f99-b785-e732472c8af3",
+                "meeting_name": "Albion Park",
+                "category_id": "161d9be2-e909-4326-8c2c-35ed71fb460b",
+                "advertised_start": {
+                    "seconds": 1686996660
+                },
+                "race_form": {
+                    "distance": 1660,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                        "name": "FINE",
+                        "short_name": "fine",
+                        "icon_uri": "FINE"
+                    },
+                    "weather_id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                    "race_comment": "SOHO RHAPSODY (6) had been around the mark in Sydney before delivering at this venue last start, coming from this same barrier to score by 5.6m. She looks nicely placed to win again. SAILOR GIRL (1) continues to race well with three wins and a second from the back row in her last three starts. Too strong last week and gets every chance from the ace draw. JO AN JO (9) draws the back row but was a Menangle winner two back. Can measure up with even luck. MISS MUCHO (8) had a tougher draw when scoring two back and placed from this barrier last time. Racing well and is a chance again while ZENXENA (2) is well drawn and going well winning two of her last three so respect.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Albion Park\",\"state\":\"QLD\",\"country\":\"AUS\",\"number\":7,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "SOHO RHAPSODY (6) had been around the mark in Sydney before delivering at this venue last start, coming from this same barrier to score by 5.6m. She looks nicely placed to win again. SAILOR GIRL (1) continues to race well with three wins and a second from the back row in her last three starts. Too strong last week and gets every chance from the ace draw. JO AN JO (9) draws the back row but was a Menangle winner two back. Can measure up with even luck. MISS MUCHO (8) had a tougher draw when scoring two back and placed from this barrier last time. Racing well and is a chance again while ZENXENA (2) is well drawn and going well winning two of her last three so respect."
+                },
+                "venue_id": "41036055-b448-4471-b64b-518543066fd1",
+                "venue_name": "Albion Park",
+                "venue_state": "QLD",
+                "venue_country": "AUS"
+            },
+            "ade1ea4a-6ecc-4491-95da-be5b1655a7ff": {
+                "race_id": "ade1ea4a-6ecc-4491-95da-be5b1655a7ff",
+                "race_name": "714Mtrs (Or3)",
+                "race_number": 4,
+                "meeting_id": "75e62fac-824b-4938-9b2b-0e317acbf4c6",
+                "meeting_name": "Crayford Bags",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1686996540
+                },
+                "race_form": {
+                    "distance": 714,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "A MYSTICAL LOVE (6) goes very well here starting four times for two wins and two minors. In the money last time at this track (57.26) in a OR3, finishing a 0.8 lengths second. Has the ability and looks a key chance here. LUNA JEZABELLE (4) has a strong record this track and trip with four wins and four placings from nine starts. In the money last time at this track (34.12) in a OR, finishing a 2.75 lengths third. With even luck and a clean start should be thereabouts. PATSYS ME DADDY (2) was out of the placings last time but before that was an impressive winner (45.81) in a OR at this track. Key player on best and worth another try. ROSEVILLE EMILY (1) can finish much closer after missing a cheque at this track last start.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Crayford Bags\",\"state\":\"UK\",\"country\":\"UK\",\"number\":4,\"race_name\":\"714Mtrs (Or3)\",\"time\":\"2023-06-17T10:09:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "A MYSTICAL LOVE (6) goes very well here starting four times for two wins and two minors. In the money last time at this track (57.26) in a OR3, finishing a 0.8 lengths second. Has the ability and looks a key chance here. LUNA JEZABELLE (4) has a strong record this track and trip with four wins and four placings from nine starts. In the money last time at this track (34.12) in a OR, finishing a 2.75 lengths third. With even luck and a clean start should be thereabouts. PATSYS ME DADDY (2) was out of the placings last time but before that was an impressive winner (45.81) in a OR at this track. Key player on best and worth another try. ROSEVILLE EMILY (1) can finish much closer after missing a cheque at this track last start."
+                },
+                "venue_id": "6d2b3084-6cd5-454b-a8e9-91a4525b880b",
+                "venue_name": "Crayford Bags",
+                "venue_state": "UK",
+                "venue_country": "UK"
+            }
+        }
+    },
+    "message": "Next 5 races from each category"
+}
