@@ -18,13 +18,8 @@ struct RacesListView: View {
     var body: some View {
         
         if let items = viewModel.raceItems {
-            List(items) { item in
-                HStack(spacing: 16) {
-                    Text(item.number)
-                    Spacer()
-                    Text(item.name)
-                    Text(item.venu.country)
-                }
+            List(items) { raceItem in
+                RaceRowView(race: raceItem)
             }
             .listStyle(.inset)
             .refreshable {

@@ -39,6 +39,25 @@ public struct Race: Identifiable {
         self.venu = .init(state: summary.venueState, country: summary.venueCountry)
     }
     
+    /// A convenience initialiser to be used for mocking and testing purposes
+    public init(
+        id: String,
+        category: Category,
+        name: String,
+        number: String,
+        meeting: String,
+        startTime: Date,
+        venu: Venu
+    ) {
+        self.id = id
+        self.category = category
+        self.name = name
+        self.number = number
+        self.meeting = meeting
+        self.startTime = startTime
+        self.venu = venu
+    }
+    
 }
 
 public extension Race {
@@ -46,6 +65,11 @@ public extension Race {
     struct Venu {
         public let state: String
         public let country: String
+        
+        public init(state: String, country: String) {
+            self.state = state
+            self.country = country
+        }
     }
     
     enum Category: String {
