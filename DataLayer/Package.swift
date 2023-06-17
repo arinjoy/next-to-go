@@ -21,7 +21,10 @@ let package = Package(
         .target(
             name: "DataLayer",
             dependencies: ["SharedUtils"],
-            path: "Sources"),
+            path: "Sources",
+            resources: [
+                .copy("Resources")
+            ]),
         .testTarget(
             name: "DataLayerTests",
             dependencies: ["DataLayer"]),
