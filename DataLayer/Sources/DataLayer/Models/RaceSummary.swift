@@ -12,12 +12,7 @@ struct ApiConstants {
 
 public struct RacesListResponse: Decodable {
     
-    let races: [RaceSummary]
-    
-    private enum CodingKeys: String, CodingKey {
-        case data = "data"
-        case raceSummaries = "race_summaries"
-    }
+    public let races: [RaceSummary]
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -26,17 +21,22 @@ public struct RacesListResponse: Decodable {
         self.races = dictArray.map { $1 }
             .sorted { $0.advertisedStartTime > $1.advertisedStartTime }
     }
+    
+    private enum CodingKeys: String, CodingKey {
+        case data = "data"
+        case raceSummaries = "race_summaries"
+    }
+    
 }
 
 public struct RaceSummary: Decodable, Identifiable {
-    
     public let id: String
-    let categoryId: String
-    let name: String
-    let meetingName: String
-    let advertisedStartTime: UInt32
-    let venueState: String
-    let venueCountry: String
+    public let categoryId: String
+    public let name: String
+    public let meetingName: String
+    public let advertisedStartTime: UInt32
+    public let venueState: String
+    public let venueCountry: String
 }
 
 extension RaceSummary {
