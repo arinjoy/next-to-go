@@ -40,11 +40,12 @@ class NextToGoViewModel: ObservableObject {
             // TODO: remove forced delay
             .delay(for: .seconds(1), scheduler: Scheduler.main)
             .sink { [unowned self] completion in
-                isLoading = false
                 if case .failure(let error) = completion {
+                    isLoading = false
                     loadingError = error
                 }
             } receiveValue: { [unowned self] results in
+                isLoading = false
                 raceItems = results
                 
                 // FIXME: Remove testing code

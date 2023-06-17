@@ -24,20 +24,8 @@ public struct NextToGoView: View {
                 
                 Spacer().frame(height: 20)
                 
-                if let items = viewModel.raceItems {
-                    
-                    List(items) { item in
-                        HStack(spacing: 16) {
-                            Text(item.number)
-                            Spacer()
-                            Text(item.name)
-                            Text(item.venu.country)
-                        }
-                    }
-                    .listStyle(.inset)
-                    .refreshable {
-                        viewModel.loadNextRaces()
-                    }
+                if viewModel.raceItems != nil {
+                    RacesListView(viewModel: viewModel)
                 } else {
                     LoadingView(
                         isLoading: viewModel.isLoading,

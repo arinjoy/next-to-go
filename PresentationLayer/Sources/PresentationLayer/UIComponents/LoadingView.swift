@@ -50,6 +50,8 @@ struct LoadingView: View {
                             
                             Spacer()
                         }
+                    } else {
+                        EmptyView()
                     }
                 }
                 
