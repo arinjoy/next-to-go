@@ -12,6 +12,7 @@
 		35B598B22A3D4FC000ABBD71 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B12A3D4FC000ABBD71 /* DataLayer */; };
 		35B598B42A3D4FC500ABBD71 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B32A3D4FC500ABBD71 /* DomainLayer */; };
 		35B598B82A3D502800ABBD71 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B72A3D502800ABBD71 /* PresentationLayer */; };
+		35B598C02A3D5E1C00ABBD71 /* SharedUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598BF2A3D5E1C00ABBD71 /* SharedUtils */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		35B4771F2A3D4C45004FA345 /* DataLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataLayer; sourceTree = "<group>"; };
 		35B598AD2A3D4E1D00ABBD71 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DomainLayer; sourceTree = "<group>"; };
 		35B598B62A3D501600ABBD71 /* PresentationLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PresentationLayer; sourceTree = "<group>"; };
+		35B598BE2A3D5DDC00ABBD71 /* SharedUtils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUtils; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 				35B598B42A3D4FC500ABBD71 /* DomainLayer in Frameworks */,
 				35B598B82A3D502800ABBD71 /* PresentationLayer in Frameworks */,
 				35B598B22A3D4FC000ABBD71 /* DataLayer in Frameworks */,
+				35B598C02A3D5E1C00ABBD71 /* SharedUtils in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 		35182CA42A3D3B62004571DB = {
 			isa = PBXGroup;
 			children = (
+				35B598BE2A3D5DDC00ABBD71 /* SharedUtils */,
 				35B598B62A3D501600ABBD71 /* PresentationLayer */,
 				35B598AD2A3D4E1D00ABBD71 /* DomainLayer */,
 				35B4771F2A3D4C45004FA345 /* DataLayer */,
@@ -94,6 +98,7 @@
 				35B598B12A3D4FC000ABBD71 /* DataLayer */,
 				35B598B32A3D4FC500ABBD71 /* DomainLayer */,
 				35B598B72A3D502800ABBD71 /* PresentationLayer */,
+				35B598BF2A3D5E1C00ABBD71 /* SharedUtils */,
 			);
 			productName = NextToGo;
 			productReference = 35182CAD2A3D3B62004571DB /* NextToGo.app */;
@@ -395,6 +400,10 @@
 		35B598B72A3D502800ABBD71 /* PresentationLayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PresentationLayer;
+		};
+		35B598BF2A3D5E1C00ABBD71 /* SharedUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUtils;
 		};
 		35E939B02A3D42B000C1B3A5 /* SwiftLint */ = {
 			isa = XCSwiftPackageProductDependency;
