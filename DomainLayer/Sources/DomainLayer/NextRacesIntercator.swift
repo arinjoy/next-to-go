@@ -27,13 +27,7 @@ public final class NextRacesInteractor: NextRacesInteracting {
         for category: Race.Category = .all,   // Defaults to all races
         pollEvery interval: TimeInterval = 5  // Defaults to 5 seconds polling
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
-        
-       let timer = Timer.publish(every: interval, on: .main, in: .common)
-            .autoconnect()
-            .prepend(Date.now)
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
-        
+                
         var targetCategoryId: String?
         if case .all = category {
             targetCategoryId = nil
@@ -44,12 +38,18 @@ public final class NextRacesInteractor: NextRacesInteracting {
         let nextRacesPublisher = networkService.load(
             Resource<RacesListResponse>.nextRaces(forCategory: targetCategoryId)
         )
-            .compactMap { $0.races.compactMap { Race(from: $0) } }
-   
+            .compactMap {
+                $0.races.compactMap { Race(from: $0) }
+                    .sorted {  $0.startTime > $1.startTime }
+            }
         
-        return Publishers.CombineLatest(timer, nextRacesPublisher)
-            .map { _, results in
-                return results
+        return Timer.publish(every: interval, on: .main, in: .common)
+            .autoconnect()
+            .prepend(Date.now) // Prepends necessary to fire instantly at start
+            .setFailureType(to: NetworkError.self) // To compose with nextRaces publisher type
+            .eraseToAnyPublisher()
+            .flatMapLatest { _ in
+                nextRacesPublisher
             }
             .eraseToAnyPublisher()
     }

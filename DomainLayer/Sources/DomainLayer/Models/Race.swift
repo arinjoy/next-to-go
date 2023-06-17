@@ -24,9 +24,17 @@ public struct Race: Identifiable {
               
         self.id = summary.id
         self.category = category
-        self.name = summary.name
+        
         self.number = "R\(summary.number)"
-        self.meeting = summary.meetingName
+        
+        // race-name can be missing/nil, so we fill the meeting-name
+        // as backup value to render something on UI
+        self.name = summary.name ?? summary.meeting ?? ""
+        
+        // meeting-name can be missing/nil, so we fill the race-name
+        // as backup value to render something on UI
+        self.meeting = summary.meeting ?? summary.name ?? ""
+        
         self.startTime = Date(timeIntervalSince1970: TimeInterval(summary.advertisedStartTime))
         self.venu = .init(state: summary.venueState, country: summary.venueCountry)
     }

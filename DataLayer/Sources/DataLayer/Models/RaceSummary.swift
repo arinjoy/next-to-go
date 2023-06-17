@@ -30,9 +30,9 @@ public struct RacesListResponse: Decodable {
 public struct RaceSummary: Decodable, Identifiable {
     public let id: String
     public let categoryId: String
-    public let name: String
+    public let name: String?
     public let number: Int
-    public let meetingName: String
+    public let meeting: String?
     public let advertisedStartTime: UInt32
     public let venueState: String
     public let venueCountry: String
@@ -45,7 +45,7 @@ extension RaceSummary {
         case categoryId = "category_id"
         case name = "race_name"
         case number = "race_number"
-        case meetingName = "meeting_name"
+        case meeting = "meeting_name"
         case advertisedStart = "advertised_start"
         case venueState = "venue_state"
         case venueCountry = "venue_country"
@@ -64,9 +64,9 @@ extension RaceSummary {
         
         self.id = try container.decode(String.self, forKey: .id)
         self.categoryId = try container.decode(String.self, forKey: .categoryId)
-        self.name = try container.decode(String.self, forKey: .name)
+        self.name = try? container.decode(String.self, forKey: .name)
         self.number = try container.decode(Int.self, forKey: .number)
-        self.meetingName = try container.decode(String.self, forKey: .meetingName)
+        self.meeting = try? container.decode(String.self, forKey: .meeting)
         self.venueState = try container.decode(String.self, forKey: .venueState)
         self.venueCountry = try container.decode(String.self, forKey: .venueCountry)
         
@@ -86,7 +86,7 @@ extension RaceSummary: Hashable {
         hasher.combine(id)
         hasher.combine(categoryId)
         hasher.combine(name)
-        hasher.combine(meetingName)
+        hasher.combine(meeting)
     }
     
 }
