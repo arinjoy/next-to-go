@@ -12,7 +12,7 @@ import PresentationLayer
 struct NextToGoApp: App {
     var body: some Scene {
         WindowGroup {
-            SampleView()
+            NextToGoView()
         }
     }
 }
