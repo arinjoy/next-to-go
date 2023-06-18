@@ -100,10 +100,12 @@ private extension RaceRowView {
                 }
             }
         } else {
-            HStack(spacing: 8) {
-                raceName
-                raceNumber
-                Spacer()
+            HStack {
+                HStack {
+                    raceName
+                    raceNumber
+                }
+                Spacer(minLength: 20)
                 raceTimeCountdown
             }
         }
@@ -132,6 +134,12 @@ private extension RaceRowView {
             .font(.callout)
             .fontWeight(.regular)
             .foregroundColor(.red)
+            .scaleEffect(isAnimatingFlag ? 1.02 : 0.98)
+            .animation(
+                .spring(response: 0.8, dampingFraction: 0.0, blendDuration: 0.0)
+                .repeatForever(autoreverses: true),
+                value: isAnimatingFlag
+            )
     }
     
     @ViewBuilder
@@ -147,16 +155,10 @@ private extension RaceRowView {
         if let countryEmoji = raceItem.countryEmoji {
             Text(countryEmoji)
                 .font(.title)
-                .transition(.opacity)
                 .scaleEffect(isAnimatingFlag ? 1.02 : 0.98)
                 .opacity(isAnimatingFlag ? 1.0 : 0.65)
                 .animation(
                     .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
-                    .repeatForever(autoreverses: true),
-                    value: isAnimatingFlag
-                )
-                .animation(
-                    .interpolatingSpring(mass: 2, stiffness: 170, damping: 10, initialVelocity: 0)
                     .repeatForever(autoreverses: true),
                     value: isAnimatingFlag
                 )
@@ -193,7 +195,7 @@ struct RaceRowView_Previews: PreviewProvider {
         category: .greyhound,
         name: "Sportsbet Green Ticks (275+Rank)",
         number: "R1",
-        meeting: "Warragul",
+        meeting: "Warragul Race",
         startTime: Date.init(timeIntervalSinceNow: 2 * 60),
         venu: .init(state: "VIC", country: "AUS")
     )
