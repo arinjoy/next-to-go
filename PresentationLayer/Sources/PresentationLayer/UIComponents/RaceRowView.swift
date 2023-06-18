@@ -18,65 +18,12 @@ struct RaceRowView: View {
     var body: some View {
         
         HStack(alignment: .center, spacing: 16) {
-            
-            /**
-             https://medium.com/@amosgyamfi/learning-swiftui-spring-animations-the-basics-and-beyond-4fb032212487
-             */
-            
-            Image(raceItem.iconName, bundle: .module)
-                .font(.title)
-                .fontWeight(.heavy)
-                .foregroundColor(Color.red)
-                .frame(width: 25, height: 25, alignment: .center)
-                .accessibilityHidden(true)
-                .scaleEffect(isAnimatingImage ? 1.1 : 0.95)
-                .offset(y: isAnimatingImage ? -5 : 0)
-                .animation(
-                    .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
-                    .repeatForever(autoreverses: true),
-                    value: isAnimatingImage
-                )
-                .animation(
-                    .interpolatingSpring(mass: 2, stiffness: 170, damping: 10, initialVelocity: 0)
-                    .repeatForever(autoreverses: true),
-                    value: isAnimatingImage
-                )
+                        
+            animatedIcon
 
             VStack(alignment: .leading, spacing: 4) {
-
-                HStack(spacing: 16) {
-                    
-                    Text(raceItem.name)
-                        .font(.body)
-                        .fontWeight(.medium)
-                        .lineLimit(1)
-                        .foregroundColor(Color.primary)
-                    
-                    Text(raceItem.number)
-                        .font(.body)
-                        .fontWeight(.regular)
-                        .foregroundColor(Color.primary)
-                    
-                     
-                    Spacer()
-                    
-                    Text(raceItem.timeString ?? "")
-                        .font(.callout)
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.red)
-                }
-
-                HStack(spacing: 16) {
-//                    Text(raceItem.venu.country)
-                    Text(raceItem.description)
-         
-                }
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .lineLimit(1)
-                .foregroundColor(Color.secondary)
-                
-
+                infoTextStack
+                descriptionStack
             }
             .accessibilityElement(children: .combine)
         }
@@ -88,10 +35,77 @@ struct RaceRowView: View {
     }
 }
 
+private extension RaceRowView {
+    
+    @ViewBuilder
+    var animatedIcon: some View {
+        
+        /** Animation related code courtesy to this amazing tutorial: 🙏🏽
+         https://medium.com/@amosgyamfi/learning-swiftui-spring-animations-the-basics-and-beyond-4fb032212487
+         */
+        
+        Image(raceItem.iconName, bundle: .module)
+            .font(.largeTitle)
+            .fontWeight(.bold) // For some reason bold effect isn't working well :(
+            .foregroundColor(Color.red)
+            .accessibilityHidden(true)
+            .scaleEffect(isAnimatingImage ? 1.1 : 0.95)
+            .offset(y: isAnimatingImage ? -5 : 0)
+            .animation(
+                .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
+                .repeatForever(autoreverses: true),
+                value: isAnimatingImage
+            )
+            .animation(
+                .interpolatingSpring(mass: 2, stiffness: 170, damping: 10, initialVelocity: 0)
+                .repeatForever(autoreverses: true),
+                value: isAnimatingImage
+            )
+    }
+    
+    @ViewBuilder
+    var infoTextStack: some View {
+        HStack(spacing: 16) {
+            
+            Text(raceItem.name)
+                .font(.body)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .foregroundColor(Color.primary)
+            
+            Text(raceItem.number)
+                .font(.body)
+                .fontWeight(.regular)
+                .foregroundColor(Color.primary)
+            
+             
+            Spacer()
+            
+            Text(raceItem.timeString ?? "")
+                .font(.callout)
+                .fontWeight(.regular)
+                .foregroundColor(Color.red)
+        }
+    }
+    
+    @ViewBuilder
+    var descriptionStack: some View {
+        HStack(spacing: 16) {
+            Text(raceItem.country)
+            Text(raceItem.description)
+        }
+        .font(.subheadline)
+        .fontWeight(.medium)
+        .lineLimit(1)
+        .foregroundColor(Color.secondary)
+    }
+    
+}
+
 #if DEBUG
 struct RaceRowView_Previews: PreviewProvider {
 
-    static let race = Race(
+    static let race1 = Race(
         id: "111",
         category: .horse,
         name: "Premio Jockey Club De Minas",
@@ -101,12 +115,40 @@ struct RaceRowView_Previews: PreviewProvider {
         venu: .init(state: "BRA", country: "BRA")
     )
     
-    static let item = RacePresentationItem(race: race)
+    static let race2 = Race(
+        id: "222",
+        category: .greyhound,
+        name: "Sportsbet Green Ticks (275+Rank)",
+        number: "R1",
+        meeting: "Warragul",
+        startTime: Date.init(timeIntervalSinceNow: 2 * 60),
+        venu: .init(state: "VIC", country: "AUS")
+    )
+    
+    static let race3 = Race(
+        id: "333",
+        category: .harness,
+        name: "The Mermaid Stakes(G3)",
+        number: "R5",
+        meeting: "Hanshin",
+        startTime: Date.init(timeIntervalSinceNow: 1 * 60),
+        venu: .init(state: "JPN", country: "JPN")
+    )
+    
+    static let items: [RacePresentationItem] = [
+        race1,
+        race2,
+        race3,
+    ]
+        .map { RacePresentationItem(race: $0) }
     
     static var previews: some View {
-        RaceRowView(raceItem: item)
-            .previewLayout(.sizeThatFits)
-            .padding()
+        VStack(spacing: 20) {
+            RaceRowView(raceItem: items[0])
+            RaceRowView(raceItem: items[1])
+            RaceRowView(raceItem: items[2])
+        }
+        .padding(.horizontal, 20)
   }
 }
 #endif
