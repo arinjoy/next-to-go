@@ -24,12 +24,12 @@ public extension Array where Element == String? {
 
 public extension String {
 
-    func isEmpty() -> Bool {
+    var isEmpty: Bool {
         self.trimmed().lengthOfBytes(using: String.Encoding.utf8) == 0
     }
 
-    func notEmpty() -> Bool {
-        self.isEmpty() == false
+    var isNotEmpty: Bool {
+        self.isEmpty == false
     }
     
     func trimmed() -> String {

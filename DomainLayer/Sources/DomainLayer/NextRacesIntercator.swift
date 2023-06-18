@@ -24,26 +24,34 @@ public final class NextRacesInteractor: NextRacesInteracting {
     // MARK: - NextRacesInteracting
     
     public func nextRaces(
-        for category: Race.Category? = nil,   // Defaults to `nil` means all races combined
-        pollEvery interval: TimeInterval = 30  // Defaults to 30 seconds polling
+        for categories: [Race.Category],
+        numberOfRaces count: Int
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
-                
-        var targetCategoryId: String?
-        if let category {
-            targetCategoryId = category.rawValue
-        }
         
+        // Always load 100 races first, but then later on filter out
+        // based on the exact need by category and number of races to list
         let nextRacesPublisher = networkService.load(
-            Resource<RacesListResponse>.nextRaces(forCategory: targetCategoryId)
+            Resource<RacesListResponse>.nextRaces(numberOfRaces: 100)
         )
-            .compactMap {
-                $0.races.compactMap { Race(from: $0) }
+            .compactMap { response in
+
+                // 1. Map the raw data model to domain model
+                // 2. Filter based on desired categories needed
+                // 3. Sort based time ascending
+                // 4. Take the first required number of races from the full list
+
+                let races = response.races
+                    .compactMap { Race(from: $0) }
+                    .filter { categories.contains($0.category) }
                     .sorted {  $0.startTime < $1.startTime }
+
+                return Array(races.prefix(count))
             }
         
-        return Timer.publish(every: interval, on: .main, in: .common)
+        // Poll every 60 seconds to refresh latest races
+        return Timer.publish(every: 5, on: .main, in: .common)
             .autoconnect()
-            .prepend(Date.now) // Prepends necessary to fire instantly at start
+            .prepend(Date.now)  // Necessary to fire instantly at start
             .setFailureType(to: NetworkError.self) // To compose with nextRaces publisher type
             .eraseToAnyPublisher()
             .flatMapLatest { _ in

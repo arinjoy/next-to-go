@@ -50,23 +50,26 @@ struct FilterView: View {
                     
                     Image(filter.category.iconName, bundle: .module)
                         .font(.largeTitle)
-                        .scaleEffect(1.2)
-                        .foregroundColor(filter.selected ? .red : .primary)
+                        .scaleEffect(1.3)
          
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
-                        .scaleEffect(0.9)
-                        .foregroundColor(filter.selected ? .red : .primary)
+                    .font(.body)
                         .onTapGesture {
                             viewModel.filterRowTapped(filterRow: filter)
                         }
                 }
+                .foregroundColor(filter.selected ? .red : .primary)
+                .adaptiveScaleFactor()
                 .padding(.vertical, 4)
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 12)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(UIColor.systemBackground))
-                        .shadow(color: .secondary, radius: 1.5, x: 0, y: 0))
+                        .shadow(color: filter.selected ?
+                                    .red.opacity(0.5) : .primary.opacity(0.5),
+                                radius: 2.5,
+                            x: 0, y: 0))
                 .padding(.horizontal, 4)
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -78,6 +81,8 @@ struct FilterView: View {
             }
         }
         .padding(.horizontal, 10)
+        
+        Divider()
     }
 }
 
@@ -86,6 +91,7 @@ struct FilterView: View {
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
         FilterView(viewModel: FilterViewModel())
+            .padding(.bottom, 300)
     }
 }
 #endif

@@ -9,20 +9,19 @@ import Combine
 
 public struct NextToGoView: View {
     
-    @State private var horseSelected: Bool = true
-    @State private var greyhoundSelected: Bool = true
-    @State private var harnessSelected: Bool = true
+    // MARK: - Properties
     
     @ObservedObject private var viewModel: NextToGoViewModel
     
-    @ObservedObject private var filterViewModel: FilterViewModel
-    
     private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Initializer
     
     public init() {
         self.viewModel = NextToGoViewModel()
-        self.filterViewModel = FilterViewModel()
     }
+    
+    // MARK: - UI Body
     
     public var body: some View {
         
@@ -32,7 +31,7 @@ public struct NextToGoView: View {
                 
                 if viewModel.raceItems != nil {
                     
-                    FilterView(viewModel: filterViewModel)
+                    FilterView(viewModel: viewModel.filterViewModel)
                     
                     RacesListView(viewModel: viewModel)
                     
@@ -66,7 +65,6 @@ public struct NextToGoView: View {
                             .foregroundColor(.primary)
                             .accessibilityAddTraits(.isHeader)
                     }
-                    //.padding(.top, 20)
                 }
             }
             .padding(.top, 20)

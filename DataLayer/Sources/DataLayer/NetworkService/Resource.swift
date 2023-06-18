@@ -26,9 +26,13 @@ public struct Resource<T: Decodable> {
         else {
             return nil
         }
-        components.queryItems = parameters.keys.map { key in
-            URLQueryItem(name: key, value: parameters[key]?.description)
-        }
+        
+        components.queryItems = parameters.keys
+            .sorted { $0 > $1 }
+            .map { key in
+                URLQueryItem(name: key, value: parameters[key]?.description)
+            }
+        
         guard let url = components.url else {
             return nil
         }

@@ -4,6 +4,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 import SharedUtils
 import DomainLayer
 import DataLayer
@@ -15,6 +16,8 @@ class NextToGoViewModel: ObservableObject {
     @Published var raceItems: [Race]?
     @Published var isLoading: Bool = false
     @Published var loadingError: NetworkError?
+    
+    @ObservedObject var filterViewModel: FilterViewModel
 
     // MARK: - Private Properties
     
@@ -25,6 +28,7 @@ class NextToGoViewModel: ObservableObject {
     
     init(interactor: NextRacesInteracting = NextRacesInteractor()) {
         self.interactor = interactor
+        self.filterViewModel = FilterViewModel()
     }
     
     // MARK: - API
@@ -35,10 +39,15 @@ class NextToGoViewModel: ObservableObject {
         isLoading = true
         
         interactor
-            .nextRaces(for: nil, pollEvery: 30)
+            .nextRaces(
+                for: filterViewModel
+                    .filters
+                    .filter { $0.selected }
+                    .map { $0.category },
+                numberOfRaces: 5
+            )
             .receive(on: Scheduler.main)
-            // TODO: remove forced delay
-            .delay(for: .seconds(1), scheduler: Scheduler.main)
+            .delay(for: .seconds(0.5), scheduler: Scheduler.main)
             .sink { [unowned self] completion in
                 if case .failure(let error) = completion {
                     isLoading = false
@@ -47,6 +56,7 @@ class NextToGoViewModel: ObservableObject {
             } receiveValue: { [unowned self] results in
                 isLoading = false
                 raceItems = results
+            
                 
                 // FIXME: Remove testing code
                 let names = results.map {
