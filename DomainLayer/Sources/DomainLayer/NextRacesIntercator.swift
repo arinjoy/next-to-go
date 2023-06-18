@@ -24,14 +24,12 @@ public final class NextRacesInteractor: NextRacesInteracting {
     // MARK: - NextRacesInteracting
     
     public func nextRaces(
-        for category: Race.Category = .all,   // Defaults to all races
-        pollEvery interval: TimeInterval = 5  // Defaults to 5 seconds polling
+        for category: Race.Category? = nil,   // Defaults to `nil` means all races combined
+        pollEvery interval: TimeInterval = 30  // Defaults to 30 seconds polling
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
                 
         var targetCategoryId: String?
-        if case .all = category {
-            targetCategoryId = nil
-        } else {
+        if let category {
             targetCategoryId = category.rawValue
         }
         

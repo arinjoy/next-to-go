@@ -31,16 +31,7 @@ class RacePresentationItem: ObservableObject {
     }
     
     var iconName: String {
-        /// Currently `horse` and  `greyhound` are custom SF symbols converted
-        /// after copying from SVG files from online free source and imported via the Image Symbol.
-        /// `harness` was made by exporting Apple's figure sport icon and mixing with other shapes. :)
-        
-        switch race.category {
-        case .horse:        return "horse"        // Hand-made SF symbol
-        case .greyhound:    return "greyhound"    // Hand-made SF symbol
-        case .harness:      return "harness"      // Hand-made SF symbol
-        default:            return ""
-        }
+        race.category.iconName
     }
     
     private var cancellables = Set<AnyCancellable>()
@@ -60,6 +51,21 @@ class RacePresentationItem: ObservableObject {
             .store(in: &cancellables)
     }
     
+}
+
+extension Race.Category {
+    
+    var iconName: String {
+        /// Currently `horse` and  `greyhound` are custom SF symbols converted
+        /// after copying from SVG files from online free source and imported via the Image Symbol.
+        /// `harness` was made by exporting Apple's figure sport icon and mixing with other shapes. :)
+        
+        switch self {
+        case .horse:        return "horse"        // Hand-made SF symbol
+        case .greyhound:    return "greyhound"    // Hand-made SF symbol
+        case .harness:      return "harness"      // Hand-made SF symbol
+        }
+    }
 }
 
 

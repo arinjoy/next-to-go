@@ -35,7 +35,7 @@ class NextToGoViewModel: ObservableObject {
         isLoading = true
         
         interactor
-            .nextRaces(for: .all, pollEvery: 30)
+            .nextRaces(for: nil, pollEvery: 30)
             .receive(on: Scheduler.main)
             // TODO: remove forced delay
             .delay(for: .seconds(1), scheduler: Scheduler.main)

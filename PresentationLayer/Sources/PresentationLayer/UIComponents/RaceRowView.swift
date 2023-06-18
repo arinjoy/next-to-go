@@ -47,7 +47,7 @@ private extension RaceRowView {
         Image(raceItem.iconName, bundle: .module)
             .font(.largeTitle)
             .fontWeight(.bold) // For some reason bold effect isn't working well :(
-            .foregroundColor(Color.red)
+            .foregroundColor(.red)
             .accessibilityHidden(true)
             .scaleEffect(isAnimatingImage ? 1.1 : 0.95)
             .offset(y: isAnimatingImage ? -5 : 0)
@@ -65,18 +65,18 @@ private extension RaceRowView {
     
     @ViewBuilder
     var infoTextStack: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 12) {
             
             Text(raceItem.name)
                 .font(.body)
                 .fontWeight(.medium)
                 .lineLimit(1)
-                .foregroundColor(Color.primary)
+                .foregroundColor(.primary)
             
             Text(raceItem.number)
                 .font(.body)
                 .fontWeight(.regular)
-                .foregroundColor(Color.primary)
+                .foregroundColor(.primary)
             
              
             Spacer()
@@ -84,20 +84,22 @@ private extension RaceRowView {
             Text(raceItem.timeString ?? "")
                 .font(.callout)
                 .fontWeight(.regular)
-                .foregroundColor(Color.red)
+                .foregroundColor(.red)
+            
+            Spacer().frame(width: 1)
         }
     }
     
     @ViewBuilder
     var descriptionStack: some View {
-        HStack(spacing: 16) {
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(raceItem.country)
             Text(raceItem.description)
         }
         .font(.subheadline)
         .fontWeight(.medium)
-        .lineLimit(1)
-        .foregroundColor(Color.secondary)
+        .lineLimit(2)
+        .foregroundColor(.secondary)
     }
     
 }
@@ -108,7 +110,7 @@ struct RaceRowView_Previews: PreviewProvider {
     static let race1 = Race(
         id: "111",
         category: .horse,
-        name: "Premio Jockey Club De Minas",
+        name: "Premio Jockey Club De Minas Fun Horse racing carnival",
         number: "R2",
         meeting: "Gavea",
         startTime: Date.init(timeIntervalSinceNow: 3 * 60),

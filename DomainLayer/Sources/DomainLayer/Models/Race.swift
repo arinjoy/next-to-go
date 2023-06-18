@@ -72,19 +72,10 @@ public extension Race {
         }
     }
     
-    enum Category: String {
+    enum Category: String, CaseIterable {
         case horse =        "4a2788f8-e825-4d36-9894-efd4baf1cfae"
         case greyhound =    "9daef0d7-bf3c-4f50-921d-8e818c60fe61"
         case harness =      "161d9be2-e909-4326-8c2c-35ed71fb460b"
-        case all =          ""
-        
-        init(fromRawValue rawValue: String? = nil) {
-            guard let rawValue else {
-                self = .all
-                return
-            }
-            self = Category(rawValue: rawValue) ?? .all
-        }
     }
     
 }

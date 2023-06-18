@@ -19,7 +19,9 @@ struct RacesListView: View {
         
         if let items = viewModel.raceItems {
             List(items) { race in
-                RaceRowView(raceItem: .init(race: race))
+                NavigationLink(destination: EmptyView()) {
+                    RaceRowView(raceItem: .init(race: race))
+               }
             }
             .listStyle(.inset)
             .refreshable {

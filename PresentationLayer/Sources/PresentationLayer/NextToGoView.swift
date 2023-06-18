@@ -18,6 +18,7 @@ public struct NextToGoView: View {
     }
     
     public var body: some View {
+        
         NavigationStack {
             
             Group {
@@ -35,7 +36,28 @@ public struct NextToGoView: View {
                     }
                 }
             }
-            .navigationBarTitle("Next to Go 🏇🏻 ")
+            .toolbar {
+                
+                ToolbarItem(placement: .principal) {
+                    
+                    VStack {
+                    
+                        Text("Next to Go")
+                            .font(.title)
+                            .fontWeight(.medium)
+                            .foregroundColor(.primary)
+                        
+                        HStack(spacing: 16) {
+                            ForEach(Race.Category.allCases, id: \.rawValue) {
+                                Image($0.iconName, bundle: .module)
+                                    .font(.title)
+                                    .foregroundColor(.primary)
+                            }
+                        }
+                    }
+                    .padding(.top, 20)
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {

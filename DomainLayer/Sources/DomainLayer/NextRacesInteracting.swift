@@ -19,7 +19,7 @@ public protocol NextRacesInteracting: AnyObject {
     /// - Returns: A publisher that repeatedly emits the found races in the given interval.
     ///
     func nextRaces(
-        for category: Race.Category,
+        for category: Race.Category?,
         pollEvery interval: TimeInterval
     ) -> AnyPublisher<[Race], DataLayer.NetworkError>
     
