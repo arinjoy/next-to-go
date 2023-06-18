@@ -20,11 +20,11 @@ class RacePresentationItem: ObservableObject {
     }
     
     var name: String {
-        race.meeting
+        race.meeting.trimmed()
     }
     
     var description: String {
-        race.name
+        race.name.trimmed()
     }
     
     var countryEmoji: String? {
@@ -40,6 +40,7 @@ class RacePresentationItem: ObservableObject {
     // MARK: - Initializer
     
     init(race: Race) {
+        
         self.race = race
         
         Timer.publish(every: 1, on: RunLoop.main, in: .common)
