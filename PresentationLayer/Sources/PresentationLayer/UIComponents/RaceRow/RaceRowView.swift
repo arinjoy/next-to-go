@@ -4,12 +4,19 @@
 
 import SwiftUI
 import DomainLayer
+import SharedUtils
 
 struct RaceRowView: View {
     
+    // MARK: - Properties
+    
     @ObservedObject private var raceItem: RacePresentationItem
     
-    @State private var isAnimatingImage: Bool = false
+    @State private var isAnimatingIcon: Bool = false
+    
+    @Environment(\.sizeCategory) private var sizeCategory
+    
+    // MARK: - Initializer
     
     init(raceItem: RacePresentationItem) {
         self.raceItem = raceItem
@@ -20,16 +27,21 @@ struct RaceRowView: View {
         HStack(alignment: .center, spacing: 16) {
                         
             animatedIcon
-
+            
             VStack(alignment: .leading, spacing: 4) {
+                
                 infoTextStack
+                
                 descriptionStack
             }
-            .accessibilityElement(children: .combine)
+            .padding(.trailing, 10)
+            
         }
+        .adaptiveScaleFactor()
+        .accessibilityElement(children: .combine)
         .onAppear() {
             withAnimation(.linear(duration: 2).repeatForever()) {
-                isAnimatingImage = true
+                isAnimatingIcon = true
             }
         }
     }
@@ -49,18 +61,18 @@ private extension RaceRowView {
             .fontWeight(.bold) // For some reason bold effect isn't working well :(
             .foregroundColor(.primary)
             .accessibilityHidden(true)
-            .scaleEffect(isAnimatingImage ? 1.15 : 0.9)
-            .offset(y: isAnimatingImage ? -7 : 0)
-            .offset(x: isAnimatingImage ? 5 : 0)
+            .scaleEffect(isAnimatingIcon ? 1.15 : 0.9)
+            .offset(y: isAnimatingIcon ? -7 : 0)
+            .offset(x: isAnimatingIcon ? 5 : 0)
             .animation(
                 .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
                 .repeatForever(autoreverses: true),
-                value: isAnimatingImage
+                value: isAnimatingIcon
             )
             .animation(
                 .interpolatingSpring(mass: 2, stiffness: 170, damping: 10, initialVelocity: 0)
                 .repeatForever(autoreverses: true),
-                value: isAnimatingImage
+                value: isAnimatingIcon
             )
             .padding(.trailing, 6)
     }
@@ -68,35 +80,29 @@ private extension RaceRowView {
     @ViewBuilder
     var infoTextStack: some View {
         
-        HStack(spacing: 8) {
-            
-            Text(raceItem.name)
-                .font(.title3)
-                .fontWeight(.medium)
-                .lineLimit(1)
-                .foregroundColor(.primary)
-            
-            Text(raceItem.number)
-                .font(.subheadline)
-                .fontWeight(.bold)
-                .foregroundColor(.primary)
-            
-             
-            Spacer()
-            
-            Text(raceItem.timeString ?? "")
-                .font(.callout)
-                .fontWeight(.regular)
-                .foregroundColor(.red)
-            
-            Spacer().frame(width: 1)
+        if sizeCategory < .extraExtraExtraLarge {
+            HStack(spacing: 8) {
+                raceName
+                raceNumber
+                Spacer()
+                raceTimeCountdown
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 8) {
+                raceName
+                HStack {
+                    raceNumber
+                    Spacer()
+                    raceTimeCountdown
+                }
+            }
         }
     }
     
     @ViewBuilder
     var descriptionStack: some View {
         
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
+        HStack(alignment: .top, spacing: 8) {
             
             if let countryEmoji = raceItem.countryEmoji {
                 Text(countryEmoji)
@@ -108,6 +114,45 @@ private extension RaceRowView {
         .fontWeight(.medium)
         .lineLimit(2)
         .foregroundColor(.secondary)
+    }
+    
+    @ViewBuilder
+    var raceName: some View {
+        Text(raceItem.name)
+            .font(.title3)
+            .fontWeight(.medium)
+            .lineLimit(1)
+            .foregroundColor(.primary)
+    }
+    
+    @ViewBuilder
+    var raceNumber: some View {
+        Text(raceItem.number)
+            .font(.title3)
+            .fontWeight(.medium)
+            .foregroundColor(.primary)
+    }
+    
+    @ViewBuilder
+    var raceTimeCountdown: some View {
+        Text(raceItem.timeString ?? "")
+            .font(.callout)
+            .fontWeight(.regular)
+            .foregroundColor(.red)
+    }
+    
+    @ViewBuilder
+    var raceDescription: some View {
+        HStack {
+            if let countryEmoji = raceItem.countryEmoji {
+                Text(countryEmoji)
+            }
+            Text(raceItem.description)
+        }
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .lineLimit(2)
+            .foregroundColor(.secondary)
     }
     
 }
