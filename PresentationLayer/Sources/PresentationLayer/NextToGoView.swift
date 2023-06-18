@@ -9,24 +9,33 @@ import Combine
 
 public struct NextToGoView: View {
     
+    @State private var horseSelected: Bool = true
+    @State private var greyhoundSelected: Bool = true
+    @State private var harnessSelected: Bool = true
+    
     @ObservedObject private var viewModel: NextToGoViewModel
+    
+    @ObservedObject private var filterViewModel: FilterViewModel
     
     private var cancellables = Set<AnyCancellable>()
     
     public init() {
         self.viewModel = NextToGoViewModel()
+        self.filterViewModel = FilterViewModel()
     }
     
     public var body: some View {
         
         NavigationStack {
             
-            Group {
-                
-                Spacer().frame(height: 20)
+            VStack(alignment: .leading, spacing: 20) {
                 
                 if viewModel.raceItems != nil {
+                    
+                    FilterView(viewModel: filterViewModel)
+                    
                     RacesListView(viewModel: viewModel)
+                    
                 } else {
                     LoadingView(
                         isLoading: viewModel.isLoading,
@@ -37,29 +46,30 @@ public struct NextToGoView: View {
                 }
             }
             .toolbar {
-                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        viewModel.loadNextRaces()
+                    } label: {
+                        Image(systemName: "arrow.clockwise.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.primary)
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityLabel("Refresh")
+                    }
+                }
                 ToolbarItem(placement: .principal) {
-                    
-                    VStack {
-                    
+                    VStack(alignment: .leading) {
                         Text("Next to Go")
-                            .font(.title)
+                            .font(.largeTitle)
                             .fontWeight(.medium)
                             .foregroundColor(.primary)
                             .accessibilityAddTraits(.isHeader)
-                        
-                        HStack(spacing: 16) {
-                            ForEach(Race.Category.allCases, id: \.rawValue) {
-                                Image($0.iconName, bundle: .module)
-                                    .font(.title)
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                        .accessibilityHidden(true)
                     }
-                    .padding(.top, 20)
+                    //.padding(.top, 20)
                 }
             }
+            .padding(.top, 20)
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {

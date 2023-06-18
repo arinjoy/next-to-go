@@ -3,9 +3,6 @@
 //
 
 import SwiftUI
-import DataLayer
-
-// TODO: Update and finalise the UI
 
 struct RacesListView: View {
     
@@ -16,7 +13,6 @@ struct RacesListView: View {
     }
     
     var body: some View {
-        
         if let items = viewModel.raceItems {
             List(items) { race in
                 NavigationLink(destination: EmptyView()) {
@@ -24,9 +20,6 @@ struct RacesListView: View {
                }
             }
             .listStyle(.inset)
-            .refreshable {
-                viewModel.loadNextRaces()
-            }
         } else {
             EmptyView()
         }
