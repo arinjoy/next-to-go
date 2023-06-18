@@ -9,7 +9,7 @@ import SharedUtils
 import DomainLayer
 import DataLayer
 
-class NextToGoViewModel: ObservableObject {
+final class NextToGoViewModel: ObservableObject {
     
     // MARK: - Outputs
     
@@ -27,16 +27,22 @@ class NextToGoViewModel: ObservableObject {
     // MARK: - Initializer
     
     init(interactor: NextRacesInteracting = NextRacesInteractor()) {
+        
         self.interactor = interactor
+        
         self.filterViewModel = FilterViewModel()
+        
+        self.filterViewModel.filterTappedAction = { [weak self] in
+            self?.loadNextRaces()
+        }
     }
     
-    // MARK: - API
+    // MARK: - API methods
     
     func loadNextRaces() {
         
         cancellable?.cancel()
-        
+
         raceItems = nil
         isLoading = true
         
@@ -44,25 +50,18 @@ class NextToGoViewModel: ObservableObject {
             .filter { $0.selected }
             .map { $0.category }
         
-        cancellable = interactor.nextRaces(for: filteredCategories, numberOfRaces: 5)
+        cancellable = interactor
+            .nextRaces(for: filteredCategories, numberOfRaces: 5)
             .receive(on: Scheduler.main)
-            .delay(for: .seconds(0.5), scheduler: Scheduler.main)
+            .delay(for: .seconds(0.2), scheduler: Scheduler.main)
             .sink { [unowned self] completion in
+                isLoading = false
                 if case .failure(let error) = completion {
-                    isLoading = false
                     loadingError = error
                 }
             } receiveValue: { [unowned self] results in
                 isLoading = false
                 raceItems = results
-            
-                
-                // FIXME: Remove testing code
-                let names = results.map {
-                    return $0.name
-                }
-                print("\n\n------------>")
-                print(names)
             }
     }
     

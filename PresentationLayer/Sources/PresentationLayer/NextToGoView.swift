@@ -29,12 +29,10 @@ public struct NextToGoView: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                if viewModel.raceItems != nil {
-                    
-                    FilterView(viewModel: viewModel.filterViewModel)
-                    
+                FilterView(viewModel: viewModel.filterViewModel)
+                
+                if viewModel.isLoading == false {
                     RacesListView(viewModel: viewModel)
-                    
                 } else {
                     LoadingView(
                         isLoading: viewModel.isLoading,

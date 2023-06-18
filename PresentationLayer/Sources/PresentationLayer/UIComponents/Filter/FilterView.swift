@@ -5,37 +5,6 @@
 import SwiftUI
 import DomainLayer
 
-struct FilterModel: Identifiable {
-    var id: Int
-    var category: Race.Category
-    var selected: Bool
-}
-
-class FilterViewModel: ObservableObject {
-    
-    @Published var filters: [FilterModel] = [
-        FilterModel(id: 0, category: .horse, selected: true),
-        FilterModel(id: 1, category: .greyhound, selected: true),
-        FilterModel(id: 2, category: .harness, selected: true),
-    ]
-    
-    init() { }
-    
-    func filterRowTapped(filterRow: FilterModel) {
-        filters[filterRow.id]
-            .selected
-            .toggle()
-    }
-    
-    func filterReset() {
-        for element in filters {
-            if element.selected {
-                filterRowTapped(filterRow: element)
-            }
-        }
-    }
-}
-
 struct FilterView: View {
     
     @StateObject var viewModel: FilterViewModel
@@ -56,7 +25,7 @@ struct FilterView: View {
                           "checkmark.circle.fill" : "circle")
                     .font(.body)
                         .onTapGesture {
-                            viewModel.filterRowTapped(filterRow: filter)
+                            viewModel.filterItemTapped(filterItem: filter)
                         }
                 }
                 .foregroundColor(filter.selected ? .red : .primary)
@@ -73,7 +42,7 @@ struct FilterView: View {
                 .padding(.horizontal, 4)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    viewModel.filterRowTapped(filterRow: filter)
+                    viewModel.filterItemTapped(filterItem: filter)
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityAddTraits(.isButton)

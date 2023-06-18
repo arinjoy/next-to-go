@@ -7,7 +7,7 @@ import Combine
 import SharedUtils
 import DomainLayer
 
-class RacePresentationItem: ObservableObject {
+final class RacePresentationItem: ObservableObject {
 
     // MARK: - Properties
     

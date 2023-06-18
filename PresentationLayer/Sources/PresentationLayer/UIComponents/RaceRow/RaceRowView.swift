@@ -68,8 +68,8 @@ private extension RaceRowView {
             .foregroundColor(.red)
             .accessibilityHidden(true)
             .scaleEffect(isAnimatingIcon ? 1.15 : 0.9)
-            .offset(y: isAnimatingIcon ? -7 : 0)
-            .offset(x: isAnimatingIcon ? 5 : 0)
+            .offset(y: isAnimatingIcon ? -6 : 0)
+            .offset(x: isAnimatingIcon ? 4 : 0)
             .animation(
                 .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
                 .repeatForever(autoreverses: true),
