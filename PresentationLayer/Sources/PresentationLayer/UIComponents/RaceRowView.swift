@@ -7,9 +7,13 @@ import DomainLayer
 
 struct RaceRowView: View {
     
-    var race: Race
+    @ObservedObject private var presentationItem: RacePresentationItem
     
     @State private var isAnimatingImage: Bool = false
+    
+    init(presentationItem: RacePresentationItem) {
+        self.presentationItem = presentationItem
+    }
     
     var body: some View {
         
@@ -19,11 +23,12 @@ struct RaceRowView: View {
              https://medium.com/@amosgyamfi/learning-swiftui-spring-animations-the-basics-and-beyond-4fb032212487
              */
             
-            Image(systemName: "tortoise")
+            Image(systemName: presentationItem.iconName)
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20, alignment: .center)
+                .accessibilityHidden(true)
                 .scaleEffect(isAnimatingImage ? 1.05 : 0.95)
                 .offset(y: isAnimatingImage ? -5 : 0)
                 .animation(
@@ -40,21 +45,38 @@ struct RaceRowView: View {
             VStack(alignment: .leading, spacing: 4) {
 
                 HStack(spacing: 16) {
-                    Text(race.number)
+                    Text(presentationItem.race.number)
                         .font(.title3)
-                        .fontWeight(.bold)
+                        .fontWeight(.semibold)
                         .foregroundColor(Color.primary)
                     
-                    Text(race.meeting)
-                      .font(.title3)
-                      .foregroundColor(Color.primary)
+                    Text(presentationItem.race.meeting)
+                        .font(.title3)
+                        .fontWeight(.regular)
+                        .lineLimit(1)
+                        .foregroundColor(Color.primary)
+                     
+                    Spacer()
+                    
+                    Text(presentationItem.timeString ?? "")
+                        .font(.callout)
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.red)
                 }
 
-                Text(race.name)
-                  .font(.caption)
-                  .multilineTextAlignment(.trailing)
-                  .foregroundColor(Color.secondary)
+                HStack(spacing: 16) {
+                    Text(presentationItem.race.venu.country)
+                    Text(presentationItem.race.name)
+         
+                }
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .foregroundColor(Color.secondary)
+                
+
             }
+            .accessibilityElement(children: .combine)
         }
         .onAppear() {
             withAnimation(.linear(duration: 2).repeatForever()) {
@@ -70,15 +92,17 @@ struct RaceRowView_Previews: PreviewProvider {
     static let race = Race(
         id: "111",
         category: .horse,
-        name: "Race2 - Premio Jockey Club De Minas Gerais",
+        name: "Premio Jockey Club De Minas",
         number: "R2",
         meeting: "Gavea",
-        startTime: Date.init(timeIntervalSinceNow: 2 * 60 * 60),
+        startTime: Date.init(timeIntervalSinceNow: 3 * 60),
         venu: .init(state: "BRA", country: "BRA")
     )
     
+    static let presentationItem = RacePresentationItem(race: race)
+    
     static var previews: some View {
-        RaceRowView(race: race)
+        RaceRowView(presentationItem: presentationItem)
             .previewLayout(.sizeThatFits)
             .padding()
   }

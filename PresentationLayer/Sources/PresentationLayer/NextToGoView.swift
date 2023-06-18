@@ -44,8 +44,10 @@ public struct NextToGoView: View {
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NextToGoView()
     }
 }
+#endif

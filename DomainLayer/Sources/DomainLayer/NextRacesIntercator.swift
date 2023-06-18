@@ -40,7 +40,7 @@ public final class NextRacesInteractor: NextRacesInteracting {
         )
             .compactMap {
                 $0.races.compactMap { Race(from: $0) }
-                    .sorted {  $0.startTime > $1.startTime }
+                    .sorted {  $0.startTime < $1.startTime }
             }
         
         return Timer.publish(every: interval, on: .main, in: .common)
