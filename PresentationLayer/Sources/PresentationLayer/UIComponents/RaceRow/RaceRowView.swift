@@ -16,6 +16,8 @@ struct RaceRowView: View {
     
     @Environment(\.sizeCategory) private var sizeCategory
     
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     // MARK: - Initializer
     
     init(raceItem: RacePresentationItem) {
@@ -80,14 +82,11 @@ private extension RaceRowView {
     @ViewBuilder
     var infoTextStack: some View {
         
-        if sizeCategory < .extraExtraExtraLarge {
-            HStack(spacing: 8) {
-                raceName
-                raceNumber
-                Spacer()
-                raceTimeCountdown
-            }
-        } else {
+        // 🤚🏽 Only flip layout when system detects large font size
+        // and horizontal compact layout, else gets normal desired layout
+        
+        if sizeCategory >= .extraExtraExtraLarge,
+           horizontalSizeClass == .compact {
             VStack(alignment: .leading, spacing: 8) {
                 raceName
                 HStack {
@@ -95,6 +94,13 @@ private extension RaceRowView {
                     Spacer()
                     raceTimeCountdown
                 }
+            }
+        } else {
+            HStack(spacing: 8) {
+                raceName
+                raceNumber
+                Spacer()
+                raceTimeCountdown
             }
         }
     }
