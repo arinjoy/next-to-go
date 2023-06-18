@@ -10,15 +10,27 @@ class RacePresentationItem: ObservableObject {
 
     // MARK: - Properties
     
-    let race: Race
-
+    private let race: Race
+    
     @Published var timeString: String?
+    
+    var number: String {
+        race.number
+    }
+    
+    var name: String {
+        race.meeting
+    }
+    
+    var description: String {
+        race.name
+    }
     
     var iconName: String {
         switch race.category {
-        case .horse:        return "tortoise"
-        case .greyhound:    return "hare"
-        case .harness:      return "bird"
+        case .horse:        return "horse"      // Currently custom SF symbol converted
+        case .greyhound:    return "greyhound"  // after copying from SVG files from flatIcons.
+        case .harness:      return "harness"    // Needs to update if Apple provides free ones.
         default:            return ""
         }
     }

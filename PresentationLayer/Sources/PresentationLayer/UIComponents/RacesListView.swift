@@ -19,7 +19,7 @@ struct RacesListView: View {
         
         if let items = viewModel.raceItems {
             List(items) { race in
-                RaceRowView(presentationItem: .init(race: race))
+                RaceRowView(raceItem: .init(race: race))
             }
             .listStyle(.inset)
             .refreshable {
