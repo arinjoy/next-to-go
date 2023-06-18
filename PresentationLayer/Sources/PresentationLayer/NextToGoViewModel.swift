@@ -22,7 +22,7 @@ class NextToGoViewModel: ObservableObject {
     // MARK: - Private Properties
     
     private let interactor: NextRacesInteracting
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellable: AnyCancellable?
     
     // MARK: - Initializer
     
@@ -35,17 +35,16 @@ class NextToGoViewModel: ObservableObject {
     
     func loadNextRaces() {
         
+        cancellable?.cancel()
+        
         raceItems = nil
         isLoading = true
         
-        interactor
-            .nextRaces(
-                for: filterViewModel
-                    .filters
-                    .filter { $0.selected }
-                    .map { $0.category },
-                numberOfRaces: 5
-            )
+        let filteredCategories = filterViewModel.filters
+            .filter { $0.selected }
+            .map { $0.category }
+        
+        cancellable = interactor.nextRaces(for: filteredCategories, numberOfRaces: 5)
             .receive(on: Scheduler.main)
             .delay(for: .seconds(0.5), scheduler: Scheduler.main)
             .sink { [unowned self] completion in
@@ -65,7 +64,11 @@ class NextToGoViewModel: ObservableObject {
                 print("\n\n------------>")
                 print(names)
             }
-            .store(in: &cancellables)
+    }
+    
+    deinit {
+        cancellable?.cancel()
+        cancellable = nil
     }
     
 }

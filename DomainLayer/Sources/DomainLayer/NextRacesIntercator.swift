@@ -28,8 +28,15 @@ public final class NextRacesInteractor: NextRacesInteracting {
         numberOfRaces count: Int
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         
+        // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
         // Always load 100 races first, but then later on filter out
-        // based on the exact need by category and number of races to list
+        // based on the exact need by category and number of races to list.
+        
+        // Perhaps not the best practice to load such heavy volume of data
+        // in REST JSON api pattern. GraphQL comes handy here to filter out
+        // necessary subsections of data from a huge list to load faster
+        // and save network data bandwidth.
+        // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
         let nextRacesPublisher = networkService.load(
             Resource<RacesListResponse>.nextRaces(numberOfRaces: 100)
         )

@@ -48,7 +48,7 @@ class RacePresentationItem: ObservableObject {
             .prepend(Date.now)
             .sink { [weak self] _ in
                 self?.timeString = race.startTime.timeIntervalSinceNow
-                    .minutesSecondsLeft()
+                    .hoursMinutesSeconds()
             }
             .store(in: &cancellables)
     }
@@ -58,10 +58,13 @@ class RacePresentationItem: ObservableObject {
 extension Race.Category {
     
     var iconName: String {
-        /// Currently `horse` and  `greyhound` are custom SF symbols converted
-        /// after copying from SVG files from online free source and imported via the Image Symbol.
-        /// `harness` was made by exporting Apple's figure sport icon and mixing with other shapes. :)
         
+        /// Currently these are all custom SF symbols converted after copying
+        /// from SVG files from online free sources and then edited via Sketch.app.
+        /// Thereafter imported as the Symbol Image Asset in Xcode's Image Assets.
+        /// Xcode can read these symbols and treat like any other standard SF symbols.
+        /// https://developer.apple.com/documentation/uikit/uiimage/creating_custom_symbol_images_for_your_app
+
         switch self {
         case .horse:        return "horse"        // Hand-made SF symbol
         case .greyhound:    return "greyhound"    // Hand-made SF symbol
@@ -73,12 +76,25 @@ extension Race.Category {
 
 extension TimeInterval {
 
-    func minutesSecondsLeft() -> String {
+    /// Returns a formatted string from hour minute seconds left
+    /// Example: `5h` `2h` `18m` `3m``1m 20s`  `17s` `5s` etc.
+    func hoursMinutesSeconds() -> String {
         let time = NSInteger(self)
 
+        let hours = (time / 60 / 60) % 60
         let minutes = (time / 60) % 60
         let seconds = time % 60
-     
+        
+        // TODO: Needs more tweaking and unit testing every combination
+
+        if hours >= 1 {
+            return String(format: "%0.1dh", hours)
+        }
+        
+        if minutes >= 3 {
+            return String(format: "%0.1dm", minutes)
+        }
+        
         if minutes == 0 {
             return String(format: "%0.1ds", seconds)
         }
