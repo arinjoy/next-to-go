@@ -28,7 +28,7 @@ class RacePresentationItem: ObservableObject {
     }
     
     var countryEmoji: String? {
-        CountryUtilities.countryFlag(byAlpha3Code: race.venu.country)
+        CountryUtilities.countryFlag(byAlphaCode: race.venu.country)
     }
     
     var iconName: String {

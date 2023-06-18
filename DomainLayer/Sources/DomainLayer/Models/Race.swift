@@ -36,7 +36,11 @@ public struct Race: Identifiable {
         self.meeting = summary.meeting ?? summary.name ?? ""
         
         self.startTime = Date(timeIntervalSince1970: TimeInterval(summary.advertisedStartTime))
-        self.venu = .init(state: summary.venueState, country: summary.venueCountry)
+        
+        self.venu = .init(
+            state: summary.venueState.uppercased(), // Just upper casing for safety
+            country: summary.venueCountry.uppercased()
+        )
     }
     
     /// A convenience initialiser to be used for mocking and testing purposes

@@ -18,12 +18,21 @@ public struct CountryUtilities {
     
     /// 🙏🏽 Courtesy:  https://stackoverflow.com/questions/30402435/swift-turn-a-country-code-into-a-emoji-flag-via-unicode
     ///
-    public static func countryFlag(byAlpha3Code alpha3code: String) -> String? {
-        guard
-            let alpha2code = getAlpha2Code(byAlpha3Code: alpha3code)
-        else {
-            return nil
+    public static func countryFlag(byAlphaCode alphaCode: String) -> String? {
+        var alpha2code: String?
+        
+        if alphaCode.count == 3 {
+            alpha2code = getAlpha2Code(byAlpha3Code: alphaCode)
+        } else if alphaCode.count == 2 {
+            if alphaCode == "UK" {
+                alpha2code = "GB" // Exception rule for UK
+            } else {
+                alpha2code = alphaCode
+            }
         }
+        
+        guard let alpha2code else { return nil }
+        
         let base : UInt32 = 127397
         var s = ""
         for v in alpha2code.unicodeScalars {

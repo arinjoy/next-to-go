@@ -13,6 +13,7 @@ struct RaceRowView: View {
     @ObservedObject private var raceItem: RacePresentationItem
     
     @State private var isAnimatingIcon: Bool = false
+    @State private var isAnimatingFlag: Bool = false
     
     @Environment(\.sizeCategory) private var sizeCategory
     
@@ -36,7 +37,7 @@ struct RaceRowView: View {
                 
                 descriptionStack
             }
-            .padding(.trailing, 10)
+            .padding(.trailing, 8)
             
         }
         .adaptiveScaleFactor()
@@ -44,6 +45,9 @@ struct RaceRowView: View {
         .onAppear() {
             withAnimation(.linear(duration: 2).repeatForever()) {
                 isAnimatingIcon = true
+            }
+            withAnimation(.easeInOut(duration: 2).repeatForever()) {
+                isAnimatingFlag = true
             }
         }
     }
@@ -60,7 +64,7 @@ private extension RaceRowView {
         
         Image(raceItem.iconName, bundle: .module)
             .font(.largeTitle)
-            .fontWeight(.bold) // For some reason bold effect isn't working well :(
+            .fontWeight(.bold) // For some reason bold effect isn't working well 😿
             .foregroundColor(.primary)
             .accessibilityHidden(true)
             .scaleEffect(isAnimatingIcon ? 1.15 : 0.9)
@@ -106,23 +110,6 @@ private extension RaceRowView {
     }
     
     @ViewBuilder
-    var descriptionStack: some View {
-        
-        HStack(alignment: .top, spacing: 8) {
-            
-            if let countryEmoji = raceItem.countryEmoji {
-                Text(countryEmoji)
-            }
-            
-            Text(raceItem.description)
-        }
-        .font(.subheadline)
-        .fontWeight(.medium)
-        .lineLimit(2)
-        .foregroundColor(.secondary)
-    }
-    
-    @ViewBuilder
     var raceName: some View {
         Text(raceItem.name)
             .font(.title3)
@@ -148,19 +135,44 @@ private extension RaceRowView {
     }
     
     @ViewBuilder
-    var raceDescription: some View {
+    var descriptionStack: some View {
         HStack {
-            if let countryEmoji = raceItem.countryEmoji {
-                Text(countryEmoji)
-            }
-            Text(raceItem.description)
+            countryFlag
+            description
         }
+    }
+    
+    @ViewBuilder
+    var countryFlag: some View {
+        if let countryEmoji = raceItem.countryEmoji {
+            Text(countryEmoji)
+                .font(.title)
+                .transition(.opacity)
+                .scaleEffect(isAnimatingFlag ? 1.02 : 0.98)
+                .opacity(isAnimatingFlag ? 1.0 : 0.65)
+                .animation(
+                    .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
+                    .repeatForever(autoreverses: true),
+                    value: isAnimatingFlag
+                )
+                .animation(
+                    .interpolatingSpring(mass: 2, stiffness: 170, damping: 10, initialVelocity: 0)
+                    .repeatForever(autoreverses: true),
+                    value: isAnimatingFlag
+                )
+        } else {
+            EmptyView()
+        }
+    }
+        
+    @ViewBuilder
+    var description: some View {
+        Text(raceItem.description)
             .font(.subheadline)
             .fontWeight(.medium)
             .lineLimit(2)
             .foregroundColor(.secondary)
     }
-    
 }
 
 #if DEBUG
@@ -208,8 +220,9 @@ struct RaceRowView_Previews: PreviewProvider {
             RaceRowView(raceItem: items[0])
             RaceRowView(raceItem: items[1])
             RaceRowView(raceItem: items[2])
+            Spacer()
         }
-        .padding(.horizontal, 20)
+        .padding(.all, 20)
   }
 }
 #endif
