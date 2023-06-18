@@ -4,6 +4,7 @@
 
 import SwiftUI
 import Combine
+import SharedUtils
 import DomainLayer
 
 class RacePresentationItem: ObservableObject {
@@ -15,7 +16,7 @@ class RacePresentationItem: ObservableObject {
     @Published var timeString: String?
     
     var number: String {
-        race.number
+        "R\(race.number)"
     }
     
     var name: String {
@@ -26,8 +27,8 @@ class RacePresentationItem: ObservableObject {
         race.name
     }
     
-    var country: String {
-        race.venu.country
+    var countryEmoji: String? {
+        CountryUtilities.countryFlag(byAlpha3Code: race.venu.country)
     }
     
     var iconName: String {

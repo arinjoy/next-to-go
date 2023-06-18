@@ -46,6 +46,7 @@ public struct NextToGoView: View {
                             .font(.title)
                             .fontWeight(.medium)
                             .foregroundColor(.primary)
+                            .accessibilityAddTraits(.isHeader)
                         
                         HStack(spacing: 16) {
                             ForEach(Race.Category.allCases, id: \.rawValue) {
@@ -54,6 +55,7 @@ public struct NextToGoView: View {
                                     .foregroundColor(.primary)
                             }
                         }
+                        .accessibilityHidden(true)
                     }
                     .padding(.top, 20)
                 }

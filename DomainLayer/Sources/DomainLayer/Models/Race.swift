@@ -25,7 +25,7 @@ public struct Race: Identifiable {
         self.id = summary.id
         self.category = category
         
-        self.number = "R\(summary.number)"
+        self.number = "\(summary.number)"
         
         // race-name can be missing/nil, so we fill the meeting-name
         // as backup value to render something on UI

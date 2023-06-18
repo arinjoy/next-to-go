@@ -47,10 +47,11 @@ private extension RaceRowView {
         Image(raceItem.iconName, bundle: .module)
             .font(.largeTitle)
             .fontWeight(.bold) // For some reason bold effect isn't working well :(
-            .foregroundColor(.red)
+            .foregroundColor(.primary)
             .accessibilityHidden(true)
-            .scaleEffect(isAnimatingImage ? 1.1 : 0.95)
-            .offset(y: isAnimatingImage ? -5 : 0)
+            .scaleEffect(isAnimatingImage ? 1.15 : 0.9)
+            .offset(y: isAnimatingImage ? -7 : 0)
+            .offset(x: isAnimatingImage ? 5 : 0)
             .animation(
                 .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
                 .repeatForever(autoreverses: true),
@@ -61,21 +62,23 @@ private extension RaceRowView {
                 .repeatForever(autoreverses: true),
                 value: isAnimatingImage
             )
+            .padding(.trailing, 6)
     }
     
     @ViewBuilder
     var infoTextStack: some View {
-        HStack(spacing: 12) {
+        
+        HStack(spacing: 8) {
             
             Text(raceItem.name)
-                .font(.body)
+                .font(.title3)
                 .fontWeight(.medium)
                 .lineLimit(1)
                 .foregroundColor(.primary)
             
             Text(raceItem.number)
-                .font(.body)
-                .fontWeight(.regular)
+                .font(.subheadline)
+                .fontWeight(.bold)
                 .foregroundColor(.primary)
             
              
@@ -92,8 +95,13 @@ private extension RaceRowView {
     
     @ViewBuilder
     var descriptionStack: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 12) {
-            Text(raceItem.country)
+        
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            
+            if let countryEmoji = raceItem.countryEmoji {
+                Text(countryEmoji)
+            }
+            
             Text(raceItem.description)
         }
         .font(.subheadline)
