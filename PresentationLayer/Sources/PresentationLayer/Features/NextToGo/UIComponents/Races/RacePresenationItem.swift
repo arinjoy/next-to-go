@@ -13,7 +13,8 @@ final class RacePresentationItem: ObservableObject {
     
     private let race: Race
     
-    @Published var countDownTimeText: String?
+    @Published private(set) var countdownText: String?
+    @Published private(set) var highlightCountdown: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -27,8 +28,9 @@ final class RacePresentationItem: ObservableObject {
             .autoconnect()
             .prepend(Date.now)
             .sink { [weak self] _ in
-                self?.countDownTimeText = race.startTime.timeIntervalSinceNow
-                    .hoursMinutesSeconds()
+                let time = race.startTime.timeIntervalSinceNow
+                self?.countdownText = time.hoursMinutesSeconds
+                self?.highlightCountdown = time.shouldHighlight
             }
             .store(in: &cancellables)
     }
@@ -87,7 +89,7 @@ final class RacePresentationItem: ObservableObject {
     /// for handling the count-down. Not sure if this possible by the way.
     ///
     private var countdownTimeAccessibilityLabel: String? {
-        countDownTimeText?
+        countdownText?
             .replacingOccurrences(of: "h", with: "hour")
             .replacingOccurrences(of: "m", with: "minute")
             .replacingOccurrences(of: "s", with: "second")
@@ -118,7 +120,8 @@ extension TimeInterval {
 
     /// Returns a formatted string from hour minute seconds left
     /// Example: `5h` `2h` `18m` `3m``1m 20s`  `17s` `5s` etc.
-    func hoursMinutesSeconds() -> String {
+    ///
+    var hoursMinutesSeconds: String {
         let time = NSInteger(self)
 
         let hours = (time / 60 / 60) % 60
@@ -140,6 +143,12 @@ extension TimeInterval {
         }
         
         return String(format: "%0.1dm %0.1ds", minutes, seconds)
+    }
+    
+    var shouldHighlight: Bool {
+        let time = NSInteger(self)
+        let minutes = (time / 60) % 60
+        return minutes < 6
     }
 
 }

@@ -71,7 +71,7 @@ struct RaceDetailsView: View {
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
             
-            Text(item.countDownTimeText ?? "")
+            Text(item.countdownText ?? "")
                 .font(.body)
                 .foregroundColor(.red)
             

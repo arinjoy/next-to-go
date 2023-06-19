@@ -13,7 +13,7 @@ struct RaceRowView: View {
     @ObservedObject private var raceItem: RacePresentationItem
     
     @State private var isAnimatingIcon: Bool = false
-    @State private var isAnimatingFlag: Bool = false
+    @State private var isAnimatingText: Bool = false
     
     @Environment(\.sizeCategory) private var sizeCategory
     
@@ -38,8 +38,8 @@ struct RaceRowView: View {
                 descriptionStack
             }
             .onAppear {
-                withAnimation(.easeInOut(duration: 2).repeatForever()) {
-                    isAnimatingFlag = true
+                withAnimation(.easeInOut(duration: 1)) {
+                    isAnimatingText = true
                 }
             }
 
@@ -132,15 +132,19 @@ private extension RaceRowView {
     
     @ViewBuilder
     var raceTimeCountdown: some View {
-        Text(raceItem.countDownTimeText ?? "")
+        Text(raceItem.countdownText ?? "")
             .font(.callout)
             .fontWeight(.regular)
-            .foregroundColor(.red)
-            .scaleEffect(isAnimatingFlag ? 1.02 : 0.98)
+            .foregroundColor(
+                raceItem.highlightCountdown ? .red : .primary
+            )
+            .opacity(isAnimatingText ? 1.0 : 0.6)
+            .scaleEffect(
+                raceItem.highlightCountdown && isAnimatingText ? 1.03 : 0.97
+            )
             .animation(
-                .spring(response: 0.8, dampingFraction: 0.0, blendDuration: 0.0)
-                .repeatForever(autoreverses: true),
-                value: isAnimatingFlag
+                .spring().repeatForever(autoreverses: true),
+                value: isAnimatingText
             )
     }
     
@@ -157,12 +161,12 @@ private extension RaceRowView {
         if let countryEmoji = raceItem.countryEmoji {
             Text(countryEmoji)
                 .font(.title)
-                .scaleEffect(isAnimatingFlag ? 1.02 : 0.98)
-                .opacity(isAnimatingFlag ? 1.0 : 0.65)
+                .scaleEffect(isAnimatingText ? 1.04 : 0.99)
+                .opacity(isAnimatingText ? 1.0 : 0.5)
                 .animation(
                     .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
                     .repeatForever(autoreverses: true),
-                    value: isAnimatingFlag
+                    value: isAnimatingText
                 )
         } else {
             EmptyView()
@@ -188,7 +192,7 @@ struct RaceRowView_Previews: PreviewProvider {
         name: "Premio Jockey Club De Minas Fun Horse racing carnival",
         number: "R2",
         meeting: "Gavea",
-        startTime: Date.init(timeIntervalSinceNow: 3 * 60),
+        startTime: Date.init(timeIntervalSinceNow: 1 * 60),
         venu: .init(state: "BRA", country: "BRA")
     )
     
@@ -198,7 +202,7 @@ struct RaceRowView_Previews: PreviewProvider {
         name: "Sportsbet Green Ticks (275+Rank)",
         number: "R1",
         meeting: "Warragul Race",
-        startTime: Date.init(timeIntervalSinceNow: 2 * 60),
+        startTime: Date.init(timeIntervalSinceNow: 2.5 * 60),
         venu: .init(state: "VIC", country: "AUS")
     )
     
@@ -208,7 +212,7 @@ struct RaceRowView_Previews: PreviewProvider {
         name: "The Mermaid Stakes(G3)",
         number: "R5",
         meeting: "Hanshin",
-        startTime: Date.init(timeIntervalSinceNow: 1 * 60),
+        startTime: Date.init(timeIntervalSinceNow: 8 * 60),
         venu: .init(state: "JPN", country: "JPN")
     )
     
