@@ -10,7 +10,7 @@ extension Resource {
     /// Fetches the next x number of races combining all categories.
     ///
     /// ‼️ The API is designed to not have category based filtering in query
-    /// parameter and we can always get the combination effect from  each categories. ‼️
+    /// parameter and we always get the combination effect from  each categories. ‼️
     ///
     /// Races will be returned up to the given preference count in total.
     /// - Parameters:

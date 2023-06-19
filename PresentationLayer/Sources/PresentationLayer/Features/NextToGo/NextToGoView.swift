@@ -31,20 +31,29 @@ public struct NextToGoView: View {
         
         NavigationView {
             
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .center, spacing: 10) {
                 
                 FilterView(viewModel: viewModel.filterViewModel)
                 
-                if viewModel.isLoading == false {
-                    RacesListView(viewModel: viewModel)
-                } else {
-                    LoadingView(
-                        isLoading: viewModel.isLoading,
-                        error: viewModel.loadingError
-                    ) {
-                        viewModel.loadNextRaces()
+                Spacer()
+                
+                CollectionLoadingView(
+                    loadingState: viewModel.loadingState,
+                    content: RacesListView.init(items:),
+                    empty: {
+                        MessageView(
+                          message: "There are no races right now.",
+                          imageName: "exclamationmark.bubble"
+                        )
+                    },
+                    error: {
+                        MessageView(
+                          message: $0.localizedDescription,
+                          imageName: "exclamationmark.triangle"
+                        )
+                        .foregroundColor(.red)
                     }
-                }
+                )
             }
             .navigationBarTitle(Text(viewModel.title), displayMode: .large)
             .toolbar { toolBarContent }
@@ -115,3 +124,18 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
+
+
+
+struct MessageView: View {
+  let message: String
+  let imageName: String
+  var body: some View {
+    VStack(spacing: 12) {
+      Spacer()
+      Image(systemName: imageName).font(.system(size: 48))
+      Text(message)
+      Spacer()
+    }
+  }
+}

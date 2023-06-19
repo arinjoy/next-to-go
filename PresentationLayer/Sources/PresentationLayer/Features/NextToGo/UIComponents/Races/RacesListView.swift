@@ -3,31 +3,38 @@
 //
 
 import SwiftUI
+import DomainLayer
 
 struct RacesListView: View {
     
     // MARK: - Properties
     
-    @ObservedObject private var viewModel: NextToGoViewModel
+    let items: [Race]
     
-    // MARK: - Initializer
-    
-    init(viewModel: NextToGoViewModel) {
-        self.viewModel = viewModel
-    }
+    @Environment(\.redactionReasons) private var redactionReasons
+      
+    private var isRedacted: Bool { redactionReasons.contains(.placeholder) }
     
     // MARK: - UI Body
     
     var body: some View {
-        if let items = viewModel.raceItems {
-            List(items) { race in
-                NavigationLink(destination: EmptyView()) {
-                    RaceRowView(raceItem: .init(race: race))
-               }
+        
+        List(items) { item in
+            
+            NavigationLink(
+                
+                // Dummy Destination detail page
+                // TODO: Finish the detail page as your next feature
+                // so that you can go there and bet...
+                
+                destination: MessageView(
+                    message: "R\(item.number)" + item.meeting,
+                    imageName: "figure.equestrian.sports"
+                )
+            ) {
+                RaceRowView(raceItem: .init(race: item))
             }
-            .listStyle(.inset)
-        } else {
-            EmptyView()
         }
+        .listStyle(.inset)
     }
 }

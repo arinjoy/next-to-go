@@ -36,6 +36,7 @@ public struct Resource<T: Decodable> {
         guard let url = components.url else {
             return nil
         }
+        
         return URLRequest(url: url)
     }
 

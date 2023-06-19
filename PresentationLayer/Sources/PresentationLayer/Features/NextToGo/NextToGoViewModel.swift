@@ -7,21 +7,19 @@ import Combine
 import SwiftUI
 import SharedUtils
 import DomainLayer
-import DataLayer
 
 final class NextToGoViewModel: ObservableObject {
     
     // MARK: - Outputs
     
-    @Published var raceItems: [Race]?
-    @Published var isLoading: Bool = false
-    @Published var loadingError: NetworkError?
+    @Published private(set) var loadingState: CollectionLoadingState<[Race]> = .loading(placeholder: Race.placeholders)
     
-    @ObservedObject var filterViewModel: FilterViewModel
+    @ObservedObject private(set) var filterViewModel: FilterViewModel
 
-    // MARK: - Private Properties
+    // MARK: - Dependency
     
     private let interactor: NextRacesInteracting
+    
     private var cancellable: AnyCancellable?
     
     // MARK: - Lifecycle
@@ -31,7 +29,6 @@ final class NextToGoViewModel: ObservableObject {
         self.interactor = interactor
         
         self.filterViewModel = FilterViewModel()
-        
         self.filterViewModel.filterTappedAction = { [weak self] in
             self?.loadNextRaces()
         }
@@ -44,36 +41,26 @@ final class NextToGoViewModel: ObservableObject {
     
     // MARK: - API methods
     
+    /// Load the next races. (Currently loads next 5)
     func loadNextRaces() {
         
         cancellable?.cancel()
-
-        raceItems = nil
-        isLoading = true
         
         let filteredCategories = filterViewModel.filters
             .filter { $0.selected }
             .map { $0.category }
         
-        
-        // Note: Get the latest 5 races only (not more) as per business requirement
-        
+        // Note:🤚🏽🤚🏽 As per business need, load 5 races.
+        // Update this value below to load 10 or as many
+        // as you like. 🤩
+                
         cancellable = interactor
             .nextRaces(for: filteredCategories, numberOfRaces: 5)
+            // TODO: ‼️ Tweak this 1.0 delay below. Helps in shimmering. ‼️
+            .delay(for: .seconds(1.0), scheduler: Scheduler.main)
+            .mapToLoadingState(placeholder: Race.placeholders)
             .receive(on: Scheduler.main)
-        
-            // Increase this to debug delayed loading
-            .delay(for: .seconds(0.5), scheduler: Scheduler.main)
-        
-            .sink { [unowned self] completion in
-                isLoading = false
-                if case .failure(let error) = completion {
-                    loadingError = error
-                }
-            } receiveValue: { [unowned self] results in
-                isLoading = false
-                raceItems = results
-            }
+            .assign(to: \.loadingState, on: self)
     }
     
     // MARK: - Localized Copies
@@ -110,4 +97,27 @@ final class NextToGoViewModel: ObservableObject {
         "next.togo.races.settings.button.accessibility.hint".l10n()
     }
     
+}
+
+// MARK: - Shimmer placeholders helper
+
+private extension Race {
+    
+    static var placeholders: [Race] {
+        var list: [Race] = []
+        for idx in 1...5 {
+            list.append(
+                Race(
+                    id: "\(idx)",
+                    category: .horse,
+                    name: "Lorem ipsum dolor",
+                    number: "9",
+                    meeting: "Lorem ipsum",
+                    startTime: Date.now,
+                    venu: .init(state: "QLD", country: "AUS")
+                )
+            )
+        }
+        return list
+    }
 }

@@ -29,16 +29,17 @@ public final class NextRacesInteractor: NextRacesInteracting {
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         
         // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
-        // Always load 100 races first, but then later on filter out
-        // based on the exact need by category and number of races to list.
+        // Always try to load 45 races at once, but then later filter out based
+        // on the exact need by category and number of races to show on UI.
         
         // Perhaps not the best practice to load such heavy volume of data
         // in REST JSON api pattern. GraphQL comes handy here to filter out
-        // necessary subsections of data from a huge list to load faster
+        // necessary sub-properties of data from a huge list to load faster
         // and save network data bandwidth.
         // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
+        
         let nextRacesPublisher = networkService.load(
-            Resource<RacesListResponse>.nextRaces(numberOfRaces: 100)
+            Resource<RacesListResponse>.nextRaces(numberOfRaces: 45)
         )
             .compactMap { response in
 
@@ -55,11 +56,11 @@ public final class NextRacesInteractor: NextRacesInteracting {
                 return Array(races.prefix(count))
             }
         
-        // Poll every 60 seconds to refresh latest races
-        return Timer.publish(every: 5, on: .main, in: .common)
+        // Poll every 30 seconds to refresh latest races
+        return Timer.publish(every: 30, on: .main, in: .common)
             .autoconnect()
             .prepend(Date.now)  // Necessary to fire instantly at start
-            .setFailureType(to: NetworkError.self) // To compose with nextRaces publisher type
+            .setFailureType(to: NetworkError.self) // To compose with nextRaces publisher
             .eraseToAnyPublisher()
             .flatMapLatest { _ in
                 nextRacesPublisher
