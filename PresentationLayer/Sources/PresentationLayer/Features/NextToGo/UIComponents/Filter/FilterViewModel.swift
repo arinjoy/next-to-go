@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import SharedUtils
 import DomainLayer
 
 struct FilterModel: Identifiable {
@@ -46,4 +47,16 @@ final class FilterViewModel: ObservableObject {
             filters[item.id].selected.toggle()
         }
     }
+}
+
+extension Race.Category {
+    
+    var accessibilityLabel: String {
+        switch self {
+        case .horse:      return "next.togo.races.filter.horse.title".l10n()
+        case .greyhound:  return "next.togo.races.filter.greyhound.title".l10n()
+        case .harness:    return "next.togo.races.filter.harness.title".l10n()
+        }
+    }
+
 }

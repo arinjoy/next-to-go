@@ -52,7 +52,7 @@ struct FilterView: View {
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityAddTraits(.isButton)
-                .accessibilityLabel(filter.category.accessibilityName)
+                .accessibilityLabel(filter.category.accessibilityLabel)
                 .accessibilityAddTraits(filter.selected ? .isSelected : .isButton)
             }
         }
@@ -60,18 +60,6 @@ struct FilterView: View {
         
         Divider()
     }
-}
-
-private extension Race.Category {
-    
-    var accessibilityName: String {
-        switch self {
-        case .horse:        return "Horse racing"
-        case .greyhound:    return "Greyhound racing"
-        case .harness:      return "Harness racing"
-        }
-    }
-
 }
 
 

@@ -1,0 +1,23 @@
+/*
+
+  Created by Arinjoy Biswas on 19/6/2023.
+  
+*/
+
+// French language 🇫🇷
+
+// TODO: ‼️‼️‼️ Translate into French 🇫🇷 ‼️‼️‼️
+// Else French men would hate English 🤣
+
+"next.togo.races.title" = "Next to Go";
+
+"next.togo.races.filter.horse.title" = "Horse Racing";
+"next.togo.races.filter.greyhound.title" = "Greyhound Racing";
+"next.togo.races.filter.harness.title" = "Harness Racing";
+
+"next.togo.races.error.heading" = "Something went wrong!";
+"next.togo.races.error.body" = "Please try again after some time";
+
+"next.togo.races.race.number.prefix" = "R";
+"next.togo.races.race.number.accessibility.label" = "Race";
+"next.togo.races.race.cell.accessibility.hint" = "Double tap to see more and start betting";

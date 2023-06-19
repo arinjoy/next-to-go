@@ -20,11 +20,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DataLayer",
-            dependencies: ["SharedUtils"],
-            path: "Sources",
-            resources: [
-                .copy("Resources")
-            ]),
+            dependencies: ["SharedUtils"]),
         .testTarget(
             name: "DataLayerTests",
             dependencies: ["DataLayer"]),

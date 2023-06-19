@@ -46,7 +46,7 @@ public struct NextToGoView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Next to Go"), displayMode: .large)
+            .navigationBarTitle(Text(viewModel.title), displayMode: .large)
             .toolbar { toolBarContent }
             .padding(.top, 20)
         }
@@ -66,19 +66,20 @@ private extension NextToGoView {
                 haptic.impactOccurred()
                 viewModel.loadNextRaces()
             } label: {
-                Image(systemName: "arrow.clockwise.circle")
+                Image(systemName: viewModel.refreshButtonIcon)
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .frame(width: 24, height: 24)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel("Refresh")
+                    .accessibilityLabel(viewModel.refreshButtonTitle)
+                    .accessibilityHint(viewModel.refreshButtonAccessibilityHint)
             }
         }
         
         ToolbarItem(placement: .principal) {
-            Image(systemName: "figure.equestrian.sports")
+            Image(systemName: viewModel.navBarHeroIcon)
                 .resizable()
                 .frame(width: 36, height: 36)
                 .foregroundColor(.red)
@@ -90,14 +91,15 @@ private extension NextToGoView {
                 haptic.impactOccurred()
                 isShowingSettings.toggle()
             } label: {
-                Image(systemName: "slider.horizontal.3")
+                Image(systemName: viewModel.settingsButtonIcon)
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .frame(width: 24, height: 24)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel("Settings")
+                    .accessibilityLabel(viewModel.settingsButtonTitle)
+                    .accessibilityHint(viewModel.settingsButtonAccessibilityHint)
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
