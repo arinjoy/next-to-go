@@ -13,10 +13,34 @@ final class RacePresentationItem: ObservableObject {
     
     private let race: Race
     
-    @Published var timeString: String?
+    @Published var countDownTimeText: String?
     
-    var number: String {
-        "R\(race.number)"
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Initializer
+    
+    init(race: Race) {
+        
+        self.race = race
+        
+        Timer.publish(every: 1, on: RunLoop.main, in: .common)
+            .autoconnect()
+            .prepend(Date.now)
+            .sink { [weak self] _ in
+                self?.countDownTimeText = race.startTime.timeIntervalSinceNow
+                    .hoursMinutesSeconds()
+            }
+            .store(in: &cancellables)
+    }
+    
+    // MARK: - Computed properties
+    
+    var iconName: String {
+        race.category.iconName
+    }
+    
+    var raceNumber: String {
+        "next.togo.races.race.number.prefix".l10n() + "\(race.number)"
     }
     
     var name: String {
@@ -31,26 +55,42 @@ final class RacePresentationItem: ObservableObject {
         CountryUtilities.countryFlag(byAlphaCode: race.venu.country)
     }
     
-    var iconName: String {
-        race.category.iconName
+    // MARK: - Accessibility
+    
+    var combinedAccessibilityLabel: String {
+        [
+            race.category.accessibilityLabel,
+            name,
+            raceNumberAccessibilityLabel,
+            countryEmoji,
+            description,
+            countdownTimeAccessibilityLabel
+        ]
+            .combinedAccessibilityLabel()
     }
     
-    private var cancellables = Set<AnyCancellable>()
+    private var raceNumberAccessibilityLabel: String {
+        "next.togo.races.race.number.accessibility.label".l10n() + "\(race.number)"
+    }
     
-    // MARK: - Initializer
+    ///
+    // TODO: 🤚🏽 Need to tweak a few things 🤚🏽
     
-    init(race: Race) {
-        
-        self.race = race
-        
-        Timer.publish(every: 1, on: RunLoop.main, in: .common)
-            .autoconnect()
-            .prepend(Date.now)
-            .sink { [weak self] _ in
-                self?.timeString = race.startTime.timeIntervalSinceNow
-                    .hoursMinutesSeconds()
-            }
-            .store(in: &cancellables)
+    /// To handle the singular vs. plural. Currently all singular without `s` at end when they
+    /// should be. Does not sound perfect in `VoiceOver`, but manageable to understand.
+    ///
+    /// Also localise these components via `Localization.strings` file for non English users.
+    ///
+    /// And by the time user has heard this, it's too late because the timer has moved on.
+    /// So the countdown value will be out of date. 😭
+    /// We need a dynamic way to attach / announce the accessibility label for the cell  just
+    /// for handling the count-down. Not sure if this possible by the way.
+    ///
+    private var countdownTimeAccessibilityLabel: String? {
+        countDownTimeText?
+            .replacingOccurrences(of: "h", with: "hour")
+            .replacingOccurrences(of: "m", with: "minute")
+            .replacingOccurrences(of: "s", with: "second")
     }
     
 }

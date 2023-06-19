@@ -6,6 +6,7 @@
 
 // English language
 
+// MARK: - Races main screen
 "next.togo.races.title" = "Next to Go";
 
 "next.togo.races.refresh.button.title" = "Refresh";
@@ -21,6 +22,7 @@
 "next.togo.races.error.heading" = "Something went wrong!";
 "next.togo.races.error.body" = "Please try again after some time";
 
+// MARK: - Races list -> Cell
 "next.togo.races.race.number.prefix" = "R";
-"next.togo.races.race.number.accessibility.label" = "Race";
-"next.togo.races.race.cell.accessibility.hint" = "Double tap to see more and start betting";
+"next.togo.races.race.number.accessibility.label" = "Race number";
+"next.togo.races.race.cell.accessibility.hint" = "Double tap to see the race and start betting";

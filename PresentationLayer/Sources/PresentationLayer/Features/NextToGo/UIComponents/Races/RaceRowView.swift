@@ -38,10 +38,10 @@ struct RaceRowView: View {
                 descriptionStack
             }
             .padding(.trailing, 8)
-            
         }
         .adaptiveScaleFactor()
         .accessibilityElement(children: .combine)
+        .accessibilityLabel(raceItem.combinedAccessibilityLabel)
         .onAppear() {
             withAnimation(.linear(duration: 2).repeatForever()) {
                 isAnimatingIcon = true
@@ -121,7 +121,7 @@ private extension RaceRowView {
     
     @ViewBuilder
     var raceNumber: some View {
-        Text(raceItem.number)
+        Text(raceItem.raceNumber)
             .font(.title3)
             .fontWeight(.medium)
             .foregroundColor(.primary)
@@ -129,7 +129,7 @@ private extension RaceRowView {
     
     @ViewBuilder
     var raceTimeCountdown: some View {
-        Text(raceItem.timeString ?? "")
+        Text(raceItem.countDownTimeText ?? "")
             .font(.callout)
             .fontWeight(.regular)
             .foregroundColor(.red)
