@@ -8,6 +8,8 @@ import DataLayer
 // TODO: Update and finalise the UI
 // Bind to its viewModel and abstract copies etc.
 
+// WIP (This can be used instead of Shimmer CollectionLoadingView
+
 struct LoadingView: View {
     
     let isLoading: Bool
@@ -37,12 +39,12 @@ struct LoadingView: View {
                             VStack(spacing: 16) {
                                 
                                 // TODO: Use custom error message mapped from the error code
-                                Text(LocalizedStringKey("next.togo.races.error.heading"))
+                                Text(LocalizedStringKey("next.togo.races.error.generic.heading"))
                                     .font(.headline)
                                 
                                 if let retryAction {
                                     Button(action: retryAction) {
-                                        Text(LocalizedStringKey("next.togo.races.error.retry.button.title"))
+                                        Text("Retry")
                                     }
                                     .foregroundColor(Color.blue)
                                     .buttonStyle(PlainButtonStyle())

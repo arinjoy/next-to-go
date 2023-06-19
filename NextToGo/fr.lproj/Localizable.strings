@@ -9,7 +9,7 @@
 // TODO: ‼️‼️‼️ Translate into French 🇫🇷 ‼️‼️‼️
 // Else French men would hate English 🤣
 
-// MARK: - Races main screen
+/// MARK: - Races list
 "next.togo.races.title" = "Next to Go";
 
 "next.togo.races.refresh.button.title" = "Refresh";
@@ -24,10 +24,16 @@
 "next.togo.races.filter.do.accessibility.hint.prefix" = "Double tap to select ";
 "next.togo.races.filter.undo.accessibility.hint.prefix" = "Double tap to un-select ";
 
-"next.togo.races.error.heading" = "Something went wrong!";
-"next.togo.races.error.body" = "Please try again after some time";
-
 // MARK: - Races list -> Cell
 "next.togo.races.race.number.prefix" = "R";
 "next.togo.races.race.number.accessibility.label" = "Race number";
 "next.togo.races.race.cell.accessibility.hint" = "Double tap to see the race and start betting";
+
+// MARK: - Error messages
+"next.togo.races.error.generic.heading" = "Something went wrong!";
+"next.togo.races.error.generic.message" = "Please try again soon and start punting.";
+"next.togo.races.error.network.heading" = "You seem to be offline!";
+"next.togo.races.error.network.message" = "Please connect to the Internet and start punting.";
+
+"next.togo.races.empty.title" = "Uh-oh! There aren't any races.";
+"next.togo.races.empty.message" = "Races would be available soon. Please check in a while and start punting.";

@@ -63,7 +63,7 @@ final class NextToGoViewModel: ObservableObject {
             .assign(to: \.loadingState, on: self)
     }
     
-    // MARK: - Localized Copies
+    // MARK: - Computed properties
     
     var title: String {
         "next.togo.races.title".l10n()
@@ -95,6 +95,18 @@ final class NextToGoViewModel: ObservableObject {
     
     var settingsButtonAccessibilityHint: String {
         "next.togo.races.settings.button.accessibility.hint".l10n()
+    }
+    
+    var emptyListIcon: String {
+        "cloud.moon.rain"
+    }
+    
+    var emptyListTilte: String {
+        "next.togo.races.empty.title".l10n()
+    }
+    
+    var emptyListMessage: String {
+        "next.togo.races.empty.message".l10n()
     }
     
 }

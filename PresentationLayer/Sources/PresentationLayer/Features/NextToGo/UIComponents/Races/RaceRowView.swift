@@ -37,19 +37,17 @@ struct RaceRowView: View {
                 
                 descriptionStack
             }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 2).repeatForever()) {
+                    isAnimatingFlag = true
+                }
+            }
+
             .padding(.trailing, 8)
         }
         .adaptiveScaleFactor()
         .accessibilityElement(children: .combine)
         .accessibilityLabel(raceItem.combinedAccessibilityLabel)
-        .onAppear() {
-            withAnimation(.linear(duration: 2).repeatForever()) {
-                isAnimatingIcon = true
-            }
-            withAnimation(.easeInOut(duration: 2).repeatForever()) {
-                isAnimatingFlag = true
-            }
-        }
     }
 }
 
@@ -80,6 +78,11 @@ private extension RaceRowView {
                 value: isAnimatingIcon
             )
             .padding(.trailing, 6)
+            .onAppear() {
+                withAnimation(.linear(duration: 2).repeatForever()) {
+                    isAnimatingIcon = true
+                }
+            }
     }
     
     @ViewBuilder

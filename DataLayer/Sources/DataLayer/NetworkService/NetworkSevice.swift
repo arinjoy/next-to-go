@@ -108,7 +108,7 @@ private extension NetworkService {
     var NSURLErrorConnectionFailureCodes: [Int] {
         [
             NSURLErrorBackgroundSessionInUseByAnotherProcess, /// Error Code: `-996`
-            NSURLErrorCannotFindHost, /// Error Code: ` -1003`
+            // NSURLErrorCannotFindHost, /// Error Code: ` -1003`
             NSURLErrorCannotConnectToHost, /// Error Code: ` -1004`
             NSURLErrorNetworkConnectionLost, /// Error Code: ` -1005`
             NSURLErrorNotConnectedToInternet, /// Error Code: ` -1009`

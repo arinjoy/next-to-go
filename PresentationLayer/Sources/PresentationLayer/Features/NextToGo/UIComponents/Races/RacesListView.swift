@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import SharedUtils
 import DomainLayer
 
 struct RacesListView: View {
@@ -21,20 +22,63 @@ struct RacesListView: View {
         
         List(items) { item in
             
-            NavigationLink(
-                
-                // Dummy Destination detail page
-                // TODO: Finish the detail page as your next feature
-                // so that you can go there and bet...
-                
-                destination: MessageView(
-                    message: "R\(item.number)" + item.meeting,
-                    imageName: "figure.equestrian.sports"
-                )
-            ) {
+            let presentationItem = RacePresentationItem(race: item)
+            
+            NavigationLink(destination: RaceDetailsView(item: presentationItem)) {
                 RaceRowView(raceItem: .init(race: item))
             }
+            
         }
         .listStyle(.inset)
     }
+}
+
+// TODO: Finish the detail page as your next feature
+// Destination detail page so that you can go there and
+// be as much creative as possible to give the punters the edge. 😁
+
+// WIP: Finish the Race details view here...
+
+struct RaceDetailsView: View {
+    
+    let item: RacePresentationItem
+    
+    var body: some View {
+     
+        VStack(alignment: .center, spacing: 16) {
+            
+            Image(item.iconName, bundle: .module)
+                .resizable()
+                .scaledToFit()
+                .font(.largeTitle)
+                .frame(width: 80, height: 80)
+                .foregroundColor(.red)
+                .accessibilityHidden(true)
+            
+            Text(item.name)
+                .font(.title)
+                .foregroundColor(.primary)
+            
+            Text(item.raceNumber)
+                .font(.title)
+                .foregroundColor(.primary)
+            
+            Text(item.countryEmoji ?? "")
+                .font(.largeTitle)
+            
+            Text(item.description)
+                .font(.body)
+                .foregroundColor(.primary)
+                .multilineTextAlignment(.center)
+            
+            Text(item.countDownTimeText ?? "")
+                .font(.body)
+                .foregroundColor(.red)
+            
+            Spacer()
+        }
+        .padding()
+        .adaptiveScaleFactor()
+    }
+    
 }

@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import DataLayer
 import DomainLayer
 import SharedUtils
 import Combine
@@ -41,17 +42,19 @@ public struct NextToGoView: View {
                     loadingState: viewModel.loadingState,
                     content: RacesListView.init(items:),
                     empty: {
-                        MessageView(
-                          message: "There are no races right now.",
-                          imageName: "exclamationmark.bubble"
+                        ErrorMessageView(
+                            iconName: viewModel.emptyListIcon,
+                            title: viewModel.emptyListTilte,
+                            message: viewModel.emptyListMessage
                         )
                     },
                     error: {
-                        MessageView(
-                          message: $0.localizedDescription,
-                          imageName: "exclamationmark.triangle"
+                        // TODO: Find better way to avoid force casting
+                        ErrorMessageView(
+                            iconName: ($0 as! NetworkError).iconName,
+                            title: ($0 as! NetworkError).title,
+                            message: ($0 as! NetworkError).message
                         )
-                        .foregroundColor(.red)
                     }
                 )
             }
@@ -118,24 +121,9 @@ private extension NextToGoView {
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
+struct NextToGoView_Previews: PreviewProvider {
     static var previews: some View {
         NextToGoView()
     }
 }
 #endif
-
-
-
-struct MessageView: View {
-  let message: String
-  let imageName: String
-  var body: some View {
-    VStack(spacing: 12) {
-      Spacer()
-      Image(systemName: imageName).font(.system(size: 48))
-      Text(message)
-      Spacer()
-    }
-  }
-}

@@ -61,9 +61,12 @@ struct SettingsView: View {
                             .scaledToFit()
                             .frame(width: 60, height: 60)
                             .accessibilityHidden(true)
-                            .scaleEffect(isAnimatingIcon ? 1.0 : 0.5)
+                            .scaleEffect(isAnimatingIcon ? 1.15 : 0.7)
                             .onAppear {
-                                withAnimation(.easeOut(duration: 1.5)) {
+                                withAnimation(
+                                    .easeOut(duration: 1.5)
+                                    .repeatCount(2, autoreverses: false)
+                                ) {
                                     isAnimatingIcon = true
                                 }
                             }
