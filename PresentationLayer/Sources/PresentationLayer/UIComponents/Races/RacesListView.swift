@@ -6,11 +6,17 @@ import SwiftUI
 
 struct RacesListView: View {
     
+    // MARK: - Properties
+    
     @ObservedObject private var viewModel: NextToGoViewModel
+    
+    // MARK: - Initializer
     
     init(viewModel: NextToGoViewModel) {
         self.viewModel = viewModel
     }
+    
+    // MARK: - UI Body
     
     var body: some View {
         if let items = viewModel.raceItems {
@@ -24,5 +30,4 @@ struct RacesListView: View {
             EmptyView()
         }
     }
-    
 }

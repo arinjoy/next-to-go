@@ -7,7 +7,14 @@ import DomainLayer
 
 struct FilterView: View {
     
+    // MARK: - Properties
+    
     @StateObject var viewModel: FilterViewModel
+    
+    // TODO: Test more and find the perfect haptic you need. 💗
+    let haptic = UIImpactFeedbackGenerator(style: .medium)
+    
+    // MARK: - UI Body
     
     var body: some View {
         
@@ -23,11 +30,9 @@ struct FilterView: View {
          
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
-                    .font(.body)
-                        .onTapGesture {
-                            viewModel.filterItemTapped(filterItem: filter)
-                        }
+                        .font(.body)
                 }
+                .accessibilityElement(children: .combine)
                 .foregroundColor(filter.selected ? .red : .primary)
                 .adaptiveScaleFactor()
                 .padding(.vertical, 4)
@@ -42,10 +47,12 @@ struct FilterView: View {
                 .padding(.horizontal, 4)
                 .contentShape(Rectangle())
                 .onTapGesture {
+                    haptic.impactOccurred()
                     viewModel.filterItemTapped(filterItem: filter)
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityAddTraits(.isButton)
+                .accessibilityLabel(filter.category.accessibilityName)
                 .accessibilityAddTraits(filter.selected ? .isSelected : .isButton)
             }
         }
@@ -53,6 +60,18 @@ struct FilterView: View {
         
         Divider()
     }
+}
+
+private extension Race.Category {
+    
+    var accessibilityName: String {
+        switch self {
+        case .horse:        return "Horse racing"
+        case .greyhound:    return "Greyhound racing"
+        case .harness:      return "Harness racing"
+        }
+    }
+
 }
 
 
