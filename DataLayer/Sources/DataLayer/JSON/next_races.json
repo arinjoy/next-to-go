@@ -1,0 +1,385 @@
+{
+    "status": 200,
+    "data": {
+        "next_to_go_ids": [
+            "1bdf5d35-0300-4e1e-8a2b-2cc331eda045",
+            "21c38114-23ea-4418-8523-d1526288a824",
+            "f8aa9888-0c30-4d33-9b3a-b94971d15a94",
+            "38c35467-220f-4568-9791-ae0b220f9811",
+            "1571ba4b-6f07-4212-8a35-1aea7808049a",
+            "36daa249-ea8d-411e-9724-8e581495bc0e",
+            "79fd5476-7160-4220-af41-c36a2a0cfead",
+            "0f48a5a6-c68c-4114-ac08-7e5724dc5318",
+            "3f6bbab6-f1bd-4822-9dbf-9047366a7ab6",
+            "bbd048d9-c0a7-4107-a27a-581e1766333b",
+            "ca155d92-8cbf-433a-a418-1382f691506b"
+        ],
+        "race_summaries": {
+            "0f48a5a6-c68c-4114-ac08-7e5724dc5318": {
+                "race_id": "0f48a5a6-c68c-4114-ac08-7e5724dc5318",
+                "race_name": "Race 3 - Trials",
+                "race_number": 3,
+                "meeting_id": "5ac6c359-d23d-4757-b934-2052172c37d6",
+                "meeting_name": "Prairie Meadows",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687211400
+                },
+                "race_form": {
+                    "distance": 320,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "SWINGIN LIGHTENING (9) wasted no time getting off the mark on debut over 302m at Remington Park (Dirt) 11 weeks ago and has not raced since. Likely improver who should run well again. HOT RYDER (4) was prominent on straightening and broke through for her maiden win over 320m at Remington Park (Dirt) last time. Is lightly raced and has plenty of scope for improvement. Shaping up nicely and she cannot be discounted. LAZLES LIGHTS (8) impressed when successful on debut over 320m at Remington Park (Dirt) five-and-a-half weeks ago. Will come on following that run; definite threat. SFS CAPO DE GATO (1) made an encouraging debut last time out, finishing 1.1 lengths from the winner in third over 274m at Remington Park (Dirt). Open to plenty of improvement.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Prairie Meadows\",\"state\":\"IA\",\"country\":\"USA\",\"number\":3,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "SWINGIN LIGHTENING (9) wasted no time getting off the mark on debut over 302m at Remington Park (Dirt) 11 weeks ago and has not raced since. Likely improver who should run well again. HOT RYDER (4) was prominent on straightening and broke through for her maiden win over 320m at Remington Park (Dirt) last time. Is lightly raced and has plenty of scope for improvement. Shaping up nicely and she cannot be discounted. LAZLES LIGHTS (8) impressed when successful on debut over 320m at Remington Park (Dirt) five-and-a-half weeks ago. Will come on following that run; definite threat. SFS CAPO DE GATO (1) made an encouraging debut last time out, finishing 1.1 lengths from the winner in third over 274m at Remington Park (Dirt). Open to plenty of improvement."
+                },
+                "venue_id": "79f0ab71-a9ab-49d1-aeb6-7b6d8cf35951",
+                "venue_name": "Prairie Meadows",
+                "venue_state": "IA",
+                "venue_country": "USA"
+            },
+            "21c38114-23ea-4418-8523-d1526288a824": {
+                "race_id": "21c38114-23ea-4418-8523-d1526288a824",
+                "race_name": "Red Snapper Seafoods, Christchurch C0",
+                "race_number": 2,
+                "meeting_id": "2eb1806e-8913-4cb6-b5ba-6912c8822157",
+                "meeting_name": "Manawatu",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1687221000
+                },
+                "race_form": {
+                    "distance": 457,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                        "name": "FINE",
+                        "short_name": "fine",
+                        "icon_uri": "FINE"
+                    },
+                    "weather_id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                    "race_comment": "ROWDY CHAOS (4) turned in a good run last time, finishing in the placings (19.29) at Manukau in a Class 0. Lines up from box 4 for the first time. Some good form is emerging from his last run. Sure to be about the mark. BOW BELL DEL (6) took advantage of the inside draw and gave a big sight in front when second and beaten 1.5 lengths (26.54) at this track in a Class 0 over 457m. Expected to feature again. OPAWA BLOSSOM (7) is overdue for a maiden success having placed at five of 14 starts, the latest missing the frame when fifth at this track. Yet to win out of this box but has been in the placings two times from four starts. In the mix. RECKLESS ERIC (3) must be included in calculations and can even win if he makes a better beginning.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Manawatu\",\"state\":\"NZ\",\"country\":\"NZ\",\"number\":2,\"race_name\":\"\",\"time\":\"2023-06-20T00:30:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "ROWDY CHAOS (4) turned in a good run last time, finishing in the placings (19.29) at Manukau in a Class 0. Lines up from box 4 for the first time. Some good form is emerging from his last run. Sure to be about the mark. BOW BELL DEL (6) took advantage of the inside draw and gave a big sight in front when second and beaten 1.5 lengths (26.54) at this track in a Class 0 over 457m. Expected to feature again. OPAWA BLOSSOM (7) is overdue for a maiden success having placed at five of 14 starts, the latest missing the frame when fifth at this track. Yet to win out of this box but has been in the placings two times from four starts. In the mix. RECKLESS ERIC (3) must be included in calculations and can even win if he makes a better beginning."
+                },
+                "venue_id": "809963b5-79b6-45c0-a1e8-5c4d80f890bd",
+                "venue_name": "Manawatu",
+                "venue_state": "NZ",
+                "venue_country": "NZ"
+            },
+            "1571ba4b-6f07-4212-8a35-1aea7808049a": {
+                "race_id": "1571ba4b-6f07-4212-8a35-1aea7808049a",
+                "race_name": "Race 6 - Claiming",
+                "race_number": 6,
+                "meeting_id": "6c9e26fd-f088-4259-a04c-c34591818b76",
+                "meeting_name": "Louisiana Downs",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687209900
+                },
+                "race_form": {
+                    "distance": 1673,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "WISE GUY (6) finished second when resuming from a spell last start over 1408m at this track. Nicely placed and expected to go well. NATE'S REVENGE (1) finished sixth two runs back at Evangeline Downs (Dirt) then improved last time out to score by 1.3 lengths as favourite after being prominent at the bend over 1408m at Evangeline Downs (Dirt). Meets some better types this time but he has the talent to test this line-up. OKUDAH (11) showed good early muster and fought on to finish second when resuming last start over 1673m at this track (Dirt). Has to overcome a tricky draw. Looks well placed so expect another big run. POST CLOSE (7) finished fourth last start over 1408m at this track (Dirt) after racing on the pace for much of the way. Has ability and a bold showing is expected.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Louisiana Downs\",\"state\":\"LA\",\"country\":\"USA\",\"number\":6,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "WISE GUY (6) finished second when resuming from a spell last start over 1408m at this track. Nicely placed and expected to go well. NATE'S REVENGE (1) finished sixth two runs back at Evangeline Downs (Dirt) then improved last time out to score by 1.3 lengths as favourite after being prominent at the bend over 1408m at Evangeline Downs (Dirt). Meets some better types this time but he has the talent to test this line-up. OKUDAH (11) showed good early muster and fought on to finish second when resuming last start over 1673m at this track (Dirt). Has to overcome a tricky draw. Looks well placed so expect another big run. POST CLOSE (7) finished fourth last start over 1408m at this track (Dirt) after racing on the pace for much of the way. Has ability and a bold showing is expected."
+                },
+                "venue_id": "5ae5afa0-2797-4117-982b-0630d2b3b847",
+                "venue_name": "Louisiana Downs",
+                "venue_state": "LA",
+                "venue_country": "USA"
+            },
+            "1bdf5d35-0300-4e1e-8a2b-2cc331eda045": {
+                "race_id": "1bdf5d35-0300-4e1e-8a2b-2cc331eda045",
+                "race_name": "1M Stakes",
+                "race_number": 11,
+                "meeting_id": "beadcd72-1642-4e8a-b503-9dc6dd78a631",
+                "meeting_name": "Palermo",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687208700
+                },
+                "race_form": {
+                    "distance": 1600,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "TREASURE NIGHT (8) finished second when resuming from a spell last start over 1600m at this track. Looks to have an edge on most of these and can go one better today. PRIMOGENITO D'ORO (5) is a progressive four-year-old entire who resumes from a break of four-and-a-half months, his last appearance being a win over 2000m at this track. Best form puts him right in this. DOQUIER (6) resumes today after filling a minor placing at his only appearance last prep at San Isidro over 1600m on March 26. Has a decent record at this trip with three minor placings from four tries and has to be included. ICY VASCO (1) was beaten 4 lengths into fifth in a 1400m contest at this track three weeks ago. The step up to a mile will suit and he can bounce back into the money",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Palermo\",\"state\":\"ARG\",\"country\":\"ARG\",\"number\":11,\"race_name\":\"1M Stakes\",\"time\":\"2023-06-19T21:05:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "TREASURE NIGHT (8) finished second when resuming from a spell last start over 1600m at this track. Looks to have an edge on most of these and can go one better today. PRIMOGENITO D'ORO (5) is a progressive four-year-old entire who resumes from a break of four-and-a-half months, his last appearance being a win over 2000m at this track. Best form puts him right in this. DOQUIER (6) resumes today after filling a minor placing at his only appearance last prep at San Isidro over 1600m on March 26. Has a decent record at this trip with three minor placings from four tries and has to be included. ICY VASCO (1) was beaten 4 lengths into fifth in a 1400m contest at this track three weeks ago. The step up to a mile will suit and he can bounce back into the money"
+                },
+                "venue_id": "cb1b304f-1ea6-4869-9d28-d5eef6b28719",
+                "venue_name": "Palermo",
+                "venue_state": "ARG",
+                "venue_country": "ARG"
+            },
+            "36daa249-ea8d-411e-9724-8e581495bc0e": {
+                "race_id": "36daa249-ea8d-411e-9724-8e581495bc0e",
+                "race_name": "Race 2 - Premio Aiortrophe - 1999",
+                "race_number": 2,
+                "meeting_id": "75235b4c-e585-4105-a3fa-2fa3e3e01600",
+                "meeting_name": "Gavea",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687210200
+                },
+                "race_form": {
+                    "distance": 1000,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "3d4f4967-4328-11e8-91cf-06cd88845500",
+                        "name": "Mostly Cloudy",
+                        "short_name": "mostly cloud",
+                        "icon_uri": "Mostly-Cloudy"
+                    },
+                    "weather_id": "3d4f4967-4328-11e8-91cf-06cd88845500",
+                    "race_comment": "LOGARITMO (6) comes here off a break of four months. Worth noting he filled a minor placing when returning from a spell last prep over 1300m at this track. Now under the care of new trainer Leonardo Jose Dos Reis. He is the one to beat fresh up. QUENY LEE (5) resumes after a break of 12 weeks. Won on debut to launch the last campaign over 1200m at Cidade Jardim. Makes plenty of appeal. MEDSHOW (2) doesn't boast the best winning strike rate but ran a strong race last time out, finishing second and beaten only 1.3 lengths over 1000m at this track. Looks well placed so expect a big run this time. POLO NORTE (1) has been struggling to make an impression lately but gets his best chance in a while to put his hoof in the till. One more chance.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Gavea\",\"state\":\"BRA\",\"country\":\"BRA\",\"number\":2,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "LOGARITMO (6) comes here off a break of four months. Worth noting he filled a minor placing when returning from a spell last prep over 1300m at this track. Now under the care of new trainer Leonardo Jose Dos Reis. He is the one to beat fresh up. QUENY LEE (5) resumes after a break of 12 weeks. Won on debut to launch the last campaign over 1200m at Cidade Jardim. Makes plenty of appeal. MEDSHOW (2) doesn't boast the best winning strike rate but ran a strong race last time out, finishing second and beaten only 1.3 lengths over 1000m at this track. Looks well placed so expect a big run this time. POLO NORTE (1) has been struggling to make an impression lately but gets his best chance in a while to put his hoof in the till. One more chance."
+                },
+                "venue_id": "8e64c646-a3dc-4f27-a338-9e45def539b9",
+                "venue_name": "Gavea",
+                "venue_state": "BRA",
+                "venue_country": "BRA"
+            },
+            "38c35467-220f-4568-9791-ae0b220f9811": {
+                "race_id": "38c35467-220f-4568-9791-ae0b220f9811",
+                "race_name": "Zambombo Maiden Special Weight",
+                "race_number": 12,
+                "meeting_id": "c9b07db7-dba7-4e19-9aca-ab1a2a7531ed",
+                "meeting_name": "Santiago",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687209660
+                },
+                "race_form": {
+                    "distance": 1200,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "MARCIANO (3) resumed from a spell last start with a sound second over 1200m at this track. Nicely placed to take this out. EMPEZAR DE NUEVO (11) is a promising maiden who looks close to a win, finishing fourth on debut then placing over 1200m at this track last time out. Well placed and can take this out. LITTLE GASPI (4) ran a better race last start to finish a close third over 1000m at this track after missing the placings at the previous appearance. Going up a level this time but he is up to the challenge. TIRREL (15) is a three-start maiden who could only manage to finish fifth at his latest appearance over 1200m at this track. Well placed on this occasion and is a likely improver.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Santiago\",\"state\":\"CHI\",\"country\":\"CHI\",\"number\":12,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "MARCIANO (3) resumed from a spell last start with a sound second over 1200m at this track. Nicely placed to take this out. EMPEZAR DE NUEVO (11) is a promising maiden who looks close to a win, finishing fourth on debut then placing over 1200m at this track last time out. Well placed and can take this out. LITTLE GASPI (4) ran a better race last start to finish a close third over 1000m at this track after missing the placings at the previous appearance. Going up a level this time but he is up to the challenge. TIRREL (15) is a three-start maiden who could only manage to finish fifth at his latest appearance over 1200m at this track. Well placed on this occasion and is a likely improver."
+                },
+                "venue_id": "8a58ddef-bbe6-459f-9656-585543a9cf2f",
+                "venue_name": "Santiago",
+                "venue_state": "CHI",
+                "venue_country": "CHI"
+            },
+            "bbd048d9-c0a7-4107-a27a-581e1766333b": {
+                "race_id": "bbd048d9-c0a7-4107-a27a-581e1766333b",
+                "race_name": "1M Stakes",
+                "race_number": 13,
+                "meeting_id": "beadcd72-1642-4e8a-b503-9dc6dd78a631",
+                "meeting_name": "Palermo",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687212000
+                },
+                "race_form": {
+                    "distance": 1600,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "MISTURA (2) has been in the placings at her last two appearances, finishing second over 1600m in Group 3 class at this track most recently. She drops in class today and is poised to go one better. MI PIDAL (5) couldn't have been more impressive first up last start when she scored by 4 lengths over 1400m at this track. Fitter for that last hitout and she is a major player again. ENJOY CRAF (9) was well in the market when resuming last start but failed to threaten when a disappointing seventh at this track over 2000m. Can do much better. SECRETA BLACK (8) finished second last time over 1600m at this track, beaten half a length. She is still on the up and should not be underestimated.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Palermo\",\"state\":\"ARG\",\"country\":\"ARG\",\"number\":13,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "MISTURA (2) has been in the placings at her last two appearances, finishing second over 1600m in Group 3 class at this track most recently. She drops in class today and is poised to go one better. MI PIDAL (5) couldn't have been more impressive first up last start when she scored by 4 lengths over 1400m at this track. Fitter for that last hitout and she is a major player again. ENJOY CRAF (9) was well in the market when resuming last start but failed to threaten when a disappointing seventh at this track over 2000m. Can do much better. SECRETA BLACK (8) finished second last time over 1600m at this track, beaten half a length. She is still on the up and should not be underestimated."
+                },
+                "venue_id": "cb1b304f-1ea6-4869-9d28-d5eef6b28719",
+                "venue_name": "Palermo",
+                "venue_state": "ARG",
+                "venue_country": "ARG"
+            },
+            "ca155d92-8cbf-433a-a418-1382f691506b": {
+                "race_id": "ca155d92-8cbf-433a-a418-1382f691506b",
+                "race_name": "Race 7 - 1609M",
+                "race_number": 7,
+                "meeting_id": "c827b5ad-7a8b-4454-8915-489c1f521613",
+                "meeting_name": "Plainridge Racecourse",
+                "category_id": "161d9be2-e909-4326-8c2c-35ed71fb460b",
+                "advertised_start": {
+                    "seconds": 1687212000
+                },
+                "race_form": {
+                    "distance": 1609,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "MCSTONED AGAIN (5) turned in a poor effort by his standards most recently when 21 metres away in seventh over 1609m at this track. Form prior to that had been solid. Has the class to take this out. RAYBARNZ (1) has been a model of consistency of late and deserved his victory last time out, scoring by 10 metres over 1609m at this track. No excuses from this advantageous draw. Taking on a better field but he is up to the task. SIDD FINCH (2) has to come into calculations on the back of some strong recent form, most recently when second at this track over 1609m. Must be included. VESUVIO BI (3) is the next elect off a last-start win by 5 metres at this track over 1609m.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Plainridge Racecourse\",\"state\":\"MA\",\"country\":\"USA\",\"number\":7,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "MCSTONED AGAIN (5) turned in a poor effort by his standards most recently when 21 metres away in seventh over 1609m at this track. Form prior to that had been solid. Has the class to take this out. RAYBARNZ (1) has been a model of consistency of late and deserved his victory last time out, scoring by 10 metres over 1609m at this track. No excuses from this advantageous draw. Taking on a better field but he is up to the task. SIDD FINCH (2) has to come into calculations on the back of some strong recent form, most recently when second at this track over 1609m. Must be included. VESUVIO BI (3) is the next elect off a last-start win by 5 metres at this track over 1609m."
+                },
+                "venue_id": "c8cd9819-b725-454e-9229-0a1727f1cf8d",
+                "venue_name": "Plainridge Racecourse",
+                "venue_state": "MA",
+                "venue_country": "USA"
+            },
+            "e16ff159-c897-4cf0-92f3-77c3aad4dd54": {
+                "race_id": "e16ff159-c897-4cf0-92f3-77c3aad4dd54",
+                "race_name": "6F Stakes",
+                "race_number": 12,
+                "meeting_id": "beadcd72-1642-4e8a-b503-9dc6dd78a631",
+                "meeting_name": "Palermo",
+                "category_id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start": {
+                    "seconds": 1687210200
+                },
+                "race_form": {
+                    "distance": 1200,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "TOP TEEN (11) turned things around last start and scored by 4 lengths as public elect over 1200m at this track. This is no harder than last time and she can repeat the dose. EUDEMONIA (3) and recorded a gutsy maiden victory last time out over 1200m at San Isidro, scoring by half a length. Jumps from a nice gate and she is a great chance to go back-to-back. AZAFRANADA (6) was in the money two starts back at this track but was unable to repeat the effort last time when seventh, beaten 18 lengths, at this track over 1200m. Perfectly placed and is sure to prove tough to beat. VEREDA FLORIDA (8) is experiencing a long win drought, extended last start when fifth over 1200m at this track. She is well placed at this level and should be thereabouts.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Palermo\",\"state\":\"ARG\",\"country\":\"ARG\",\"number\":12,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "TOP TEEN (11) turned things around last start and scored by 4 lengths as public elect over 1200m at this track. This is no harder than last time and she can repeat the dose. EUDEMONIA (3) and recorded a gutsy maiden victory last time out over 1200m at San Isidro, scoring by half a length. Jumps from a nice gate and she is a great chance to go back-to-back. AZAFRANADA (6) was in the money two starts back at this track but was unable to repeat the effort last time when seventh, beaten 18 lengths, at this track over 1200m. Perfectly placed and is sure to prove tough to beat. VEREDA FLORIDA (8) is experiencing a long win drought, extended last start when fifth over 1200m at this track. She is well placed at this level and should be thereabouts."
+                },
+                "venue_id": "cb1b304f-1ea6-4869-9d28-d5eef6b28719",
+                "venue_name": "Palermo",
+                "venue_state": "ARG",
+                "venue_country": "ARG"
+            },
+            "f8aa9888-0c30-4d33-9b3a-b94971d15a94": {
+                "race_id": "f8aa9888-0c30-4d33-9b3a-b94971d15a94",
+                "race_name": "Race 5 - 1609M",
+                "race_number": 5,
+                "meeting_id": "c827b5ad-7a8b-4454-8915-489c1f521613",
+                "meeting_name": "Plainridge Racecourse",
+                "category_id": "161d9be2-e909-4326-8c2c-35ed71fb460b",
+                "advertised_start": {
+                    "seconds": 1687209600
+                },
+                "race_form": {
+                    "distance": 1609,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "WALLET (3) turned in another strong performance last time when he battled on bravely to finish third over 1609m at this track. Will enjoy a nice run from this favourable starting position. Tackles a similar assignment and he can earn that well-deserved win. SONNY'S MONI (7) scored by 4 metres at this track over 1609m last start at his first run back from a spell. Has to contend with a very wide draw. Tackles a similar assignment and he can make it two for two this time in work. HARKO (1) is the next elect off a last-start win by 1.5 metres at this track over 1609m. BRAVADO (2) has been hard to fault of late, adding to the winning tally last start with success over 1609m at this track.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Plainridge Racecourse\",\"state\":\"MA\",\"country\":\"USA\",\"number\":5,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "WALLET (3) turned in another strong performance last time when he battled on bravely to finish third over 1609m at this track. Will enjoy a nice run from this favourable starting position. Tackles a similar assignment and he can earn that well-deserved win. SONNY'S MONI (7) scored by 4 metres at this track over 1609m last start at his first run back from a spell. Has to contend with a very wide draw. Tackles a similar assignment and he can make it two for two this time in work. HARKO (1) is the next elect off a last-start win by 1.5 metres at this track over 1609m. BRAVADO (2) has been hard to fault of late, adding to the winning tally last start with success over 1609m at this track."
+                },
+                "venue_id": "c8cd9819-b725-454e-9229-0a1727f1cf8d",
+                "venue_name": "Plainridge Racecourse",
+                "venue_state": "MA",
+                "venue_country": "USA"
+            }
+        }
+    },
+    "message": "Next 15 races from each category"
+}

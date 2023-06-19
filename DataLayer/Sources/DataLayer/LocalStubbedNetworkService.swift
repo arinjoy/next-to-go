@@ -24,11 +24,13 @@ final class LocalStubbedDataService: NetworkServiceType {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
 
-                if let filePath = Bundle(for: type(of: strongSelf))
-                    .path(forResource: strongSelf.localFileName, ofType: "json") {
+                if let fileURLPath = Bundle.module.url(
+                    forResource: strongSelf.localFileName,
+                    withExtension: "json",
+                    subdirectory: "JSON") {
 
                     do {
-                        let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
+                        let data = try Data(contentsOf: fileURLPath)
                         let jsonDecoder = JSONDecoder()
                         let decoded = try jsonDecoder.decode(T.self, from: data)
                         promise(.success(decoded))

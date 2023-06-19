@@ -22,6 +22,7 @@ let package = Package(
         .target(
             name: "DataLayer",
             dependencies: ["SharedUtils"],
+            resources: [.copy("JSON")],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]
@@ -29,6 +30,7 @@ let package = Package(
         .testTarget(
             name: "DataLayerTests",
             dependencies: ["DataLayer"],
+            resources: [.copy("Mocks")],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]
