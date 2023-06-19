@@ -13,9 +13,9 @@ final class LocalStubbedDataService: NetworkServiceType {
     init(withLocalFile fileName: String) {
         self.localFileName = fileName
     }
-    
+
     // MARK: - NetworkServiceType
-    
+
     func load<T>(_ resource: Resource<T>) -> AnyPublisher<T, NetworkError> {
         let future = Future<T, NetworkError> { [weak self] promise in
             guard let strongSelf = self else {
@@ -23,7 +23,10 @@ final class LocalStubbedDataService: NetworkServiceType {
                 return
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                if let filePath = Bundle(for: type(of: strongSelf)).path(forResource: strongSelf.localFileName, ofType: "json") {
+
+                if let filePath = Bundle(for: type(of: strongSelf))
+                    .path(forResource: strongSelf.localFileName, ofType: "json") {
+
                     do {
                         let data = try Data(contentsOf: URL(fileURLWithPath: filePath))
                         let jsonDecoder = JSONDecoder()
@@ -40,4 +43,3 @@ final class LocalStubbedDataService: NetworkServiceType {
         return future.eraseToAnyPublisher()
     }
 }
-

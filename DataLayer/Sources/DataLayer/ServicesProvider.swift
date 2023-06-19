@@ -10,7 +10,7 @@ public class ServicesProvider {
 
     /// The underlying network service to load HTTP network based data
     public let network: NetworkServiceType
-    
+
     init(network: NetworkServiceType) {
         self.network = network
     }
@@ -18,7 +18,7 @@ public class ServicesProvider {
     /// The default provider used for production code to fetch from remote
     public static func defaultProvider() -> ServicesProvider {
         let sessionConfig = URLSessionConfiguration.ephemeral
-        
+
         // Set 10 seconds timeout for the request,
         // otherwise defaults to 60 seconds which is too long.
         // This helps in network disconnection and error testing.
@@ -26,12 +26,12 @@ public class ServicesProvider {
         sessionConfig.waitsForConnectivity = true
         sessionConfig.allowsConstrainedNetworkAccess = true
         sessionConfig.allowsExpensiveNetworkAccess = true
-        
+
         let network = NetworkService(with: sessionConfig)
-        
+
         return ServicesProvider(network: network)
     }
-    
+
     /// The helping provider to fetch locally from stub JSON file
     public static func localStubbedProvider() -> ServicesProvider {
         // Slightly modified version with more recent dates used for testing

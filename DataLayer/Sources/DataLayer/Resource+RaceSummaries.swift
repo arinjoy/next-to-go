@@ -5,7 +5,7 @@
 import Foundation
 
 extension Resource {
-    
+
     ///
     /// Fetches the next x number of races combining all categories.
     ///
@@ -18,15 +18,15 @@ extension Resource {
     /// - Returns: The list of races.
     ///
     public static func nextRaces(numberOfRaces count: Int) -> Resource<RacesListResponse> {
-        
+
         let baseURL = ApiConstants.baseURL
-        
-        let parameters: [String : CustomStringConvertible] = [
+
+        let parameters: [String: CustomStringConvertible] = [
             "method": "nextraces",
             "count": count
         ]
-        
+
         return Resource<RacesListResponse>(url: baseURL, parameters: parameters)
     }
-    
+
 }
