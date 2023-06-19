@@ -1,0 +1,22 @@
+{
+    "status": 200,
+    "data": {
+        "summaries": {
+            "0f48a5a6-c68c-4114-ac08-7e5724dc5318": {
+                "id": "0f48a5a6-c68c-4114-ac08-7e5724dc5318",
+                "name": "Race 3 - Trials",
+                "number": 3,
+                "meeting_id": "5ac6c359-d23d-4757-b934-2052172c37d6",
+                "name": "Prairie Meadows",
+                "id": "4a2788f8-e825-4d36-9894-efd4baf1cfae",
+                "advertised_start_time": {
+                    "seconds": 1687211400
+                },
+                "venue_name": "Prairie Meadows",
+                "venue_state": "IA",
+                "venue_country": "USA"
+            }
+        }
+    },
+    "message": "Next 1 races from each category"
+}
