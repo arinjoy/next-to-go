@@ -63,7 +63,7 @@ final class NextToGoViewModel: ObservableObject {
             .receive(on: Scheduler.main)
         
             // Increase this to debug delayed loading
-            .delay(for: .seconds(0.2), scheduler: Scheduler.main)
+            .delay(for: .seconds(0.5), scheduler: Scheduler.main)
         
             .sink { [unowned self] completion in
                 isLoading = false

@@ -23,6 +23,7 @@
 
 "next.togo.races.error.heading" = "Something went wrong!";
 "next.togo.races.error.body" = "Please try again after some time";
+"next.togo.races.error.retry.button.title" = "Retry";
 
 // MARK: - Races list -> Cell
 "next.togo.races.race.number.prefix" = "R";

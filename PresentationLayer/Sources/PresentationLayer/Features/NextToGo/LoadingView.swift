@@ -6,6 +6,7 @@ import SwiftUI
 import DataLayer
 
 // TODO: Update and finalise the UI
+// Bind to its viewModel and abstract copies etc.
 
 struct LoadingView: View {
     
@@ -36,12 +37,12 @@ struct LoadingView: View {
                             VStack(spacing: 16) {
                                 
                                 // TODO: Use custom error message mapped from the error code
-                                Text("Something went wrong!")
+                                Text(LocalizedStringKey("next.togo.races.error.heading"))
                                     .font(.headline)
                                 
                                 if let retryAction {
                                     Button(action: retryAction) {
-                                        Text("Retry")
+                                        Text(LocalizedStringKey("next.togo.races.error.retry.button.title"))
                                     }
                                     .foregroundColor(Color.blue)
                                     .buttonStyle(PlainButtonStyle())

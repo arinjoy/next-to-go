@@ -21,10 +21,14 @@ struct SettingsView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     // MARK: - UI body
     
     // NOTE: Break down the sub section via `@ViewBuilder` based
     // child elements, show that easy to follow declarative code.
+    // Otherwise, it looks like pyramid of doom with too many
+    // nested blocks
     
     var body: some View {
         
@@ -86,7 +90,7 @@ struct SettingsView: View {
                             .font(.footnote)
                             .multilineTextAlignment(.leading)
                         
-                        Toggle(isOn: .constant(true)) {
+                        Toggle(isOn: $isDarkMode) {
                             Text("Dark Mode")
                         }
                         .padding()
@@ -150,6 +154,7 @@ struct SettingsView: View {
                 .padding()
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
