@@ -64,7 +64,6 @@ private extension RaceRowView {
         
         Image(raceItem.iconName, bundle: .module)
             .font(.largeTitle)
-            .fontWeight(.bold) // For some reason bold effect isn't working well 😿
             .foregroundColor(.red)
             .accessibilityHidden(true)
             .scaleEffect(isAnimatingIcon ? 1.15 : 0.9)
