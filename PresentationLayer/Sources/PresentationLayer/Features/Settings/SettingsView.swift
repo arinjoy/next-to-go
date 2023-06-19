@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import SharedUtils
 
 /// ‼️‼️‼️‼️‼️‼️
 //  TODO: Move all the copy / content...
@@ -57,6 +58,11 @@ struct SettingsView: View {
                             .frame(width: 60, height: 60)
                             .accessibilityHidden(true)
                             .scaleEffect(isAnimatingIcon ? 1.0 : 0.5)
+                            .onAppear {
+                                withAnimation(.easeOut(duration: 1.5)) {
+                                    isAnimatingIcon = true
+                                }
+                            }
                             
                             Text("Immerse yourself in the new world of personalised betting on races. Horse, Greyhound or Harness, whatever racing you're looking for internationally. Just filter them out an see the next most up to date 5 races to punt on.")
                                 .font(.footnote)
@@ -124,7 +130,6 @@ struct SettingsView: View {
                         SettingsRowView(name: "SwiftUI", value: "v3")
                         SettingsRowView(name: "App", value: "1.2.1")
                     }
-                    
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .navigationBarItems(
@@ -137,17 +142,12 @@ struct SettingsView: View {
                             Image(systemName: "multiply.circle.fill")
                                 .resizable()
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(.secondary)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Color(uiColor: UIColor.lightGray))
                                 .accessibilityLabel("Close")
                         }
                 )
                 .padding()
-                .onAppear {
-                    withAnimation(.easeOut(duration: 1.5)) {
-                        isAnimatingIcon = true
-                    }
-                }
             }
         }
     }
@@ -169,6 +169,7 @@ struct SettingsLabelView: View {
             Image(systemName: imageName)
                 .accessibilityHidden(true)
         }
+        .adaptiveScaleFactor()
         .accessibilityElement(children: .combine)
     }
 }
@@ -210,6 +211,7 @@ struct SettingsRowView: View {
                     EmptyView()
                 }
             }
+              .adaptiveScaleFactor()
               .accessibilityElement(children: .combine)
         }
     }
