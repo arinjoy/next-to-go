@@ -15,6 +15,8 @@ public struct NextToGoView: View {
     
     @State private var isShowingSettings: Bool = false
     
+    private let haptic = UIImpactFeedbackGenerator(style: .light)
+    
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initializer
@@ -63,10 +65,12 @@ private extension NextToGoView {
         
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
+                haptic.impactOccurred()
                 viewModel.loadNextRaces()
             } label: {
                 Image(systemName: "arrow.clockwise.circle")
                     .resizable()
+                    .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
                     .frame(width: 24, height: 24)
                     .foregroundColor(.primary)
@@ -78,20 +82,21 @@ private extension NextToGoView {
         ToolbarItem(placement: .principal) {
             Image(systemName: "figure.equestrian.sports")
                 .resizable()
-                .scaledToFit()
-                .frame(width: 30, height: 30)
+                .frame(width: 36, height: 36)
                 .foregroundColor(.red)
                 .accessibilityHidden(true)
         }
         
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
+                haptic.impactOccurred()
                 isShowingSettings.toggle()
             } label: {
                 Image(systemName: "slider.horizontal.3")
                     .resizable()
+                    .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .frame(width: 22, height: 22)
+                    .frame(width: 24, height: 24)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
                     .accessibilityLabel("Settings")

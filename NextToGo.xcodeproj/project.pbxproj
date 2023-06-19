@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		35182CB12A3D3B62004571DB /* NextToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35182CB02A3D3B62004571DB /* NextToGoApp.swift */; };
-		35182CB52A3D3B64004571DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35182CB42A3D3B64004571DB /* Assets.xcassets */; };
 		35B598B22A3D4FC000ABBD71 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B12A3D4FC000ABBD71 /* DataLayer */; };
 		35B598B42A3D4FC500ABBD71 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B32A3D4FC500ABBD71 /* DomainLayer */; };
 		35B598B82A3D502800ABBD71 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598B72A3D502800ABBD71 /* PresentationLayer */; };
 		35B598C02A3D5E1C00ABBD71 /* SharedUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 35B598BF2A3D5E1C00ABBD71 /* SharedUtils */; };
+		35C463392A4003960077961F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35C463382A4003960077961F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35182CAD2A3D3B62004571DB /* NextToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35182CB02A3D3B62004571DB /* NextToGoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextToGoApp.swift; sourceTree = "<group>"; };
-		35182CB42A3D3B64004571DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B4771F2A3D4C45004FA345 /* DataLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataLayer; sourceTree = "<group>"; };
 		35B598AD2A3D4E1D00ABBD71 /* DomainLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DomainLayer; sourceTree = "<group>"; };
 		35B598B62A3D501600ABBD71 /* PresentationLayer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PresentationLayer; sourceTree = "<group>"; };
 		35B598BE2A3D5DDC00ABBD71 /* SharedUtils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUtils; sourceTree = "<group>"; };
+		35C463382A4003960077961F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				35182CB02A3D3B62004571DB /* NextToGoApp.swift */,
-				35182CB42A3D3B64004571DB /* Assets.xcassets */,
+				35C463382A4003960077961F /* Assets.xcassets */,
 			);
 			path = NextToGo;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35182CB52A3D3B64004571DB /* Assets.xcassets in Resources */,
+				35C463392A4003960077961F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

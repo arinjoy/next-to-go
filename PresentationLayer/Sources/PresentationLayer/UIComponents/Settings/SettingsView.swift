@@ -29,11 +29,18 @@ struct SettingsView: View {
                         
                         HStack(alignment: .center, spacing: 16) {
                             
-                            Image(systemName: "figure.equestrian.sports")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 60, height: 60)
-                                .accessibilityHidden(true)
+                            Group {
+                                if let appIconImage = UIImage(named: "AppIcon") {
+                                    Image(uiImage: appIconImage)
+                                        .resizable()
+                                } else {
+                                    Image(systemName: "figure.equestrian.sports")
+                                        .resizable()
+                                }
+                            }
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                            .accessibilityHidden(true)
                             
                             Text("Immerse yourself in the new world of personalised betting on races. Horse, Greyhound or Harness, whatever racing you're looking for internationally. Just filter them out an see the next most up to date 5 races to punt on.")
                                 .font(.footnote)
