@@ -120,7 +120,7 @@ struct SettingsView: View {
                         
                         SettingsRowView(
                             name: "LinkedIn",
-                            linkLabel: "linkedin.com/arinjoybiswas",
+                            linkLabel: "linkedin.com/arinjoy",
                             linkURL: URL(string: "https://www.linkedin.com/in/arinjoybiswas/")!
                         )
                     }
