@@ -9,15 +9,25 @@
 // TODO: ‼️‼️‼️ Translate into French 🇫🇷 ‼️‼️‼️
 // Else French men would hate English 🤣
 
+// MARK: - Races main screen
 "next.togo.races.title" = "Next to Go";
+
+"next.togo.races.refresh.button.title" = "Refresh";
+"next.togo.races.refresh.button.accessibility.hint" = "Double tap to see most up to date races";
+
+"next.togo.races.settings.button.title" = "Settings";
+"next.togo.races.settings.button.accessibility.hint" = "Double tap to go to settings";
 
 "next.togo.races.filter.horse.title" = "Horse Racing";
 "next.togo.races.filter.greyhound.title" = "Greyhound Racing";
 "next.togo.races.filter.harness.title" = "Harness Racing";
+"next.togo.races.filter.do.accessibility.hint.prefix" = "Double tap to select ";
+"next.togo.races.filter.undo.accessibility.hint.prefix" = "Double tap to un-select ";
 
 "next.togo.races.error.heading" = "Something went wrong!";
 "next.togo.races.error.body" = "Please try again after some time";
 
+// MARK: - Races list -> Cell
 "next.togo.races.race.number.prefix" = "R";
-"next.togo.races.race.number.accessibility.label" = "Race";
-"next.togo.races.race.cell.accessibility.hint" = "Double tap to see more and start betting";
+"next.togo.races.race.number.accessibility.label" = "Race number";
+"next.togo.races.race.cell.accessibility.hint" = "Double tap to see the race and start betting";

@@ -18,6 +18,8 @@
 "next.togo.races.filter.horse.title" = "Horse Racing";
 "next.togo.races.filter.greyhound.title" = "Greyhound Racing";
 "next.togo.races.filter.harness.title" = "Harness Racing";
+"next.togo.races.filter.do.accessibility.hint.prefix" = "Double tap to select ";
+"next.togo.races.filter.undo.accessibility.hint.prefix" = "Double tap to un-select ";
 
 "next.togo.races.error.heading" = "Something went wrong!";
 "next.togo.races.error.body" = "Please try again after some time";

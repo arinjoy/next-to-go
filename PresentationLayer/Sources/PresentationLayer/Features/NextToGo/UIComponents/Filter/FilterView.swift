@@ -51,9 +51,12 @@ struct FilterView: View {
                     viewModel.filterItemTapped(filterItem: filter)
                 }
                 .accessibilityElement(children: .ignore)
-                .accessibilityAddTraits(.isButton)
                 .accessibilityLabel(filter.category.accessibilityLabel)
-                .accessibilityAddTraits(filter.selected ? .isSelected : .isButton)
+                .accessibilityHint(
+                    filter.category.accessibilityHint(selected: filter.selected)
+                )
+                .accessibilityAddTraits(filter.selected ?
+                                        [.isButton, .isSelected] : .isButton)
             }
         }
         .padding(.horizontal, 10)

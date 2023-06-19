@@ -58,5 +58,13 @@ extension Race.Category {
         case .harness:    return "next.togo.races.filter.harness.title".l10n()
         }
     }
+    
+    func accessibilityHint(selected: Bool) -> String {
+        if selected {
+            "next.togo.races.filter.undo.accessibility.hint.prefix".l10n() + accessibilityLabel
+        } else {
+            "next.togo.races.filter.do.accessibility.hint.prefix".l10n() + accessibilityLabel
+        }
+    }
 
 }
