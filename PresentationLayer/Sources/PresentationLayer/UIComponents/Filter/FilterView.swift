@@ -12,7 +12,7 @@ struct FilterView: View {
     @StateObject var viewModel: FilterViewModel
     
     // TODO: Test more and find the perfect haptic you need. 💗
-    let haptic = UIImpactFeedbackGenerator(style: .medium)
+    let haptic = UIImpactFeedbackGenerator(style: .heavy)
     
     // MARK: - UI Body
     

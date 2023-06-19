@@ -15,7 +15,7 @@ public struct NextToGoView: View {
     
     @State private var isShowingSettings: Bool = false
     
-    private let haptic = UIImpactFeedbackGenerator(style: .light)
+    private let haptic = UIImpactFeedbackGenerator(style: .medium)
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -49,8 +49,6 @@ public struct NextToGoView: View {
             .navigationBarTitle(Text("Next to Go"), displayMode: .large)
             .toolbar { toolBarContent }
             .padding(.top, 20)
-//            .navigationTitle("Next to Go")
-//            .navigationBarTitleDisplayMode(.large)
         }
         .onAppear {
             viewModel.loadNextRaces()

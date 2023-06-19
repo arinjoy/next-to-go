@@ -4,11 +4,26 @@
 
 import SwiftUI
 
+/// ‼️‼️‼️‼️‼️‼️
+//  TODO: Move all the copy / content...
+/// used here via ViewModel / PresentationItem based bindings.
+/// This is just a prototyping experimental feature screen for now.
+/// Hard coded content here but UI and accessibility - font scaling &
+/// VoiceOver all works fine.
+/// ‼️‼️‼️‼️‼️‼️
+///
 struct SettingsView: View {
     
-    @Environment(\.dismiss) var dismiss
+    // MARK: - Properties
+    
+    @State private var isAnimatingIcon: Bool = false
+    
+    @Environment(\.dismiss) private var dismiss
     
     // MARK: - UI body
+    
+    // NOTE: Break down the sub section via `@ViewBuilder` based
+    // child elements, show that easy to follow declarative code.
     
     var body: some View {
         
@@ -41,6 +56,7 @@ struct SettingsView: View {
                             .scaledToFit()
                             .frame(width: 60, height: 60)
                             .accessibilityHidden(true)
+                            .scaleEffect(isAnimatingIcon ? 1.0 : 0.5)
                             
                             Text("Immerse yourself in the new world of personalised betting on races. Horse, Greyhound or Harness, whatever racing you're looking for internationally. Just filter them out an see the next most up to date 5 races to punt on.")
                                 .font(.footnote)
@@ -114,6 +130,8 @@ struct SettingsView: View {
                 .navigationBarItems(
                     trailing:
                         Button(action: {
+                            let haptic = UIImpactFeedbackGenerator(style: .medium)
+                            haptic.impactOccurred()
                             dismiss()
                         }) {
                             Image(systemName: "multiply.circle.fill")
@@ -125,6 +143,11 @@ struct SettingsView: View {
                         }
                 )
                 .padding()
+                .onAppear {
+                    withAnimation(.easeOut(duration: 1.5)) {
+                        isAnimatingIcon = true
+                    }
+                }
             }
         }
     }
