@@ -7,7 +7,7 @@ import SharedUtils
 import DataLayer
 
 extension NetworkError {
-    
+
     // TODO: Map more custom error messages
     /// such `serviceUnavailable`, `forbidden` etc.
     /// based on the use cases and granularity of messaging required.
@@ -20,7 +20,7 @@ extension NetworkError {
             return "next.togo.races.error.generic.heading".l10n()
         }
     }
-    
+
     var message: String {
         switch self {
         case .networkFailure:
