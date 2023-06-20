@@ -23,7 +23,8 @@ let package = Package(
         .target(
             name: "PresentationLayer",
             dependencies: ["SharedUtils",
-                           "DomainLayer", "DataLayer"],
+                           "DomainLayer",
+                           "DataLayer"],
             path: "Sources"),
         .testTarget(
             name: "PresentationLayerTests",

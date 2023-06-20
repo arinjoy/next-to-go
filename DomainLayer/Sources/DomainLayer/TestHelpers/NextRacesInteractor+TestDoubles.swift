@@ -18,7 +18,7 @@ public final class NextRacesInteractorSpy: NextRacesInteracting {
         numberOfRaces count: Int
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         nextRacesCalled = true
-        return Empty().eraseToAnyPublisher()
+        return .just([]).eraseToAnyPublisher()
     }
 }
 
