@@ -1,11 +1,11 @@
 # Next To Go
 An app made with ❤️ to demonstrate some examples of **clean architecture**, **code organisation**, **loose coupling**, **unit testing**, **accessibility** and some of the best practices used in modern iOS programming using `Swift` & `SwiftUI`
 
-## App Goal
+## 📱 App Goal
 Create an iOS app that displays ‘Next to Go’ races using Neds free public API.
-A user should always see 5 races, and they should be sorted by time ascending. Race should disappear from the list after 1 min past the start time, if you are looking for inspiration look at popular betting apps like Neds, Ladbrokes, Sportsbet etc.
+A user should always see top 5 races, and they should be sorted by time ascending. Race should disappear from the list after 1 min past the start time. Take some inspirations from popular betting apps like Neds, Ladbrokes, Sportsbet etc.
 
-### Requirements
+### 💼 Requirements
 1.	As a user, I should be able to see a time ordered list of races ordered by advertised start ascending
 2.	As a user, I should not see races that are one minute past the advertised start 
 3.	As a user, I should be able to filter my list of races by the following categories: Horse, Harness & Greyhound racing
@@ -19,6 +19,7 @@ A user should always see 5 races, and they should be sorted by time ascending. R
    2.  DomainLayer (Business logic of polling and combining data based on filters)
    3.  PresentationLayer (Domain data to SwiftUI binding logic)
    4.  SharedUtils (Common utility helpers and extensions)
+  - A mix of **`MVVM`** and **`VIPER`** design pattern is used to acheive loose coupling and unit testing via **`Depdendency Injection`** patterns and mocks
 - The package depdencies (import logic from one to another) are shown below:
 
 ```mermaid
