@@ -90,4 +90,15 @@ final class RaceItemViewModelTests: XCTestCase {
         )
     }
 
+    func testCountryEmojiForCountries() {
+        testSubject = .init(race: RaceMocks.raceOne)
+        XCTAssertEqual(testSubject.countryEmoji, "🇧🇷")
+
+        testSubject = .init(race: RaceMocks.raceTwo)
+        XCTAssertEqual(testSubject.countryEmoji, "🇦🇺")
+
+        testSubject = .init(race: RaceMocks.raceThree)
+        XCTAssertEqual(testSubject.countryEmoji, "🇯🇵")
+    }
+
 }
