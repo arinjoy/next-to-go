@@ -35,8 +35,6 @@ public struct NextToGoView: View {
 
                 FiltersView(viewModel: viewModel.filterViewModel)
 
-                Spacer()
-
                 CollectionLoadingView(
                     loadingState: viewModel.loadingState,
                     content: RacesListView.init(items:),

@@ -9,7 +9,7 @@
 // TODO: ‼️‼️‼️ Translate into Japanese 🇯🇵 ‼️‼️‼️
 
 /// MARK: - Races list
-"next.togo.races.title" = "Next to Go";
+"next.togo.races.title" = "Next To Go";
 
 "next.togo.races.refresh.button.title" = "Refresh";
 "next.togo.races.refresh.button.accessibility.hint" = "Double tap to see most up to date races";

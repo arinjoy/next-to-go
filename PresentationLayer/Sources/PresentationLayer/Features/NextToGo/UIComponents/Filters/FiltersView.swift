@@ -26,23 +26,24 @@ struct FiltersView: View {
 
                     Image(filter.category.iconName, bundle: .module)
                         .font(.largeTitle)
-                        .scaleEffect(1.3)
+                        .scaleEffect(1.4)
 
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
-                        .font(.body)
+                        .font(.title3)
+                        .scaleEffect(1.1)
                 }
                 .accessibilityElement(children: .combine)
                 .foregroundColor(filter.selected ? .red : .primary)
                 .adaptiveScaleFactor()
-                .padding(.vertical, 4)
-                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 14)
                 .background(
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(UIColor.systemBackground))
                         .shadow(color: filter.selected ?
-                                    .red.opacity(0.5) : .primary.opacity(0.5),
-                                radius: 2.5,
+                                    .red.opacity(0.5) : .primary.opacity(0.3),
+                                radius: 3,
                             x: 0, y: 0))
                 .padding(.horizontal, 4)
                 .contentShape(Rectangle())
@@ -62,6 +63,8 @@ struct FiltersView: View {
         .padding(.horizontal, 10)
 
         Divider()
+            .padding(.top, 8)
+
     }
 }
 
