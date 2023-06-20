@@ -6,11 +6,11 @@ import Foundation
 
 ///
 /// Helps joining multiple string components to create a combined accessibility label string
-/// with comma separators. Accepts `nil` s for convenience but ignores them. Also trims anything needed
-/// and creates the final result that is a legible sound for VoiceOver.
+/// with comma separators. Accepts `nil` s for convenience but ignores them. Also trims
+/// anything needed and creates the final result that is a legible sound for VoiceOver.
 ///
-/// Example: Input: `["Hello", "", " world", " ", nil]`
-///        Output: `"Hello, World"`
+/// Example: Input: `["Hello", "", " World", " ", nil, "test"]`
+///        Output: `"Hello, World, test"`
 ///
 public extension Array where Element == String? {
 
@@ -31,7 +31,7 @@ public extension String {
     var isNotEmpty: Bool {
         self.isEmpty == false
     }
-    
+
     func trimmed() -> String {
         self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
@@ -49,3 +49,4 @@ public extension Optional where Wrapped == String {
     }
 
 }
+

@@ -5,12 +5,12 @@
 import SwiftUI
 
 public extension View {
-    
+
     /// A helper to not let the font scale at too high rate after the larger accessibility font sizes
     func adaptiveScaleFactor() -> some View {
         self.modifier(AdaptiveScaleFactor())
     }
-    
+
 }
 
 // MARK: - Private
