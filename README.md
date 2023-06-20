@@ -34,7 +34,9 @@ A user should always see top 5 races, and they should be sorted by time ascendin
  
 Please refer from the project navigator in Xcode to see the layering.
 <p align="center">
-  <img src="screenshots/project_structure" width="350" alt="">
+  <img src="Screenshots/project-structure.png" width="300" alt="">
+  <img src="Screenshots/targets.png" width="300" alt="">
+  <img src="Screenshots/tests.png" width="300" alt="">
 </p>
 
 ```mermaid
@@ -54,7 +56,7 @@ graph TB
     c1-. Race Domain Model .->b1;
 ```
 
-### 💻 Installation
+## 💻 Installation
  - Xcode 14 or later (required)
  - Clean /DerivedData folder if any
  - Let the Swift package Manager load and sync
@@ -71,14 +73,37 @@ graph TB
 - All texts on UI can grow with system level font scaling and auto reposition themselves when needed to fit better within the container
 - UI also adapts to layout chnages - landscape / potrait modes (including iPad support)
 
-### 🚀 Extra Features
+## 🚀 Extra Features
 - A settings more menu has been made to show extra info and author attribution and demonstrate how easy & fast SwiftUI is to build such layouts
 - Some custom SwiftUI animations are applied to many icons
 - Dark mode toggle can be applied from Settings
 - Loading shimmers are added when refreshing races & changing between race category filters
 
-### ⛈️ Error Handling UX
+## ⛈️ Error Handling UX
 - Custom error UI are shown when loading error occurs
 - `NetworkFailure` (i.e. internet disconnected) shows its custom message and animated icon
 - All other server errors have a generic message and animated icon
 - If no races are found from API for some odd reason, then empty state also shows with some messaging
+
+## Screenshots
+<p align="center">
+  <img src="Screenshots/filtering-logic.gif" width="300" alt="">
+ <img src="Screenshots/settings-menu.gif" width="300" alt="">
+  <br/>
+  <img src="Screenshots/races-empty-list.gif" width="300" alt="">
+  <img src="Screenshots/network-error.gif" width="300" alt="">
+  <img src="Screenshots/server-error.gif" width="300" alt="">
+  <br/>
+  <img src="Screenshots/dark-mode-1.png" width="300" alt="">
+  <img src="Screenshots/dark-mode-2.png" width="300" alt="">
+</p>
+
+### A11Y
+<p align="center">
+  <img src="Screenshots/a11y-font-scaling.gif" width="300" alt="">
+  <img src="Screenshots/potrait-mode-large.png" width="300" alt="">
+  <br/>
+  <img src="Screenshots/a11y-voice-over.gif" height="400" alt="">
+  <br/>
+  <img src="Screenshots/landscape-mode-large.png" height="300" alt="">
+</p>
