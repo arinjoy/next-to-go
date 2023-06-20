@@ -72,7 +72,7 @@ final class RaceItemViewModel: ObservableObject {
     }
 
     private var raceNumberAccessibilityLabel: String {
-        "next.togo.races.race.number.accessibility.label".l10n() + "\(race.number)"
+        "next.togo.races.race.number.accessibility.label".l10n() + " \(race.number)"
     }
 
     ///

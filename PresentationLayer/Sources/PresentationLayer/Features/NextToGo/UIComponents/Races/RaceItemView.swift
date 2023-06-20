@@ -186,40 +186,10 @@ private extension RaceItemView {
 #if DEBUG
 struct RaceRowView_Previews: PreviewProvider {
 
-    static let race1 = Race(
-        id: "111",
-        category: .horse,
-        name: "Premio Jockey Club De Minas Fun Horse racing carnival",
-        number: "R2",
-        meeting: "Gavea",
-        startTime: Date.init(timeIntervalSinceNow: 1 * 60),
-        venu: .init(state: "BRA", country: "BRA")
-    )
-
-    static let race2 = Race(
-        id: "222",
-        category: .greyhound,
-        name: "Sportsbet Green Ticks (275+Rank)",
-        number: "R1",
-        meeting: "Warragul Race",
-        startTime: Date.init(timeIntervalSinceNow: 2.5 * 60),
-        venu: .init(state: "VIC", country: "AUS")
-    )
-
-    static let race3 = Race(
-        id: "333",
-        category: .harness,
-        name: "The Mermaid Stakes(G3)",
-        number: "R5",
-        meeting: "Hanshin",
-        startTime: Date.init(timeIntervalSinceNow: 8 * 60),
-        venu: .init(state: "JPN", country: "JPN")
-    )
-
     static let items: [RaceItemViewModel] = [
-        race1,
-        race2,
-        race3,
+        RaceMocks.raceOne,
+        RaceMocks.raceTwo,
+        RaceMocks.raceThree,
     ]
         .map { RaceItemViewModel(race: $0) }
 
