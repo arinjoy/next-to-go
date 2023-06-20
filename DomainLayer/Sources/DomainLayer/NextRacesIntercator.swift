@@ -48,17 +48,30 @@ public final class NextRacesInteractor: NextRacesInteracting {
         )
             .compactMap { response in
 
-                // 1. Map the raw data model to domain model
-                // 2. Filter based on desired categories needed
-                // 3. Sort based time ascending
+                // 1. Map the raw data layer models to domain layer models
+                // 2. Filter & combine based on desired categories needed and crate a big list
+                // 3. Sort based on time ascending from the big list
                 // 4. Take the first required number of races from the full list
 
-                let races = response.races
-                    .compactMap { Race(from: $0) }
-                    .filter { categories.contains($0.category) }
-                    .sorted {  $0.startTime < $1.startTime }
+                // This above logic matches precisely with Neds / Ladbrokes apps
+                // filter logic. To show the top 5 races after ✅ filters.
 
-                return Array(races.prefix(count))
+                // Remove any duplicates (if possible via API)
+                let allRaces = Array(Set(response.races))
+                    .compactMap { Race(from: $0) }
+
+                var results: [Race] = []
+                categories.forEach { category in
+                    results.append(
+                        contentsOf: allRaces.filter { $0.category == category }
+                    )
+                }
+
+                let sortedTopRaces = results
+                    .sorted {  $0.startTime < $1.startTime }
+                    .prefix(count)
+
+                return Array(sortedTopRaces)
             }
         
         // Poll every 30 seconds to refresh latest races

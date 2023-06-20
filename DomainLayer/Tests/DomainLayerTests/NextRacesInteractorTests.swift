@@ -15,8 +15,8 @@ final class NextRacesInteractorTests: XCTestCase {
         super.setUp()
 
         // Dependency injection to have the stubbed provider
-        // that returns sample response as if stubbed way from
-        // DataLayer's implementation
+        // that returns sample response as stubbed way from
+        // DataLayer's service implementation
 
         interactor = NextRacesInteractor(
             networkService: ServicesProvider.localStubbedProvider().network
@@ -212,6 +212,8 @@ final class NextRacesInteractorTests: XCTestCase {
         // THEN - received race response should be correct with
         // filtered category of race results. That is 5 total
         // combining all.
+        // (There was 1 greyhound but missed out from top 5)
+        // NOTE: See the business logic notes in the intercator code
 
         XCTAssertEqual(receivedResponse?.count, 5)
 
