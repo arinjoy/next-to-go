@@ -6,8 +6,9 @@ import Foundation
 
 public struct CountryUtilities {
 
-    /// 🙏🏽 Courtesy: https://stackoverflow.com/questions/6447242/always-get-iso-639-2-three-character-language-code-in-ios
-    ///
+    /// 🙏🏽 Courtesy:
+    /** https://stackoverflow.com/questions/6447242/always-get-iso-639-2-three-character-language-code-in-ios
+    */
     public static func getAlpha3Code(byAlpha2Code alpha2code: String) -> String? {
         return countries[alpha2code]?.uppercased()
     }
@@ -16,8 +17,10 @@ public struct CountryUtilities {
         return countries.key(forValue: alpha3code)?.uppercased()
     }
 
-    /// 🙏🏽 Courtesy:  https://stackoverflow.com/questions/30402435/swift-turn-a-country-code-into-a-emoji-flag-via-unicode
-    ///
+    /// 🙏🏽 Courtesy:
+    /**
+     https://stackoverflow.com/questions/30402435/swift-turn-a-country-code-into-a-emoji-flag-via-unicode
+     */
     public static func countryFlag(byAlphaCode alphaCode: String) -> String? {
         var alpha2code: String?
 
@@ -33,7 +36,7 @@ public struct CountryUtilities {
 
         guard let alpha2code else { return nil }
 
-        let base : UInt32 = 127397
+        let base: UInt32 = 127397
         var s = ""
         for v in alpha2code.unicodeScalars {
             guard let scalar = UnicodeScalar(base + v.value) else {
@@ -43,7 +46,6 @@ public struct CountryUtilities {
         }
         return String(s)
     }
-
 
     private static let countries: [String: String] = [
         "AF": "AFG",
@@ -306,4 +308,3 @@ private extension Dictionary where Value: Equatable {
     }
 
 }
-
