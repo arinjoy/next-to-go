@@ -14,7 +14,7 @@ final class NextToGoViewModel: ObservableObject {
     
     @Published private(set) var loadingState: CollectionLoadingState<[Race]> = .loading(placeholder: Race.placeholders)
     
-    @ObservedObject private(set) var filterViewModel: FilterViewModel
+    @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
     // MARK: - Dependency
     
@@ -28,7 +28,7 @@ final class NextToGoViewModel: ObservableObject {
         
         self.interactor = interactor
         
-        self.filterViewModel = FilterViewModel()
+        self.filterViewModel = FiltersViewModel()
         self.filterViewModel.filterTappedAction = { [weak self] in
             self?.loadNextRaces()
         }

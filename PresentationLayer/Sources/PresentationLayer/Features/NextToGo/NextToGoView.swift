@@ -3,10 +3,9 @@
 //
 
 import SwiftUI
-import DataLayer
-import DomainLayer
-import SharedUtils
 import Combine
+import DataLayer
+import SharedUtils
 
 public struct NextToGoView: View {
     
@@ -34,7 +33,7 @@ public struct NextToGoView: View {
             
             VStack(alignment: .center, spacing: 10) {
                 
-                FilterView(viewModel: viewModel.filterViewModel)
+                FiltersView(viewModel: viewModel.filterViewModel)
                 
                 Spacer()
                 
@@ -67,6 +66,8 @@ public struct NextToGoView: View {
         }
     }
 }
+
+// MARK: - Private
 
 private extension NextToGoView {
     

@@ -5,11 +5,11 @@
 import SwiftUI
 import DomainLayer
 
-struct FilterView: View {
+struct FiltersView: View {
     
     // MARK: - Properties
     
-    @StateObject var viewModel: FilterViewModel
+    @StateObject var viewModel: FiltersViewModel
     
     // TODO: Test more and find the perfect haptic you need. 💗
     let haptic = UIImpactFeedbackGenerator(style: .heavy)
@@ -67,9 +67,9 @@ struct FilterView: View {
 
 
 #if DEBUG
-struct FilterView_Previews: PreviewProvider {
+struct FiltersView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(viewModel: FilterViewModel())
+        FiltersView(viewModel: FiltersViewModel())
             .padding(.bottom, 300)
     }
 }

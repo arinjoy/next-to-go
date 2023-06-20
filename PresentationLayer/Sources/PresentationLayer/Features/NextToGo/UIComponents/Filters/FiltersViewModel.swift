@@ -12,7 +12,7 @@ struct FilterModel: Identifiable {
     var selected: Bool
 }
 
-final class FilterViewModel: ObservableObject {
+final class FiltersViewModel: ObservableObject {
     
     // MARK: - Properties
     

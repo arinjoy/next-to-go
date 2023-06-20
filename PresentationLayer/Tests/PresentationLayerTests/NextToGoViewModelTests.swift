@@ -171,5 +171,26 @@ final class NextToGoViewModelTests: XCTestCase {
         }
     }
 
+    func testFilterViewModel() throws {
+
+        // GIVEN - viewModel is loaded
+        testSubject = NextToGoViewModel(interactor: NextRacesInteractorMock())
+
+        let filters = testSubject.filterViewModel.filters
+
+        // THEN - the child filter viewModel would have 3 filters in it
+        XCTAssertEqual(filters.count, 3)
+
+        // AND - each of the filter comes with `selected` true to begin with
+        XCTAssertEqual(filters[0].category, .horse)
+        XCTAssertTrue(filters[0].selected)
+
+        XCTAssertEqual(filters[1].category, .greyhound)
+        XCTAssertTrue(filters[1].selected)
+
+        XCTAssertEqual(filters[2].category, .harness)
+        XCTAssertTrue(filters[1].selected)
+    }
+
 
 }
