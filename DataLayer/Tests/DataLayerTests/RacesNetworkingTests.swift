@@ -25,16 +25,16 @@ final class RacesNetworkingTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testCallLoad() throws {
+    func testSpyLoadingResource() throws {
 
-        // given
+        // GIVEN - network service that is a spy
         let networkServiceSpy = NetworkServiceSpy()
 
-        // when
+        // WHEN - loading of desired resource type
         _ = networkServiceSpy
             .load(Resource<RacesListResponse>.nextRaces(numberOfRaces: 5))
 
-        // then
+        // THEN - Spying works correctly to see what values are being hit
 
         // Spied call
         XCTAssertTrue(networkServiceSpy.loadReSourceCalled)
@@ -56,6 +56,73 @@ final class RacesNetworkingTests: XCTestCase {
         XCTAssertEqual(networkServiceSpy.parameters?.last?.1.description, "5")
 
         XCTAssertNotNil(networkServiceSpy.request)
+    }
+
+    func testSuccessfulLoading() throws {
+        var receivedError: NetworkError?
+        var receivedResponse: RacesListResponse?
+
+        // GIVEN - network service that is a Mock with sample list successfully without error
+        let networkServiceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
+
+        // WHEN - loading of desired resource type
+        networkServiceMock
+            .load(Resource<RacesListResponse>.nextRaces(numberOfRaces: 5))
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - received race response should be correct
+        XCTAssertNotNil(receivedResponse)
+        XCTAssertEqual(receivedResponse?.races.count, 5)
+        XCTAssertEqual(receivedResponse?.races.first?.name, "Red Snapper Seafoods, Christchurch C0")
+        XCTAssertEqual(receivedResponse?.races.first?.number, 2)
+        XCTAssertEqual(receivedResponse?.races.first?.meeting, "Manawatu")
+
+        // Note: The rest of the JSON mapping related tests are always done
+        // at the unit level inside`RaceSummaryDecodingTests`.
+        // So not repeating for each property...
+
+        // AND - there should not any error returned
+        XCTAssertNil(receivedError)
+    }
+
+    func testFailureLoading() throws {
+        var receivedError: NetworkError?
+        var receivedResponse: RacesListResponse?
+
+        // GIVEN - network service that to return an `serviceUnavailable` error
+        let networkServiceMock = NetworkServiceMock(
+            response: TestHelper.sampleRacesList,
+            returningError: true,
+            error: .serviceUnavailable
+        )
+
+        // WHEN - loading of desired resource type
+        networkServiceMock
+            .load(Resource<RacesListResponse>.nextRaces(numberOfRaces: 5))
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - there should be an error returned
+        XCTAssertNotNil(receivedError)
+
+        // AND - error is correct as type
+        XCTAssertEqual(receivedError, .serviceUnavailable)
+
+        // AND - race response should not be returned
+        XCTAssertNil(receivedResponse)
     }
 
 }

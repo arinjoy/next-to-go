@@ -57,3 +57,24 @@ final class NetworkServiceMock<ResponseType>: NetworkServiceType {
         return .just(response as! T) // swiftlint:disable:this force_cast
     }
 }
+
+extension NetworkError: Equatable {
+
+    // swiftlint:disable:next cyclomatic_complexity
+    public static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
+        switch(lhs, rhs) {
+        case (.networkFailure, .networkFailure):                return true
+        case (.timeout, .timeout):                              return true
+        case (.server, .server):                                return true
+        case (.serviceUnavailable, .serviceUnavailable):        return true
+        case (.apiRateLimited, .apiRateLimited):                return true
+        case (.unAuthorized, .unAuthorized):                    return true
+        case (.forbidden, .forbidden):                          return true
+        case (.notFound, .notFound):                            return true
+        case (.noDataFound, .noDataFound):                      return true
+        case (.jsonDecodingError(_), .jsonDecodingError(_)):    return true
+        default:                                                return false
+        }
+    }
+
+}
