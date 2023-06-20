@@ -20,17 +20,85 @@ final class NextToGoViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        testSubject = NextToGoViewModel(interactor: NextRacesInteractorMock())
     }
 
     override func tearDown() {
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
+        testSubject = nil
         super.tearDown()
     }
 
-    // MARK: - Tests
+    // MARK: - Test copies & icons
 
-    func testInitialLoadingPlaceholdersState() throws {
+    func testViewTitle() {
+        XCTAssertEqual(testSubject.title, "next.togo.races.title".l10n())
+    }
+
+    func testRefreshButtonIconName() {
+        XCTAssertEqual(
+            testSubject.refreshButtonIcon, "arrow.clockwise.circle")
+    }
+
+    func testRefreshButtonAccessibilityLabel() {
+        XCTAssertEqual(
+            testSubject.refreshButtonTitle,
+            "next.togo.races.refresh.button.title".l10n()
+        )
+    }
+
+    func testRefreshButtonAccessibilityHint() {
+        XCTAssertEqual(
+            testSubject.refreshButtonAccessibilityHint,
+            "next.togo.races.refresh.button.accessibility.hint".l10n()
+        )
+    }
+
+    func testSettingsButtonIconName() {
+        XCTAssertEqual(testSubject.settingsButtonIcon, "slider.horizontal.3".l10n())
+    }
+
+    func testSettingsButtonAccessibilityLabel() {
+        XCTAssertEqual(
+            testSubject.settingsButtonTitle,
+            "next.togo.races.settings.button.title".l10n()
+        )
+    }
+
+    func testSettingsButtonAccessibilityHint() {
+        XCTAssertEqual(
+            testSubject.settingsButtonAccessibilityHint,
+            "next.togo.races.settings.button.accessibility.hint".l10n()
+        )
+    }
+
+    // MARK: - Test Filter child view model
+
+    func testFilterViewModel() {
+
+        // GIVEN - viewModel is loaded
+        testSubject = NextToGoViewModel(interactor: NextRacesInteractorMock())
+
+        let filters = testSubject.filterViewModel.filters
+
+        // THEN - the child filter viewModel would have 3 filters in it
+        XCTAssertEqual(filters.count, 3)
+
+        // AND - each of the filter comes with `selected` true to begin with
+        XCTAssertEqual(filters[0].category, .horse)
+        XCTAssertTrue(filters[0].selected)
+
+        XCTAssertEqual(filters[1].category, .greyhound)
+        XCTAssertTrue(filters[1].selected)
+
+        XCTAssertEqual(filters[2].category, .harness)
+        XCTAssertTrue(filters[1].selected)
+    }
+
+    // MARK: - Test loading, loaded, empty and error
+
+    func testInitialLoadingPlaceholdersState() {
 
         // GIVEN - viewModel is configured
         testSubject = NextToGoViewModel(interactor: NextRacesInteractorMock())
@@ -50,7 +118,7 @@ final class NextToGoViewModelTests: XCTestCase {
         }
     }
 
-    func testLoadRacesCallsInteractor() throws {
+    func testLoadRacesCallsInteractor() {
 
         let expectation = expectation(description: "Race items must be loaded from interactor")
 
@@ -73,7 +141,7 @@ final class NextToGoViewModelTests: XCTestCase {
         XCTAssertTrue(interactorSpy.nextRacesCalled)
     }
 
-    func testLoadRacesSuccessfulNonEmpty() throws {
+    func testLoadRacesSuccessfulNonEmpty() {
 
         let expectation = expectation(description: "Race items must be loaded from interactor")
 
@@ -112,7 +180,7 @@ final class NextToGoViewModelTests: XCTestCase {
         }
     }
 
-    func testLoadRacesSuccessfulEmpty() throws {
+    func testLoadRacesSuccessfulEmpty() {
 
         let expectation = expectation(description: "Empty list must be loaded from interactor")
 
@@ -140,7 +208,7 @@ final class NextToGoViewModelTests: XCTestCase {
         }
     }
 
-    func testLoadRacesFailure() throws {
+    func testLoadRacesFailure() {
 
         let expectation = expectation(description: "Error must be loaded from interactor")
 
@@ -171,25 +239,32 @@ final class NextToGoViewModelTests: XCTestCase {
         }
     }
 
-    func testFilterViewModel() throws {
+    // MARK: - Empty list, error copies & icons
 
-        // GIVEN - viewModel is loaded
-        testSubject = NextToGoViewModel(interactor: NextRacesInteractorMock())
+    func testEmptyListIconName() {
+        XCTAssertEqual(testSubject.emptyListIcon, "cloud.moon.rain")
+    }
 
-        let filters = testSubject.filterViewModel.filters
+    func testEmptyListTitle() {
+        XCTAssertEqual(testSubject.emptyListTitle, "next.togo.races.empty.title".l10n())
+    }
 
-        // THEN - the child filter viewModel would have 3 filters in it
-        XCTAssertEqual(filters.count, 3)
+    func testEmptyListMessage() {
+        XCTAssertEqual(testSubject.emptyListMessage, "next.togo.races.empty.message".l10n())
+    }
 
-        // AND - each of the filter comes with `selected` true to begin with
-        XCTAssertEqual(filters[0].category, .horse)
-        XCTAssertTrue(filters[0].selected)
+    func testErrorGeneric() {
+        let error = NetworkError.serviceUnavailable
+        XCTAssertEqual(error.iconName, "exclamationmark.icloud")
+        XCTAssertEqual(error.title, "next.togo.races.error.generic.heading".l10n())
+        XCTAssertEqual(error.message, "next.togo.races.error.generic.message".l10n())
+    }
 
-        XCTAssertEqual(filters[1].category, .greyhound)
-        XCTAssertTrue(filters[1].selected)
-
-        XCTAssertEqual(filters[2].category, .harness)
-        XCTAssertTrue(filters[1].selected)
+    func testErrorNetworkUnavailable() {
+        let error = NetworkError.networkFailure
+        XCTAssertEqual(error.iconName, "wifi.exclamationmark")
+        XCTAssertEqual(error.title, "next.togo.races.error.network.heading".l10n())
+        XCTAssertEqual(error.message, "next.togo.races.error.network.message".l10n())
     }
 
 }

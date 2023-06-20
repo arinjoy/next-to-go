@@ -7,16 +7,6 @@ final class RaceSummaryDecodingTests: XCTestCase {
 
     let jsonDecoder = JSONDecoder()
 
-    // MARK: - Lifecycle
-
-    override func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-    }
-
     // MARK: - Tests
 
     func testMappingSuccess() throws {

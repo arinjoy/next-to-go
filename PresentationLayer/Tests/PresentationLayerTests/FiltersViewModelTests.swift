@@ -14,8 +14,8 @@ final class FiltersViewModelTests: XCTestCase {
     // MARK: - Lifecycle
 
     override func setUp() {
-        testSubject = FiltersViewModel()
         super.setUp()
+        testSubject = FiltersViewModel()
     }
 
     override func tearDown() {

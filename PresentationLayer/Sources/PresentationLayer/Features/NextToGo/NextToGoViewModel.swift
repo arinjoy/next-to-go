@@ -108,7 +108,7 @@ final class NextToGoViewModel: ObservableObject {
         "cloud.moon.rain"
     }
 
-    var emptyListTilte: String {
+    var emptyListTitle: String {
         "next.togo.races.empty.title".l10n()
     }
 

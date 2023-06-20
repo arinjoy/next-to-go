@@ -41,7 +41,7 @@ public struct NextToGoView: View {
                     empty: {
                         ErrorMessageView(
                             iconName: viewModel.emptyListIcon,
-                            title: viewModel.emptyListTilte,
+                            title: viewModel.emptyListTitle,
                             message: viewModel.emptyListMessage
                         )
                     },
