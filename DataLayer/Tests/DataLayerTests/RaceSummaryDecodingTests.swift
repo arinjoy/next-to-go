@@ -22,7 +22,7 @@ final class RaceSummaryDecodingTests: XCTestCase {
     func testMappingSuccess() throws {
 
         // GIVEN - a valid JSON file with sample races list
-        testJSONData = jsonData(forResource: "test_races_success")
+        testJSONData = TestHelper.jsonData(forResource: "test_races_success")
 
         // WHEN - trying to decode the JSON into `RacesListResponse`
         let mappedItem = try? jsonDecoder.decode(RacesListResponse.self, from: testJSONData)
@@ -50,7 +50,7 @@ final class RaceSummaryDecodingTests: XCTestCase {
     func testMappingFailure() throws {
 
         // GIVEN - a invalid races list JSON structure
-        testJSONData = jsonData(forResource: "test_races_invalid_body")
+        testJSONData = TestHelper.jsonData(forResource: "test_races_invalid_body")
 
         // WHEN - trying to decode the JSON into `RacesListResponse`
         let mappedItem = try? jsonDecoder.decode(RacesListResponse.self, from: testJSONData)
@@ -58,19 +58,4 @@ final class RaceSummaryDecodingTests: XCTestCase {
         // THEN - races list cannot be mapped
         XCTAssertNil(mappedItem)
     }
-}
-
-// MARK: - Test Helpers
-
-private extension RaceSummaryDecodingTests {
-
-    func jsonData(forResource resource: String) -> Data {
-        let fileURLPath = Bundle.module.url(forResource: resource,
-                                            withExtension: "json",
-                                            subdirectory: "Mocks")
-
-        // swiftlint:disable:next force_try force_unwrapping
-        return try! Data(contentsOf: fileURLPath!)
-    }
-
 }

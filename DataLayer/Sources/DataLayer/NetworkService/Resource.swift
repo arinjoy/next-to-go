@@ -9,7 +9,7 @@ public struct Resource<T: Decodable> {
     // MARK: - Properties
 
     let url: URL
-    let parameters: [String: CustomStringConvertible]
+    let parameters: [(String, CustomStringConvertible)]
 
     /// An indicator if we are loading the the data locally from a `Stubbed JSON` file
     /// Helpful for debugging, building / unit testing
@@ -19,7 +19,7 @@ public struct Resource<T: Decodable> {
 
     public init(
         url: URL,
-        parameters: [String: CustomStringConvertible] = [:],
+        parameters: [(String, CustomStringConvertible)] = [],
         isLocalStub: Bool = false
     ) {
         self.url = url
@@ -36,11 +36,9 @@ public struct Resource<T: Decodable> {
             return nil
         }
 
-        components.queryItems = parameters.keys
-            .sorted { $0 > $1 }
-            .map { key in
-                URLQueryItem(name: key, value: parameters[key]?.description)
-            }
+        components.queryItems = parameters.map { (key, value) in
+            URLQueryItem(name: key, value: value.description)
+        }
 
         guard let url = components.url else {
             return nil

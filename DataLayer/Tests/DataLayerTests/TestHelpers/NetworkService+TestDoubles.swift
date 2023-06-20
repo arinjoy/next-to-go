@@ -13,9 +13,8 @@ final class NetworkServiceSpy: NetworkServiceType {
 
     // Spy values
     var url: URL?
-    var parameters: [String: CustomStringConvertible]?
+    var parameters: [(String, CustomStringConvertible)]?
     var request: URLRequest?
-    var isLocalStub: Bool?
 
     func load<T>(_ resource: Resource<T>) -> AnyPublisher<T, NetworkError> {
 
@@ -24,7 +23,6 @@ final class NetworkServiceSpy: NetworkServiceType {
         url = resource.url
         parameters = resource.parameters
         request = resource.request
-        isLocalStub = resource.isLocalStub
 
         return Empty().eraseToAnyPublisher()
     }

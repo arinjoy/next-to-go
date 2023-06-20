@@ -21,9 +21,9 @@ extension Resource {
 
         let baseURL = ApiConstants.baseURL
 
-        let parameters: [String: CustomStringConvertible] = [
-            "method": "nextraces",
-            "count": count
+        let parameters: [(String, CustomStringConvertible)] = [
+            ("method", "nextraces"),
+            ("count", count)
         ]
 
         return Resource<RacesListResponse>(url: baseURL, parameters: parameters)
