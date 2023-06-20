@@ -48,18 +48,18 @@ final class RaceItemViewModelTests: XCTestCase {
     }
 
     func testName() {
-        XCTAssertEqual(testSubject.name, "Liverpool")
+        XCTAssertEqual(testSubject.name, "The fast and furious")
     }
 
     func testDescription() {
         XCTAssertEqual(
             testSubject.description,
-            "Poms hounds on Fire"
+            "NY hounds on Fire"
         )
     }
 
     func testCountryEmoji() {
-        XCTAssertEqual(testSubject.countryEmoji, "🇬🇧")
+        XCTAssertEqual(testSubject.countryEmoji, "🇺🇸")
     }
 
     // TODO: Find a better way to unit test timer the logic
@@ -84,9 +84,9 @@ final class RaceItemViewModelTests: XCTestCase {
         XCTAssertEqual(
             testSubject.combinedAccessibilityLabel,
             "next.togo.races.filter.greyhound.title".l10n()
-            + ", Liverpool, "
+            + ", The fast and furious, "
             + "next.togo.races.race.number.accessibility.label".l10n() + " \(5), " +
-            "🇬🇧, Poms hounds on Fire, 2minute 59second"
+            "🇺🇸, NY hounds on Fire, 2minute 59second"
         )
     }
 

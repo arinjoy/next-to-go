@@ -14,11 +14,11 @@ public struct RaceMocks {
         Race(
             id: "12345",
             category: .greyhound,
-            name: "Poms hounds on Fire",
+            name: "NY hounds on Fire",
             number: "5",
-            meeting: "Liverpool",
+            meeting: "The fast and furious",
             startTime: time,
-            venu: .init(state: "UK", country: "UK")
+            venu: .init(state: "NY", country: "USA")
         )
     }
 
