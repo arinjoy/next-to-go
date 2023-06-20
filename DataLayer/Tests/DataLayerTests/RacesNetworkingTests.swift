@@ -37,7 +37,7 @@ final class RacesNetworkingTests: XCTestCase {
         // THEN - Spying works correctly to see what values are being hit
 
         // Spied call
-        XCTAssertTrue(networkServiceSpy.loadReSourceCalled)
+        XCTAssertTrue(networkServiceSpy.loadResourceCalled)
 
         // Spied values
         XCTAssertNotNil(networkServiceSpy.url)

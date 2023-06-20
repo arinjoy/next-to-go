@@ -30,7 +30,6 @@ let package = Package(
         .testTarget(
             name: "DataLayerTests",
             dependencies: ["DataLayer"],
-            resources: [.copy("Mocks")],
             plugins: [
                 .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
             ]

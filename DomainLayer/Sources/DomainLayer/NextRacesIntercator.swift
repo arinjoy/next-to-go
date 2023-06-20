@@ -16,8 +16,13 @@ public final class NextRacesInteractor: NextRacesInteracting {
     private let networkService: NetworkServiceType
     
     // MARK: - Initializer
-    
-    public init(networkService: NetworkServiceType = ServicesProvider.defaultProvider().network) {
+
+    /// NOTE: 🤚🏽 Use the provider which is the default as in below.
+    /// During debugging / testing use the `localStubbedProvider()`
+    /// not not hit the real network and get locally stubbed JSON :)
+    public init(
+        networkService: NetworkServiceType = ServicesProvider.defaultProvider().network
+    ) {
         self.networkService = networkService
     }
     

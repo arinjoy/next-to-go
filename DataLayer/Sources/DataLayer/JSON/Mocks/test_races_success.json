@@ -6,7 +6,9 @@
             "21c38114-23ea-4418-8523-d1526288a824",
             "1571ba4b-6f07-4212-8a35-1aea7808049a",
             "0f48a5a6-c68c-4114-ac08-7e5724dc5318",
-            "3f6bbab6-f1bd-4822-9dbf-9047366a7ab6"
+            "3f6bbab6-f1bd-4822-9dbf-9047366a7ab6",
+            "21c38114-23ea-4418-8523-d1526288a824",
+            "ca155d92-8cbf-433a-a418-1382f691506b"
         ],
         "race_summaries": {
             "0f48a5a6-c68c-4114-ac08-7e5724dc5318": {
@@ -197,8 +199,85 @@
                 "venue_name": "Gavea",
                 "venue_state": "BRA",
                 "venue_country": "BRA"
+            },
+            "21c38114-23ea-4418-8523-d1526288a824": {
+                "race_id": "21c38114-23ea-4418-8523-d1526288a824",
+                "race_name": "Red Snapper Seafoods, Christchurch C0",
+                "race_number": 2,
+                "meeting_id": "2eb1806e-8913-4cb6-b5ba-6912c8822157",
+                "meeting_name": "Manawatu",
+                "category_id": "9daef0d7-bf3c-4f50-921d-8e818c60fe61",
+                "advertised_start": {
+                    "seconds": 1687221000
+                },
+                "race_form": {
+                    "distance": 457,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "weather": {
+                        "id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                        "name": "FINE",
+                        "short_name": "fine",
+                        "icon_uri": "FINE"
+                    },
+                    "weather_id": "08e5f78c-1a36-11eb-9269-cef03e67f1a3",
+                    "race_comment": "ROWDY CHAOS (4) turned in a good run last time, finishing in the placings (19.29) at Manukau in a Class 0. Lines up from box 4 for the first time. Some good form is emerging from his last run. Sure to be about the mark. BOW BELL DEL (6) took advantage of the inside draw and gave a big sight in front when second and beaten 1.5 lengths (26.54) at this track in a Class 0 over 457m. Expected to feature again. OPAWA BLOSSOM (7) is overdue for a maiden success having placed at five of 14 starts, the latest missing the frame when fifth at this track. Yet to win out of this box but has been in the placings two times from four starts. In the mix. RECKLESS ERIC (3) must be included in calculations and can even win if he makes a better beginning.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Manawatu\",\"state\":\"NZ\",\"country\":\"NZ\",\"number\":2,\"race_name\":\"\",\"time\":\"2023-06-20T00:30:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "ROWDY CHAOS (4) turned in a good run last time, finishing in the placings (19.29) at Manukau in a Class 0. Lines up from box 4 for the first time. Some good form is emerging from his last run. Sure to be about the mark. BOW BELL DEL (6) took advantage of the inside draw and gave a big sight in front when second and beaten 1.5 lengths (26.54) at this track in a Class 0 over 457m. Expected to feature again. OPAWA BLOSSOM (7) is overdue for a maiden success having placed at five of 14 starts, the latest missing the frame when fifth at this track. Yet to win out of this box but has been in the placings two times from four starts. In the mix. RECKLESS ERIC (3) must be included in calculations and can even win if he makes a better beginning."
+                },
+                "venue_id": "809963b5-79b6-45c0-a1e8-5c4d80f890bd",
+                "venue_name": "Manawatu",
+                "venue_state": "NZ",
+                "venue_country": "NZ"
+            },
+            "ca155d92-8cbf-433a-a418-1382f691506b": {
+                "race_id": "ca155d92-8cbf-433a-a418-1382f691506b",
+                "race_name": "Race 7 - 1609M",
+                "race_number": 7,
+                "meeting_id": "c827b5ad-7a8b-4454-8915-489c1f521613",
+                "meeting_name": "Plainridge Racecourse",
+                "category_id": "161d9be2-e909-4326-8c2c-35ed71fb460b",
+                "advertised_start": {
+                    "seconds": 1687212000
+                },
+                "race_form": {
+                    "distance": 1609,
+                    "distance_type": {
+                        "id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                        "name": "Metres",
+                        "short_name": "m"
+                    },
+                    "distance_type_id": "570775ae-09ec-42d5-989d-7c8f06366aa7",
+                    "track_condition": {
+                        "id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                        "name": "Good",
+                        "short_name": "good"
+                    },
+                    "track_condition_id": "10a14653-a33d-11e7-810d-0a1a4ae29bd2",
+                    "race_comment": "MCSTONED AGAIN (5) turned in a poor effort by his standards most recently when 21 metres away in seventh over 1609m at this track. Form prior to that had been solid. Has the class to take this out. RAYBARNZ (1) has been a model of consistency of late and deserved his victory last time out, scoring by 10 metres over 1609m at this track. No excuses from this advantageous draw. Taking on a better field but he is up to the task. SIDD FINCH (2) has to come into calculations on the back of some strong recent form, most recently when second at this track over 1609m. Must be included. VESUVIO BI (3) is the next elect off a last-start win by 5 metres at this track over 1609m.",
+                    "additional_data": "{\"revealed_race_info\":{\"track_name\":\"Plainridge Racecourse\",\"state\":\"MA\",\"country\":\"USA\",\"number\":7,\"race_name\":\"\",\"time\":\"1970-01-01T00:00:00Z\"}}",
+                    "generated": 1,
+                    "silk_base_url": "drr38safykj6s.cloudfront.net",
+                    "race_comment_alternative": "MCSTONED AGAIN (5) turned in a poor effort by his standards most recently when 21 metres away in seventh over 1609m at this track. Form prior to that had been solid. Has the class to take this out. RAYBARNZ (1) has been a model of consistency of late and deserved his victory last time out, scoring by 10 metres over 1609m at this track. No excuses from this advantageous draw. Taking on a better field but he is up to the task. SIDD FINCH (2) has to come into calculations on the back of some strong recent form, most recently when second at this track over 1609m. Must be included. VESUVIO BI (3) is the next elect off a last-start win by 5 metres at this track over 1609m."
+                },
+                "venue_id": "c8cd9819-b725-454e-9229-0a1727f1cf8d",
+                "venue_name": "Plainridge Racecourse",
+                "venue_state": "MA",
+                "venue_country": "USA"
             }
         }
     },
-    "message": "Next 5 races from each category"
+    "message": "Next 7 races combining each category ;)"
 }
