@@ -185,6 +185,11 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertEqual(receivedResponse?[0].category, .harness)
         XCTAssertEqual(receivedResponse?[1].category, .greyhound)
 
+        // AND - the races are sorted
+        XCTAssertTrue(
+            receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
+        )
+
         // AND - there should not any error returned
         XCTAssertNil(receivedError)
     }
@@ -213,7 +218,7 @@ final class NextRacesInteractorTests: XCTestCase {
         // filtered category of race results. That is 5 total
         // combining all.
         // (There was 1 greyhound but missed out from top 5)
-        // NOTE: See the business logic notes in the intercator code
+        // NOTE: See the business logic notes in the interactor code
 
         XCTAssertEqual(receivedResponse?.count, 5)
 
@@ -221,7 +226,26 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertEqual(receivedResponse?[1].category, .horse)
         XCTAssertEqual(receivedResponse?[2].category, .horse)
         XCTAssertEqual(receivedResponse?[3].category, .horse)
+
+        // AND - the races are sorted
+        XCTAssertTrue(
+            receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
+        )
+        XCTAssertTrue(
+            receivedResponse![1].startTime.timeIntervalSince1970 < receivedResponse![2].startTime.timeIntervalSince1970
+        )
+        XCTAssertTrue(
+            receivedResponse![2].startTime.timeIntervalSince1970 < receivedResponse![3].startTime.timeIntervalSince1970
+        )
+        XCTAssertTrue(
+            receivedResponse![3].startTime.timeIntervalSince1970 < receivedResponse![4].startTime.timeIntervalSince1970
+        )
+
         XCTAssertEqual(receivedResponse?[4].category, .harness)
+        XCTAssertEqual(receivedResponse?[4].name, "Race 7 - 1609M")
+        XCTAssertEqual(receivedResponse?[4].number, "7")
+        XCTAssertEqual(receivedResponse?[4].meeting, "Plainridge Racecourse")
+        XCTAssertEqual(receivedResponse?[4].startTime.timeIntervalSince1970, 1687212000)
 
         // AND - there should not any error returned
         XCTAssertNil(receivedError)
