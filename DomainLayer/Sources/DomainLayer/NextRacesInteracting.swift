@@ -7,7 +7,7 @@ import Combine
 import DataLayer
 
 public protocol NextRacesInteracting: AnyObject {
-    
+
     ///
     /// Gets the latest next x number races live and poll through it.
     /// ‼️ This publisher would create a continuous subscription that would
@@ -23,5 +23,5 @@ public protocol NextRacesInteracting: AnyObject {
         for categories: [Race.Category],
         numberOfRaces count: Int
     ) -> AnyPublisher<[Race], DataLayer.NetworkError>
-    
+
 }

@@ -32,8 +32,8 @@ final class RaceSummaryDecodingTests: XCTestCase {
 
         let races = try XCTUnwrap(mappedItem?.races)
 
-        // AND - there should be 5 races in the list
-        XCTAssertEqual(races.count, 5)
+        // AND - there should be 6 races in the list
+        XCTAssertEqual(races.count, 6)
 
         // AND - the race and all its content mapped correctly into the `RaceSummary` model
         let race = races[0]

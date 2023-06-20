@@ -8,13 +8,13 @@ import SharedUtils
 import DataLayer
 
 public final class NextRacesInteractor: NextRacesInteracting {
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Dependency
-    
+
     private let networkService: NetworkServiceType
-    
+
     // MARK: - Initializer
 
     /// NOTE: 🤚🏽 Use the provider which is the default as in below.
@@ -25,24 +25,24 @@ public final class NextRacesInteractor: NextRacesInteracting {
     ) {
         self.networkService = networkService
     }
-    
+
     // MARK: - NextRacesInteracting
-    
+
     public func nextRaces(
         for categories: [Race.Category],
         numberOfRaces count: Int
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
-        
+
         // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
         // Always try to load 45 races at once, but then later filter out based
         // on the exact need by category and number of races to show on UI.
-        
+
         // Perhaps not the best practice to load such heavy volume of data
         // in REST JSON api pattern. GraphQL comes handy here to filter out
         // necessary sub-properties of data from a huge list to load faster
         // and save network data bandwidth.
         // ‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽‼️🤚🏽
-        
+
         let nextRacesPublisher = networkService.load(
             Resource<RacesListResponse>.nextRaces(numberOfRaces: 45)
         )
@@ -73,7 +73,7 @@ public final class NextRacesInteractor: NextRacesInteracting {
 
                 return Array(sortedTopRaces)
             }
-        
+
         // Poll every 30 seconds to refresh latest races
         return Timer.publish(every: 30, on: .main, in: .common)
             .autoconnect()
@@ -85,5 +85,5 @@ public final class NextRacesInteractor: NextRacesInteracting {
             }
             .eraseToAnyPublisher()
     }
-    
+
 }

@@ -79,7 +79,7 @@ final class RacesNetworkingTests: XCTestCase {
 
         // THEN - received race response should be correct
         XCTAssertNotNil(receivedResponse)
-        XCTAssertEqual(receivedResponse?.races.count, 5)
+        XCTAssertEqual(receivedResponse?.races.count, 6)
         XCTAssertEqual(receivedResponse?.races.first?.name, "Red Snapper Seafoods, Christchurch C0")
         XCTAssertEqual(receivedResponse?.races.first?.number, 2)
         XCTAssertEqual(receivedResponse?.races.first?.meeting, "Manawatu")

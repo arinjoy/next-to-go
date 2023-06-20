@@ -3,10 +3,11 @@ import Combine
 @testable import DataLayer
 @testable import DomainLayer
 
+// swiftlint:disable force_unwrapping
 final class NextRacesInteractorTests: XCTestCase {
 
     private var interactor: NextRacesInteracting!
-    
+
     private var cancellables: [AnyCancellable] = []
 
     // MARK: - Lifecycle
@@ -148,6 +149,7 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertEqual(receivedResponse?[0].meeting, "Manawatu")
         XCTAssertEqual(receivedResponse?[0].number, "2")
         XCTAssertEqual(receivedResponse?[0].venu.country, "NZ")
+        XCTAssertEqual(receivedResponse?[0].venu.state, "NZ")
         XCTAssertEqual(receivedResponse?[0].startTime.timeIntervalSince1970, 1687221000)
 
         // AND - there should not any error returned
@@ -179,13 +181,18 @@ final class NextRacesInteractorTests: XCTestCase {
 
         // Although searched for 5, but found actually 1 running on each :(
         // now out 45 max possible (total combining all types)
-        // coming via lower level network service
+        // coming via lower level network service. So total 2.
+
         XCTAssertEqual(receivedResponse?.count, 2)
 
         XCTAssertEqual(receivedResponse?[0].category, .harness)
+        XCTAssertEqual(receivedResponse?[0].name, "Race 7 - 1609M")
+
         XCTAssertEqual(receivedResponse?[1].category, .greyhound)
+        XCTAssertEqual(receivedResponse?[1].name, "Red Snapper Seafoods, Christchurch C0")
 
         // AND - the races are sorted
+
         XCTAssertTrue(
             receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
         )
@@ -245,6 +252,8 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertEqual(receivedResponse?[4].name, "Race 7 - 1609M")
         XCTAssertEqual(receivedResponse?[4].number, "7")
         XCTAssertEqual(receivedResponse?[4].meeting, "Plainridge Racecourse")
+        XCTAssertEqual(receivedResponse?[4].venu.country, "USA")
+        XCTAssertEqual(receivedResponse?[4].venu.state, "MA")
         XCTAssertEqual(receivedResponse?[4].startTime.timeIntervalSince1970, 1687212000)
 
         // AND - there should not any error returned
@@ -252,3 +261,4 @@ final class NextRacesInteractorTests: XCTestCase {
     }
 
 }
+// swiftlint:enable force_unwrapping
