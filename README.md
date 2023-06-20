@@ -88,6 +88,7 @@ graph TB
 ## Screenshots
 <p align="center">
   <img src="Screenshots/filtering-logic.gif" width="300" alt="">
+ <img src="Screenshots/settings-menu.gif" width="300" alt="">
   <br/>
   <img src="Screenshots/races-empty-list.gif" width="300" alt="">
   <img src="Screenshots/network-error.gif" width="300" alt="">
