@@ -6,11 +6,11 @@ import SwiftUI
 import DomainLayer
 import SharedUtils
 
-struct RaceRowView: View {
+struct RaceItemView: View {
 
     // MARK: - Properties
 
-    @ObservedObject private var raceItem: RacePresentationItem
+    @ObservedObject private var viewModel: RaceItemViewModel
 
     @State private var isAnimatingIcon: Bool = false
     @State private var isAnimatingText: Bool = false
@@ -21,8 +21,8 @@ struct RaceRowView: View {
 
     // MARK: - Initializer
 
-    init(raceItem: RacePresentationItem) {
-        self.raceItem = raceItem
+    init(viewModel: RaceItemViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -47,11 +47,11 @@ struct RaceRowView: View {
         }
         .adaptiveScaleFactor()
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(raceItem.combinedAccessibilityLabel)
+        .accessibilityLabel(viewModel.combinedAccessibilityLabel)
     }
 }
 
-private extension RaceRowView {
+private extension RaceItemView {
 
     @ViewBuilder
     var animatedIcon: some View {
@@ -60,7 +60,7 @@ private extension RaceRowView {
          https://medium.com/@amosgyamfi/learning-swiftui-spring-animations-the-basics-and-beyond-4fb032212487
          */
 
-        Image(raceItem.iconName, bundle: .module)
+        Image(viewModel.iconName, bundle: .module)
             .font(.largeTitle)
             .foregroundColor(.red)
             .accessibilityHidden(true)
@@ -115,7 +115,7 @@ private extension RaceRowView {
 
     @ViewBuilder
     var raceName: some View {
-        Text(raceItem.name)
+        Text(viewModel.name)
             .font(.title3)
             .fontWeight(.medium)
             .lineLimit(1)
@@ -124,7 +124,7 @@ private extension RaceRowView {
 
     @ViewBuilder
     var raceNumber: some View {
-        Text(raceItem.raceNumber)
+        Text(viewModel.raceNumber)
             .font(.title3)
             .fontWeight(.medium)
             .foregroundColor(.primary)
@@ -132,15 +132,15 @@ private extension RaceRowView {
 
     @ViewBuilder
     var raceTimeCountdown: some View {
-        Text(raceItem.countdownText ?? "")
+        Text(viewModel.countdownText ?? "")
             .font(.callout)
             .fontWeight(.regular)
             .foregroundColor(
-                raceItem.highlightCountdown ? .red : .primary
+                viewModel.highlightCountdown ? .red : .primary
             )
             .opacity(isAnimatingText ? 1.0 : 0.6)
             .scaleEffect(
-                raceItem.highlightCountdown && isAnimatingText ? 1.03 : 0.97
+                viewModel.highlightCountdown && isAnimatingText ? 1.03 : 0.97
             )
             .animation(
                 .spring().repeatForever(autoreverses: true),
@@ -158,7 +158,7 @@ private extension RaceRowView {
 
     @ViewBuilder
     var countryFlag: some View {
-        if let countryEmoji = raceItem.countryEmoji {
+        if let countryEmoji = viewModel.countryEmoji {
             Text(countryEmoji)
                 .font(.title)
                 .scaleEffect(isAnimatingText ? 1.04 : 0.99)
@@ -175,7 +175,7 @@ private extension RaceRowView {
 
     @ViewBuilder
     var description: some View {
-        Text(raceItem.description)
+        Text(viewModel.description)
             .font(.subheadline)
             .fontWeight(.medium)
             .lineLimit(2)
@@ -216,18 +216,18 @@ struct RaceRowView_Previews: PreviewProvider {
         venu: .init(state: "JPN", country: "JPN")
     )
 
-    static let items: [RacePresentationItem] = [
+    static let items: [RaceItemViewModel] = [
         race1,
         race2,
         race3,
     ]
-        .map { RacePresentationItem(race: $0) }
+        .map { RaceItemViewModel(race: $0) }
 
     static var previews: some View {
         VStack(spacing: 20) {
-            RaceRowView(raceItem: items[0])
-            RaceRowView(raceItem: items[1])
-            RaceRowView(raceItem: items[2])
+            RaceItemView(viewModel: items[0])
+            RaceItemView(viewModel: items[1])
+            RaceItemView(viewModel: items[2])
             Spacer()
         }
         .padding(.all, 20)

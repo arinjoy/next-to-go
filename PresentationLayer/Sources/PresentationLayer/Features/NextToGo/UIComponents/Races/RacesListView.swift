@@ -22,10 +22,10 @@ struct RacesListView: View {
 
         List(items) { item in
 
-            let presentationItem = RacePresentationItem(race: item)
+            let itemViewModel = RaceItemViewModel(race: item)
 
-            NavigationLink(destination: RaceDetailsView(item: presentationItem)) {
-                RaceRowView(raceItem: .init(race: item))
+            NavigationLink(destination: RaceDetailsView(viewModel: itemViewModel)) {
+                RaceItemView(viewModel: .init(race: item))
             }
 
         }
@@ -41,13 +41,13 @@ struct RacesListView: View {
 
 struct RaceDetailsView: View {
 
-    let item: RacePresentationItem
+    let viewModel: RaceItemViewModel
 
     var body: some View {
 
         VStack(alignment: .center, spacing: 16) {
 
-            Image(item.iconName, bundle: .module)
+            Image(viewModel.iconName, bundle: .module)
                 .resizable()
                 .scaledToFit()
                 .font(.largeTitle)
@@ -55,23 +55,23 @@ struct RaceDetailsView: View {
                 .foregroundColor(.red)
                 .accessibilityHidden(true)
 
-            Text(item.name)
+            Text(viewModel.name)
                 .font(.title)
                 .foregroundColor(.primary)
 
-            Text(item.raceNumber)
+            Text(viewModel.raceNumber)
                 .font(.title)
                 .foregroundColor(.primary)
 
-            Text(item.countryEmoji ?? "")
+            Text(viewModel.countryEmoji ?? "")
                 .font(.largeTitle)
 
-            Text(item.description)
+            Text(viewModel.description)
                 .font(.body)
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
 
-            Text(item.countdownText ?? "")
+            Text(viewModel.countdownText ?? "")
                 .font(.body)
                 .foregroundColor(.red)
 
