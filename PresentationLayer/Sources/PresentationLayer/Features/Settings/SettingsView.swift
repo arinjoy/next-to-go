@@ -5,50 +5,51 @@
 import SwiftUI
 import SharedUtils
 
-/// ‼️‼️‼️‼️‼️‼️
-//  TODO: Move all the copy / content...
+/// 🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽
+//  FIXME: ‼️ Move all the copy / content... ‼️
 /// used here via ViewModel / PresentationItem based bindings.
 /// This is just a prototyping experimental feature screen for now.
 /// Hard coded content here but UI and accessibility - font scaling &
-/// VoiceOver all works fine.
-/// ‼️‼️‼️‼️‼️‼️
-///
+/// VoiceOver all works nicely. To be finalised ...
+///  🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽🤚🏽
+
+// swiftlint:disable all
 struct SettingsView: View {
-    
+
     // MARK: - Properties
-    
+
     @State private var isAnimatingIcon: Bool = false
-    
+
     @Environment(\.dismiss) private var dismiss
-    
+
     @AppStorage("isDarkMode") private var isDarkMode = false
-    
+
     // MARK: - UI body
-    
+
     // NOTE: Break down the sub section via `@ViewBuilder` based
     // child elements, show that easy to follow declarative code.
     // Otherwise, it looks like pyramid of doom with too many
     // nested blocks
-    
+
     var body: some View {
-        
+
         NavigationView {
-            
+
             ScrollView(.vertical, showsIndicators: false) {
-                
+
                 VStack(spacing: 20) {
-                    
+
                     // MARK: - Section 1
-                    
+
                     GroupBox(
                         label: SettingsLabelView(text: "Next to Go", imageName: "info.circle")
                     ) {
-                        
+
                         Divider()
                             .padding(.vertical, 4)
-                        
+
                         HStack(alignment: .center, spacing: 16) {
-                            
+
                             Group {
                                 if let appIconImage = UIImage(named: "AppIcon") {
                                     Image(uiImage: appIconImage)
@@ -70,29 +71,32 @@ struct SettingsView: View {
                                     isAnimatingIcon = true
                                 }
                             }
-                            
+
+                            // swiftlint:disable:next line_length
                             Text("Immerse yourself in the new world of personalised betting on races. Horse, Greyhound or Harness, whatever racing you're looking for internationally. Just filter them out an see the next most up to date 5 races to punt on.")
                                 .font(.footnote)
                         }
                         .accessibilityElement(children: .combine)
                     }
-                    
+
                     // MARK: - Section 2
-                    
+
                     GroupBox(
                         label: SettingsLabelView(text: "Customization", imageName: "paintbrush")
                     ) {
-                        
+
                         Divider()
                             .padding(.vertical, 4)
-                        
-                        Text("If you wish, you can update the theme to be dark mode. Also you can update larger accessibility font sizes from system settings and see how the app adapts to it.")
+
+                        Text(
+                            "If you wish, you can update the theme to be dark mode. Also you can update larger accessibility font sizes from system settings and see how the app adapts to it."
+                        )
                             .padding(.vertical, 8)
                             .frame(minHeight: 60)
                             .layoutPriority(1)
                             .font(.footnote)
                             .multilineTextAlignment(.leading)
-                        
+
                         Toggle(isOn: $isDarkMode) {
                             Text("Dark Mode")
                         }
@@ -102,9 +106,9 @@ struct SettingsView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                         )
                     }
-                    
+
                     // MARK: - Section 3
-                    
+
                     GroupBox(
                         label: SettingsLabelView(
                             text: "Creator",
@@ -112,24 +116,24 @@ struct SettingsView: View {
                         )
                     ) {
                         SettingsRowView(name: "Developer", value: "Arinjoy Biswas")
-                        
+
                         SettingsRowView(name: "Designer", value: "Arinjoy (with ❤️)")
-                        
+
                         SettingsRowView(
                             name: "Github",
                             linkLabel: "github.com/arinjoy",
                             linkURL: URL(string: "https://github.com/arinjoy")!
                         )
-                        
+
                         SettingsRowView(
                             name: "LinkedIn",
                             linkLabel: "linkedin.com/arinjoy",
                             linkURL: URL(string: "https://www.linkedin.com/in/arinjoybiswas/")!
                         )
                     }
-                    
+
                     // MARK: - Section 4
-                    
+
                     GroupBox(
                         label: SettingsLabelView(text: "Application", imageName: "apps.iphone")
                     ) {
@@ -141,18 +145,21 @@ struct SettingsView: View {
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
                 .navigationBarItems(
                     trailing:
-                        Button(action: {
-                            let haptic = UIImpactFeedbackGenerator(style: .medium)
-                            haptic.impactOccurred()
-                            dismiss()
-                        }) {
-                            Image(systemName: "multiply.circle.fill")
-                                .resizable()
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(Color(uiColor: UIColor.lightGray))
-                                .accessibilityLabel("Close")
-                        }
+                        Button(
+                            action: {
+                                let haptic = UIImpactFeedbackGenerator(style: .medium)
+                                haptic.impactOccurred()
+                                dismiss()
+                            },
+                            label: {
+                                Image(systemName: "multiply.circle.fill")
+                                    .resizable()
+                                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(Color(uiColor: UIColor.lightGray))
+                                    .accessibilityLabel("Close")
+                            }
+                        )
                 )
                 .padding()
             }
@@ -160,9 +167,10 @@ struct SettingsView: View {
         .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
+// swiftlint:disable all
 
 struct SettingsLabelView: View {
-    
+
     let text: String
     let imageName: String
 
@@ -171,9 +179,9 @@ struct SettingsLabelView: View {
             Text(text.uppercased())
                 .fontWeight(.bold)
                 .accessibilityAddTraits(.isHeader)
-            
+
             Spacer()
-            
+
             Image(systemName: imageName)
                 .accessibilityHidden(true)
         }
@@ -183,38 +191,38 @@ struct SettingsLabelView: View {
 }
 
 struct SettingsRowView: View {
-    
+
     var name: String
-    var value: String? = nil
-    var linkLabel: String? = nil
-    var linkURL: URL? = nil
-    
+    var value: String?
+    var linkLabel: String?
+    var linkURL: URL?
+
     // MARK: - UI Body
 
     var body: some View {
-        
+
         VStack {
-            
+
               Divider().padding(.vertical, 4)
-              
+
               HStack {
-                  
+
                 Text(name).foregroundColor(Color.gray)
-                  
+
                 Spacer()
-                  
+
                 if let value {
-                    
+
                     Text(value)
-                    
+
                 } else if let linkLabel, let linkURL {
-                  
+
                     Link(linkLabel, destination: linkURL)
-                    
+
                     Image(systemName: "arrow.up.right.square")
                         .foregroundColor(.red)
                         .accessibilityHidden(true)
-                    
+
                 } else {
                     EmptyView()
                 }
@@ -224,8 +232,6 @@ struct SettingsRowView: View {
         }
     }
 }
-
-// MARK: - PREVIEW
 
 #if DEBUG
 struct SettingsView_Previews: PreviewProvider {

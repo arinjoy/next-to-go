@@ -13,7 +13,7 @@ enum CollectionLoadingState<Content> {
 }
 
 extension Publisher where Output: Collection {
-    
+
     func mapToLoadingState(
         placeholder: Output
     ) -> AnyPublisher<CollectionLoadingState<Output>, Never> {
@@ -26,6 +26,5 @@ extension Publisher where Output: Collection {
         .prepend(.loading(placeholder: placeholder))
         .eraseToAnyPublisher()
     }
-    
-}
 
+}

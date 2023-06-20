@@ -6,28 +6,28 @@ import SwiftUI
 import DomainLayer
 
 struct FiltersView: View {
-    
+
     // MARK: - Properties
-    
+
     @StateObject var viewModel: FiltersViewModel
-    
-    // TODO: Test more and find the perfect haptic you need. 💗
+
+    // NOTE: 💗 Test more and find the perfect haptic feelings you need. 💗
     let haptic = UIImpactFeedbackGenerator(style: .heavy)
-    
+
     // MARK: - UI Body
-    
+
     var body: some View {
-        
+
         HStack {
-            
+
             ForEach(viewModel.filters) { filter in
-                
+
                 HStack(spacing: 10) {
-                    
+
                     Image(filter.category.iconName, bundle: .module)
                         .font(.largeTitle)
                         .scaleEffect(1.3)
-         
+
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
                         .font(.body)
@@ -60,11 +60,10 @@ struct FiltersView: View {
             }
         }
         .padding(.horizontal, 10)
-        
+
         Divider()
     }
 }
-
 
 #if DEBUG
 struct FiltersView_Previews: PreviewProvider {

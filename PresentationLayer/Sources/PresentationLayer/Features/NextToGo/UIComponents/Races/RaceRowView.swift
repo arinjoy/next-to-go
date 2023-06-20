@@ -7,34 +7,34 @@ import DomainLayer
 import SharedUtils
 
 struct RaceRowView: View {
-    
+
     // MARK: - Properties
-    
+
     @ObservedObject private var raceItem: RacePresentationItem
-    
+
     @State private var isAnimatingIcon: Bool = false
     @State private var isAnimatingText: Bool = false
-    
+
     @Environment(\.sizeCategory) private var sizeCategory
-    
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
+
     // MARK: - Initializer
-    
+
     init(raceItem: RacePresentationItem) {
         self.raceItem = raceItem
     }
-    
+
     var body: some View {
-        
+
         HStack(alignment: .center, spacing: 16) {
-                        
+
             animatedIcon
-            
+
             VStack(alignment: .leading, spacing: 4) {
-                
+
                 infoTextStack
-                
+
                 descriptionStack
             }
             .onAppear {
@@ -52,14 +52,14 @@ struct RaceRowView: View {
 }
 
 private extension RaceRowView {
-    
+
     @ViewBuilder
     var animatedIcon: some View {
-        
+
         /** Animation related code courtesy to this amazing tutorial: 🙏🏽
          https://medium.com/@amosgyamfi/learning-swiftui-spring-animations-the-basics-and-beyond-4fb032212487
          */
-        
+
         Image(raceItem.iconName, bundle: .module)
             .font(.largeTitle)
             .foregroundColor(.red)
@@ -78,19 +78,19 @@ private extension RaceRowView {
                 value: isAnimatingIcon
             )
             .padding(.trailing, 6)
-            .onAppear() {
+            .onAppear {
                 withAnimation(.linear(duration: 2).repeatForever()) {
                     isAnimatingIcon = true
                 }
             }
     }
-    
+
     @ViewBuilder
     var infoTextStack: some View {
-        
+
         // 🤚🏽 Only flip layout when system detects large font size
         // and horizontal compact layout, else gets normal desired layout
-        
+
         if sizeCategory >= .extraExtraExtraLarge,
            horizontalSizeClass == .compact {
             VStack(alignment: .leading, spacing: 8) {
@@ -112,7 +112,7 @@ private extension RaceRowView {
             }
         }
     }
-    
+
     @ViewBuilder
     var raceName: some View {
         Text(raceItem.name)
@@ -121,7 +121,7 @@ private extension RaceRowView {
             .lineLimit(1)
             .foregroundColor(.primary)
     }
-    
+
     @ViewBuilder
     var raceNumber: some View {
         Text(raceItem.raceNumber)
@@ -129,7 +129,7 @@ private extension RaceRowView {
             .fontWeight(.medium)
             .foregroundColor(.primary)
     }
-    
+
     @ViewBuilder
     var raceTimeCountdown: some View {
         Text(raceItem.countdownText ?? "")
@@ -147,7 +147,7 @@ private extension RaceRowView {
                 value: isAnimatingText
             )
     }
-    
+
     @ViewBuilder
     var descriptionStack: some View {
         HStack {
@@ -155,7 +155,7 @@ private extension RaceRowView {
             description
         }
     }
-    
+
     @ViewBuilder
     var countryFlag: some View {
         if let countryEmoji = raceItem.countryEmoji {
@@ -172,7 +172,7 @@ private extension RaceRowView {
             EmptyView()
         }
     }
-        
+
     @ViewBuilder
     var description: some View {
         Text(raceItem.description)
@@ -195,7 +195,7 @@ struct RaceRowView_Previews: PreviewProvider {
         startTime: Date.init(timeIntervalSinceNow: 1 * 60),
         venu: .init(state: "BRA", country: "BRA")
     )
-    
+
     static let race2 = Race(
         id: "222",
         category: .greyhound,
@@ -205,7 +205,7 @@ struct RaceRowView_Previews: PreviewProvider {
         startTime: Date.init(timeIntervalSinceNow: 2.5 * 60),
         venu: .init(state: "VIC", country: "AUS")
     )
-    
+
     static let race3 = Race(
         id: "333",
         category: .harness,
@@ -215,14 +215,14 @@ struct RaceRowView_Previews: PreviewProvider {
         startTime: Date.init(timeIntervalSinceNow: 8 * 60),
         venu: .init(state: "JPN", country: "JPN")
     )
-    
+
     static let items: [RacePresentationItem] = [
         race1,
         race2,
         race3,
     ]
         .map { RacePresentationItem(race: $0) }
-    
+
     static var previews: some View {
         VStack(spacing: 20) {
             RaceRowView(raceItem: items[0])
@@ -234,5 +234,3 @@ struct RaceRowView_Previews: PreviewProvider {
   }
 }
 #endif
-
-

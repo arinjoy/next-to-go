@@ -8,35 +8,35 @@ import DataLayer
 import SharedUtils
 
 public struct NextToGoView: View {
-    
+
     // MARK: - Properties
-    
+
     @ObservedObject private var viewModel: NextToGoViewModel
-    
+
     @State private var isShowingSettings: Bool = false
-    
+
     private let haptic = UIImpactFeedbackGenerator(style: .medium)
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Initializer
-    
+
     public init() {
         self.viewModel = NextToGoViewModel()
     }
-    
+
     // MARK: - UI Body
-    
+
     public var body: some View {
-        
+
         NavigationView {
-            
+
             VStack(alignment: .center, spacing: 10) {
-                
+
                 FiltersView(viewModel: viewModel.filterViewModel)
-                
+
                 Spacer()
-                
+
                 CollectionLoadingView(
                     loadingState: viewModel.loadingState,
                     content: RacesListView.init(items:),
@@ -48,12 +48,16 @@ public struct NextToGoView: View {
                         )
                     },
                     error: {
+
                         // TODO: Find better way to avoid force casting
+
+                        // swiftlint:disable force_cast
                         ErrorMessageView(
                             iconName: ($0 as! NetworkError).iconName,
                             title: ($0 as! NetworkError).title,
                             message: ($0 as! NetworkError).message
                         )
+                        // swiftlint:enable force_cast
                     }
                 )
             }
@@ -70,10 +74,10 @@ public struct NextToGoView: View {
 // MARK: - Private
 
 private extension NextToGoView {
-    
+
     @ToolbarContentBuilder
     var toolBarContent: some ToolbarContent {
-        
+
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
                 haptic.impactOccurred()
@@ -90,7 +94,7 @@ private extension NextToGoView {
                     .accessibilityHint(viewModel.refreshButtonAccessibilityHint)
             }
         }
-        
+
         ToolbarItem(placement: .principal) {
             Image(systemName: viewModel.navBarHeroIcon)
                 .resizable()
@@ -98,7 +102,7 @@ private extension NextToGoView {
                 .foregroundColor(.red)
                 .accessibilityHidden(true)
         }
-        
+
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
                 haptic.impactOccurred()

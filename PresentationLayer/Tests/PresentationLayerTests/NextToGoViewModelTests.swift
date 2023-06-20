@@ -85,7 +85,7 @@ final class NextToGoViewModelTests: XCTestCase {
         // WHEN - next races are requested to be loaded
         testSubject.loadNextRaces()
 
-        testSubject.$loadingState.dropFirst(2).sink { items in
+        testSubject.$loadingState.dropFirst(2).sink { _ in
             expectation.fulfill()
         }
         .store(in: &cancellables)
@@ -124,7 +124,7 @@ final class NextToGoViewModelTests: XCTestCase {
         // WHEN - next races are requested to be loaded
         testSubject.loadNextRaces()
 
-        testSubject.$loadingState.dropFirst(2).sink { items in
+        testSubject.$loadingState.dropFirst(2).sink { _ in
             expectation.fulfill()
         }
         .store(in: &cancellables)
@@ -152,7 +152,7 @@ final class NextToGoViewModelTests: XCTestCase {
         // WHEN - next races are requested to be loaded
         testSubject.loadNextRaces()
 
-        testSubject.$loadingState.dropFirst(2).sink { items in
+        testSubject.$loadingState.dropFirst(2).sink { _ in
             expectation.fulfill()
         }
         .store(in: &cancellables)
@@ -164,7 +164,7 @@ final class NextToGoViewModelTests: XCTestCase {
         case .error(let error):
 
             // AND - error type returned is the expected one
-            XCTAssertEqual(error as! NetworkError, .networkFailure)
+            XCTAssertEqual(error as! NetworkError, .networkFailure) // swiftlint:disable:this force_cast
 
         default:
             XCTFail("Loading state must be error")
@@ -191,6 +191,5 @@ final class NextToGoViewModelTests: XCTestCase {
         XCTAssertEqual(filters[2].category, .harness)
         XCTAssertTrue(filters[1].selected)
     }
-
 
 }

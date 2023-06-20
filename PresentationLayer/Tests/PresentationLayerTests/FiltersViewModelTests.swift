@@ -23,7 +23,6 @@ final class FiltersViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-
     // MARK: - Tests
 
     func testInitialStates() {
@@ -44,7 +43,6 @@ final class FiltersViewModelTests: XCTestCase {
             filters[0].category.accessibilityLabel,
             "next.togo.races.filter.horse.title".l10n()
         )
-
 
         XCTAssertEqual(filters[1].category, .greyhound)
         XCTAssertTrue(filters[1].selected)

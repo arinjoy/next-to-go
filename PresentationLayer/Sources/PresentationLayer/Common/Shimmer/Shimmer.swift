@@ -5,15 +5,15 @@
 import SwiftUI
 
 struct ShimmerConfiguration {
-    
+
     // MARK: - Properties
-    
+
     let gradient: Gradient
     let initialLocation: (start: UnitPoint, end: UnitPoint)
     let finalLocation: (start: UnitPoint, end: UnitPoint)
     let duration: TimeInterval
     let opacity: Double
-    
+
     static let `default` = ShimmerConfiguration(
         gradient: Gradient(stops: [
             .init(color: .black, location: 0),
@@ -29,17 +29,17 @@ struct ShimmerConfiguration {
 }
 
 struct ShimmeringView<Content: View>: View {
-    
+
     // MARK: - Properties
-    
+
     private let content: () -> Content
     private let configuration: ShimmerConfiguration
-    
+
     @State private var startPoint: UnitPoint
     @State private var endPoint: UnitPoint
-    
+
     // MARK: - Initializer
-    
+
     init(
         configuration: ShimmerConfiguration,
         @ViewBuilder content: @escaping () -> Content
@@ -49,15 +49,15 @@ struct ShimmeringView<Content: View>: View {
         _startPoint = .init(wrappedValue: configuration.initialLocation.start)
         _endPoint = .init(wrappedValue: configuration.initialLocation.end)
     }
-    
+
     // MARK: - UI Body
-    
+
     var body: some View {
-        
+
         ZStack {
-            
+
             content()
-            
+
             LinearGradient(
                 gradient: configuration.gradient,
                 startPoint: startPoint,
@@ -77,19 +77,18 @@ struct ShimmeringView<Content: View>: View {
 }
 
 struct ShimmerModifier: ViewModifier {
-    
+
     let configuration: ShimmerConfiguration
-    
+
     func body(content: Content) -> some View {
         ShimmeringView(configuration: configuration) { content }
     }
 }
 
-
 extension View {
-    
+
     func shimmer(configuration: ShimmerConfiguration = .default) -> some View {
         modifier(ShimmerModifier(configuration: configuration))
     }
-    
+
 }

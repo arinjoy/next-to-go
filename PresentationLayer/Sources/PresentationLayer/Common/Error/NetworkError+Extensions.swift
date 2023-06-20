@@ -8,7 +8,7 @@ import DataLayer
 
 extension NetworkError {
 
-    // TODO: Map more custom error messages
+    // NOTE: Map more custom error messages if needed
     /// such `serviceUnavailable`, `forbidden` etc.
     /// based on the use cases and granularity of messaging required.
     ///
@@ -29,7 +29,7 @@ extension NetworkError {
             return "next.togo.races.error.generic.message".l10n()
         }
     }
-    
+
     var iconName: String {
         switch self {
         case .networkFailure:
@@ -38,5 +38,5 @@ extension NetworkError {
             return "exclamationmark.icloud"
         }
     }
-    
+
 }

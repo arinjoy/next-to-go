@@ -13,35 +13,35 @@ struct FilterModel: Identifiable {
 }
 
 final class FiltersViewModel: ObservableObject {
-    
+
     // MARK: - Properties
-    
+
     @Published var filters: [FilterModel] = [
         FilterModel(id: 0, category: .horse, selected: true),
         FilterModel(id: 1, category: .greyhound, selected: true),
         FilterModel(id: 2, category: .harness, selected: true),
     ]
-    
-    var filterTappedAction: (() -> (Void))? = nil
-    
+
+    var filterTappedAction: (() -> Void)?
+
     // MARK: - Initializer
-    
+
     init() { }
-    
+
     // MARK: - API
-    
+
     func filterItemTapped(filterItem item: FilterModel) {
         filters[item.id].selected.toggle()
-        
+
         if filters.allSatisfy({ $0.selected == false }) {
             resetFilters()
         }
-        
+
         filterTappedAction?()
     }
-    
+
     // MARK: - Private
-    
+
     private func resetFilters() {
         for item in filters {
             filters[item.id].selected.toggle()
@@ -50,7 +50,7 @@ final class FiltersViewModel: ObservableObject {
 }
 
 extension Race.Category {
-    
+
     var accessibilityLabel: String {
         switch self {
         case .horse:      return "next.togo.races.filter.horse.title".l10n()
@@ -58,7 +58,7 @@ extension Race.Category {
         case .harness:    return "next.togo.races.filter.harness.title".l10n()
         }
     }
-    
+
     func accessibilityHint(selected: Bool) -> String {
         if selected {
             return "next.togo.races.filter.undo.accessibility.hint.prefix".l10n() + accessibilityLabel

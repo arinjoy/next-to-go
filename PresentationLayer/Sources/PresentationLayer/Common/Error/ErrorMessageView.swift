@@ -9,21 +9,21 @@ import DataLayer
 struct ErrorMessageView: View {
 
     // MARK: - Properties
-    
+
     let iconName: String
     let title: String
     let message: String
-    
+
     @State private var isAnimatingIcon: Bool = false
-    
+
     // MARK: - UI Body
-    
+
     var body: some View {
-        
+
         VStack(alignment: .center, spacing: 16) {
-            
+
             Spacer()
-            
+
             Image(systemName: iconName)
                 .symbolRenderingMode(.hierarchical)
                 .resizable()
@@ -41,22 +41,22 @@ struct ErrorMessageView: View {
                     value: isAnimatingIcon
                 )
                 .padding(.bottom, 6)
-                .onAppear() {
+                .onAppear {
                     withAnimation {
                         isAnimatingIcon = true
                     }
                 }
-            
+
             Text(title)
                 .font(.title3)
                 .foregroundColor(.primary)
                 .accessibilityAddTraits(.isHeader)
-            
+
             Text(message)
                 .font(.body)
                 .foregroundColor(.secondary)
                 .accessibilityAddTraits(.isStaticText)
-            
+
             Spacer()
             Spacer()
             Spacer()
@@ -66,7 +66,6 @@ struct ErrorMessageView: View {
         .padding()
     }
 }
-
 
 #if DEBUG
 struct ErrorMessageView_Previews: PreviewProvider {

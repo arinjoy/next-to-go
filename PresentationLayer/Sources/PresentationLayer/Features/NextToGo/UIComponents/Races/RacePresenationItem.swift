@@ -10,20 +10,20 @@ import DomainLayer
 final class RacePresentationItem: ObservableObject {
 
     // MARK: - Properties
-    
+
     private let race: Race
-    
+
     @Published private(set) var countdownText: String?
     @Published private(set) var highlightCountdown: Bool = false
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Initializer
-    
+
     init(race: Race) {
-        
+
         self.race = race
-        
+
         Timer.publish(every: 1, on: RunLoop.main, in: .common)
             .autoconnect()
             .prepend(Date.now)
@@ -34,31 +34,31 @@ final class RacePresentationItem: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
     // MARK: - Computed properties
-    
+
     var iconName: String {
         race.category.iconName
     }
-    
+
     var raceNumber: String {
         "next.togo.races.race.number.prefix".l10n() + "\(race.number)"
     }
-    
+
     var name: String {
         race.meeting.trimmed()
     }
-    
+
     var description: String {
         race.name.trimmed()
     }
-    
+
     var countryEmoji: String? {
         CountryUtilities.countryFlag(byAlphaCode: race.venu.country)
     }
-    
+
     // MARK: - Accessibility
-    
+
     var combinedAccessibilityLabel: String {
         [
             race.category.accessibilityLabel,
@@ -70,14 +70,14 @@ final class RacePresentationItem: ObservableObject {
         ]
             .combinedAccessibilityLabel()
     }
-    
+
     private var raceNumberAccessibilityLabel: String {
         "next.togo.races.race.number.accessibility.label".l10n() + "\(race.number)"
     }
-    
+
     ///
     // TODO: 🤚🏽 Need to tweak a few things 🤚🏽
-    
+
     /// To handle the singular vs. plural. Currently all singular without `s` at end when they
     /// should be. Does not sound perfect in `VoiceOver`, but manageable to understand.
     ///
@@ -94,13 +94,13 @@ final class RacePresentationItem: ObservableObject {
             .replacingOccurrences(of: "m", with: "minute")
             .replacingOccurrences(of: "s", with: "second")
     }
-    
+
 }
 
 extension Race.Category {
-    
+
     var iconName: String {
-        
+
         /// Currently these are all custom SF symbols converted after copying
         /// from SVG files from online free sources and then edited via Sketch.app.
         /// Thereafter imported as the Symbol Image Asset in Xcode's Image Assets.
@@ -115,7 +115,6 @@ extension Race.Category {
     }
 }
 
-
 extension TimeInterval {
 
     /// Returns a formatted string from hour minute seconds left
@@ -127,24 +126,24 @@ extension TimeInterval {
         let hours = (time / 60 / 60) % 60
         let minutes = (time / 60) % 60
         let seconds = time % 60
-        
-        // TODO: Needs more tweaking and unit testing every combination
+
+        // TODO: 🤓 Needs more tweaking and unit testing every combination
 
         if hours >= 1 {
             return String(format: "%0.1dh", hours)
         }
-        
+
         if minutes >= 3 {
             return String(format: "%0.1dm", minutes)
         }
-        
+
         if minutes == 0 {
             return String(format: "%0.1ds", seconds)
         }
-        
+
         return String(format: "%0.1dm %0.1ds", minutes, seconds)
     }
-    
+
     var shouldHighlight: Bool {
         let time = NSInteger(self)
         let minutes = (time / 60) % 60
