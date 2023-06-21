@@ -13,7 +13,8 @@ struct RaceItemView: View {
     @ObservedObject private var viewModel: RaceItemViewModel
 
     @State private var isAnimatingIcon: Bool = false
-    @State private var isAnimatingText: Bool = false
+    @State private var isAnimatingFlag: Bool = false
+    @State private var isAnimatingCountdown: Bool = false
 
     @Environment(\.sizeCategory) private var sizeCategory
 
@@ -39,7 +40,7 @@ struct RaceItemView: View {
             }
             .onAppear {
                 withAnimation(.easeInOut(duration: 1)) {
-                    isAnimatingText = true
+                    isAnimatingFlag = true
                 }
             }
 
@@ -81,6 +82,7 @@ private extension RaceItemView {
             .onAppear {
                 withAnimation(.linear(duration: 2).repeatForever()) {
                     isAnimatingIcon = true
+                    isAnimatingCountdown = viewModel.highlightCountdown
                 }
             }
     }
@@ -136,15 +138,15 @@ private extension RaceItemView {
             .font(.callout)
             .fontWeight(.regular)
             .foregroundColor(
-                viewModel.highlightCountdown ? .red : .primary
+                isAnimatingCountdown ? .red : .primary
             )
-            .opacity(isAnimatingText ? 1.0 : 0.6)
+            .opacity(isAnimatingCountdown ? 1.0 : 0.8)
             .scaleEffect(
-                viewModel.highlightCountdown && isAnimatingText ? 1.03 : 0.97
+                isAnimatingCountdown ? 1.06 : 0.96
             )
             .animation(
                 .spring().repeatForever(autoreverses: true),
-                value: isAnimatingText
+                value: isAnimatingCountdown
             )
     }
 
@@ -161,12 +163,12 @@ private extension RaceItemView {
         if let countryEmoji = viewModel.countryEmoji {
             Text(countryEmoji)
                 .font(.title)
-                .scaleEffect(isAnimatingText ? 1.04 : 0.99)
-                .opacity(isAnimatingText ? 1.0 : 0.5)
+                .scaleEffect(isAnimatingFlag ? 1.04 : 0.99)
+                .opacity(isAnimatingFlag ? 1.0 : 0.5)
                 .animation(
                     .spring(response: 1.0, dampingFraction: 0.0, blendDuration: 0.1)
                     .repeatForever(autoreverses: true),
-                    value: isAnimatingText
+                    value: isAnimatingFlag
                 )
         } else {
             EmptyView()
