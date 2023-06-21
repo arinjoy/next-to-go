@@ -7,7 +7,7 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 
 ### 💼 Requirements
 1.	As a user, I should be able to see a time ordered list of races ordered by advertised start ascending
-2.	As a user, I should not see races that are one minute past the advertised start 
+2.	As a user, I should not see races that are **one minute past** the advertised start 
 3.	As a user, I should be able to filter my list of races by the following categories: Horse, Harness & Greyhound racing
 4.	As a user, I can deselect all filters to show the next 5 from of all racing categories
 5.	As a user, I should see the meeting name, race number and advertised start as a countdown for each race.
@@ -24,6 +24,7 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 - ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s `Moden Concurrency Async Await` paradigm (layer by layer where feasible)
 - `Unit Testing` (about 70%) has been covered on each layer. (A bit more can still be added in presentation layer code, all view models are tested for now, and to some shared utils)
 - Some TODO notes left in the code deliberartely for potential improvements and SwfiftLint warns us about those to trace them
+- To achieve the **requirment 2** above, use ⏰ **hard negative tolerance** in the interactor (currently set at -90 seconds). This can be configured to show more old races which are past few minutes with negative countdown timer on the UI. Configurable option in the app logic. 🤓
 
 The package depdencies (import logic from one to another) are shown below:
 
