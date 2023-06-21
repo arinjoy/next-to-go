@@ -148,10 +148,13 @@ extension TimeInterval {
         return String(format: "%0.1ds", seconds)
     }
 
+    /// Should only highlight if 5 minutes or less left
     var shouldHighlight: Bool {
         let time = NSInteger(self)
+        let hours = (time / 60 / 60) % 60
         let minutes = (time / 60) % 60
-        return minutes < 6
+
+        return hours == 0 && minutes <= 5
     }
 
 }
