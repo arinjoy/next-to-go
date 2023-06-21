@@ -129,19 +129,23 @@ extension TimeInterval {
 
         // TODO: 🤓 Needs more tweaking and unit testing every combination
 
-        if hours >= 1 {
+        guard hours < 2 else {
             return String(format: "%0.1dh", hours)
         }
 
-        if minutes >= 3 {
+        guard hours == 0 else {
+            return String(format: "%0.1dh %0.1dm", hours, minutes)
+        }
+
+        guard minutes < 5 else {
             return String(format: "%0.1dm", minutes)
         }
 
-        if minutes == 0 {
-            return String(format: "%0.1ds", seconds)
+        guard minutes == 0 else {
+            return String(format: "%0.1dm %0.1ds", minutes, seconds)
         }
 
-        return String(format: "%0.1dm %0.1ds", minutes, seconds)
+        return String(format: "%0.1ds", seconds)
     }
 
     var shouldHighlight: Bool {
