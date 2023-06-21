@@ -16,10 +16,12 @@ struct ShimmerConfiguration {
 
     static let `default` = ShimmerConfiguration(
         gradient: Gradient(stops: [
-            .init(color: .black, location: 0),
-            .init(color: .white, location: 0.3),
-            .init(color: .white, location: 0.7),
-            .init(color: .black, location: 1),
+            // TODO: They work in light mode but dark mode does not work
+            // Hence remove for now until fix is found
+//            .init(color: .black, location: 0),
+//            .init(color: .white, location: 0.3),
+//            .init(color: .white, location: 0.7),
+//            .init(color: .black, location: 1),
         ]),
         initialLocation: (start: UnitPoint(x: -1, y: 0.5), end: .leading),
         finalLocation: (start: .trailing, end: UnitPoint(x: 2, y: 0.5)),
@@ -66,7 +68,7 @@ struct ShimmeringView<Content: View>: View {
             .opacity(configuration.opacity)
             .blendMode(.screen)
             .onAppear {
-                withAnimation(Animation.linear(duration: configuration.duration).repeatForever(autoreverses: false)) {
+                withAnimation(.linear(duration: configuration.duration).repeatForever(autoreverses: false)) {
                     startPoint = configuration.finalLocation.start
                     endPoint = configuration.finalLocation.end
                 }
