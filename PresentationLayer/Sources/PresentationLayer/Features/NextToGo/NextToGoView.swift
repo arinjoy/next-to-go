@@ -46,16 +46,15 @@ public struct NextToGoView: View {
                         )
                     },
                     error: {
-
-                        // TODO: Find better way to avoid force casting
-
-                        // swiftlint:disable force_cast
-                        ErrorMessageView(
-                            iconName: ($0 as! NetworkError).iconName,
-                            title: ($0 as! NetworkError).title,
-                            message: ($0 as! NetworkError).message
-                        )
-                        // swiftlint:enable force_cast
+                        if let networkError = $0 as? NetworkError {
+                            ErrorMessageView(
+                                iconName: networkError.iconName,
+                                title: networkError.title,
+                                message: networkError.message
+                            )
+                        } else {
+                            EmptyView()
+                        }
                     }
                 )
             }
