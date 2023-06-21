@@ -22,7 +22,7 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 - A mix of **`MVVM`** and **`VIPER`** design pattern is used to acheive loose coupling and unit testing via **`Dependency Injection`** patterns and mocks
 - Currently use Apple's `Combine` based `Reactive Binding`
 - ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s `Moden Concurrency Async Await` paradigm (layer by layer where feasible)
-- `Unit Testing` has been added on each layer. (More coverage be added in presentation layer code, all view models are tested for now)
+- `Unit Testing` (about 70%) has been added on each layer. (A bit more coverage can still be added in presentation layer code, all view models are tested for now)
 - Some TODO notes left in the code deliberartely for potential improvements and SwfiftLint warns us about those to trace them.
 
 The package depdencies (import logic from one to another) are shown below:
