@@ -49,4 +49,3 @@ public extension Optional where Wrapped == String {
     }
 
 }
-
