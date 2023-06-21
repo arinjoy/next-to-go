@@ -117,7 +117,7 @@ struct SettingsView: View {
                     ) {
                         SettingsRowView(name: "Developer", value: "Arinjoy Biswas")
 
-                        SettingsRowView(name: "Designer", value: "Arinjoy (with ❤️)")
+                        SettingsRowView(name: "Designer", value: "🧑🏽‍🎨 Arinjoy")
 
                         SettingsRowView(
                             name: "Github",
@@ -140,6 +140,33 @@ struct SettingsView: View {
                         SettingsRowView(name: "Compatibility", value: "iOS 15+")
                         SettingsRowView(name: "SwiftUI", value: "v3")
                         SettingsRowView(name: "App", value: "1.2.1")
+                    }
+
+                    GroupBox(
+                        label: SettingsLabelView(
+                            text: "Courtesy",
+                            imageName: "heart.text.square"
+                        )
+                    ) {
+                        SettingsRowView(
+                            name: "SwiftUI Animations",
+                            linkLabel: "kodeco.com",
+                            linkURL: URL(string: "https://www.kodeco.com/books/ios-animations-by-tutorials/v6.0/chapters/1-introduction-to-animations-with-swiftui")!
+                        )
+
+                        SettingsRowView(
+                            name: "Shimmers",
+                            linkLabel: "joshhomann.medium",
+                            linkURL: URL(string: "https://joshhomann.medium.com/generic-shimmer-loading-skeletons-in-swiftui-26fcd93ccee5")!
+                        )
+
+                        SettingsRowView(
+                            name: "Custom SF Symbols",
+                            linkLabel: "medium.com",
+                            linkURL: URL(string: "https://medium.com/@mkproduct-stories/how-to-create-sf-symbols-with-sketch-2952ee02abf5")!
+                        )
+
+
                     }
                 }
                 .navigationBarTitle(Text("Settings"), displayMode: .large)
@@ -207,7 +234,8 @@ struct SettingsRowView: View {
 
               HStack {
 
-                Text(name).foregroundColor(Color.gray)
+                Text(name)
+                      .foregroundColor(Color.gray)
 
                 Spacer()
 
@@ -218,9 +246,11 @@ struct SettingsRowView: View {
                 } else if let linkLabel, let linkURL {
 
                     Link(linkLabel, destination: linkURL)
+                        .font(.callout)
+                        .foregroundColor(.blue)
 
                     Image(systemName: "arrow.up.right.square")
-                        .foregroundColor(.red)
+                        .foregroundColor(.blue)
                         .accessibilityHidden(true)
 
                 } else {
