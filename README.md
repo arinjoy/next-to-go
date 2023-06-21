@@ -47,18 +47,19 @@ Please refer from the project navigator in Xcode to see the layering.
 ```mermaid
 graph TB
     subgraph DataLayer;
-    a1[NetworkService]-. RaceSummary Data Model .->a2[URLSession];
+    a2[URLSession]-. RaceSummary Data Model .->a1[NetworkService];
     end;
     subgraph DomainLayer;
-    b1[Interactor]-. applies some business logic  .->a1;
+    a1-. applies some business logic  .->b1[Interactor];
     end;
     subgraph PresentationLayer;
-    c1[NextToGoViewModel]-. list of RaceItemViewModel .->c2[Races List UI];
+    c1[NextToGoViewModel]-. list of RaceItemViewModel reactively .->c2[Races List UI];
     c2-. RaceItemViewModel .->c3[Races Cell Item UI];
-    c1-. list of FilterModel .->c4[Filters UI];
-    c4-. applies to .->c2
+    c1-. list of FilterModels .->c4[FilterViewModel];
+    c4-. applies to .->c1;
     end;
-    c1-. Race Domain Model .->b1;
+    b1-. list of Race Domain Model reactively .->c1;
+    c1-. Category filters .->b1;
 ```
 
 ## 💻 Installation
