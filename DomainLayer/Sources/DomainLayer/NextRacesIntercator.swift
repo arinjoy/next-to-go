@@ -74,8 +74,15 @@ public final class NextRacesInteractor: NextRacesInteracting {
                 return Array(sortedTopRaces)
             }
 
-        // Poll every 30 seconds to refresh latest races
-        return Timer.publish(every: 30, on: .main, in: .common)
+        // TODO: 🚀 Another more performant (alternative) approach could be: 🚀
+        // 1. Load the max number (i.e. 45 what I can see) from remote every 5 min instead of 50 seconds
+        // 2. Keep them in a local array, and let re-fire another timer every 1 min and sort the latest
+        // 3. Using that second timer, the final publisher would always ensure to fire the latest ones
+        //    and get rid off the older ones, polled 1 min from the main interactor's final outcome publisher,
+        //    and the UI would listen to it reactively...
+
+        // Poll every 50 seconds to refresh latest races (to get tolerance level of 1 min freshness)
+        return Timer.publish(every: 50, on: .main, in: .common)
             .autoconnect()
             .prepend(Date.now)  // Necessary to fire instantly at start
             .setFailureType(to: NetworkError.self) // To compose with nextRaces publisher
