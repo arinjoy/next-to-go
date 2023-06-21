@@ -2,6 +2,7 @@
 //  Created by Arinjoy Biswas on 20/6/2023.
 //
 
+import Foundation
 import Combine
 import SharedUtils
 import DataLayer
@@ -15,7 +16,8 @@ public final class NextRacesInteractorSpy: NextRacesInteracting {
 
     public func nextRaces(
         for categories: [Race.Category],
-        numberOfRaces count: Int
+        numberOfRaces count: Int,
+        hardNegativeTolerance tolerance: TimeInterval? = nil
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         nextRacesCalled = true
         return .just([]).eraseToAnyPublisher()
@@ -42,7 +44,8 @@ public final class NextRacesInteractorMock: NextRacesInteracting {
 
     public func nextRaces(
         for categories: [Race.Category],
-        numberOfRaces count: Int
+        numberOfRaces count: Int,
+        hardNegativeTolerance tolerance: TimeInterval? = nil
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
         if returningError {
             return .fail(error)

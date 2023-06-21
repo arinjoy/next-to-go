@@ -54,8 +54,16 @@ final class NextToGoViewModel: ObservableObject {
         // Update this value below to load 10 or as many
         // as you like. 🤩
 
+        // ALSO UPDATE THE NEGATIVE TOLERANCE from -90s to -180s or
+        // even more to show how much older ones you want the users to show
+        // Neds, Ladbrokes app shows up to minus 3 or 4 minutes.
+
         cancellable = interactor
-            .nextRaces(for: filteredCategories, numberOfRaces: 5)
+            .nextRaces(
+                for: filteredCategories,
+                numberOfRaces: 5,           // Load the top 5 only
+                hardNegativeTolerance: -90  // Up to -90 seconds older allowed to show on UI
+            )
 
             // FIXME: ‼️ Tweak this 1.0 delay below ‼️
             // Helps in shimmering to show always for a bit.

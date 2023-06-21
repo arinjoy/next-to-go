@@ -43,8 +43,12 @@ final class NextRacesInteractorTests: XCTestCase {
         let serviceSpy = NetworkServiceSpy()
         interactor = NextRacesInteractor(networkService: serviceSpy)
 
-        // WHEN - loading of desired resource type
-        _ = interactor.nextRaces(for: [.horse, .greyhound], numberOfRaces: 3)
+        // WHEN - being requested to load races
+        interactor.nextRaces(
+            for: [.horse, .greyhound, .harness], numberOfRaces: 20, hardNegativeTolerance: nil
+        )
+        .sink { _ in } receiveValue: { _ in
+        }.store(in: &cancellables)
 
         // THEN - Spying works correctly to see what values are being hit
 
@@ -67,7 +71,7 @@ final class NextRacesInteractorTests: XCTestCase {
         // always with `45` races to load and then it filters out from there
         // based on filters passed and number of races needed
         XCTAssertEqual(serviceSpy.parameters?.last?.0, "count")
-        XCTAssertEqual(serviceSpy.parameters?.last?.1.description, "45")
+        XCTAssertEqual(serviceSpy.parameters?.last?.1.description, "50")
     }
 
     func testLoadingWithHoseFilterOnly() throws {
@@ -80,7 +84,7 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 3 races for `horse`
-        interactor.nextRaces(for: [.horse], numberOfRaces: 3)
+        interactor.nextRaces(for: [.horse], numberOfRaces: 3, hardNegativeTolerance: nil)
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -126,7 +130,7 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races for `greyhound`
-        interactor.nextRaces(for: [.greyhound], numberOfRaces: 5)
+        interactor.nextRaces(for: [.greyhound], numberOfRaces: 5, hardNegativeTolerance: nil)
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -166,7 +170,7 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races for `greyhound` & `harness`
-        interactor.nextRaces(for: [.greyhound, .harness], numberOfRaces: 5)
+        interactor.nextRaces(for: [.greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -211,7 +215,7 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races combining all three categories
-        interactor.nextRaces(for: [.horse, .greyhound, .harness], numberOfRaces: 5)
+        interactor.nextRaces(for: [.horse, .greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
