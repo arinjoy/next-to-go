@@ -17,6 +17,8 @@ public struct NextToGoView: View {
 
     private let haptic = UIImpactFeedbackGenerator(style: .medium)
 
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initializer
@@ -62,6 +64,7 @@ public struct NextToGoView: View {
             .toolbar { toolBarContent }
             .padding(.top, 20)
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light) // link dark / light mode
         .onAppear {
             viewModel.loadNextRaces()
         }

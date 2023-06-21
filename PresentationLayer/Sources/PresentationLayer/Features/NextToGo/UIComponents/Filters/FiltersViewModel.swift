@@ -44,7 +44,7 @@ final class FiltersViewModel: ObservableObject {
 
     private func resetFilters() {
         for item in filters {
-            filters[item.id].selected.toggle()
+            filters[item.id].selected = true
         }
     }
 }
