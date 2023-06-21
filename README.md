@@ -117,9 +117,11 @@ graph TB
 
 | 🎧 VoiceOver 📢 Labels and Traits & sounds 🎼 | 
 | ---------- | 
-| Play with the videos below with sound option ON to listen how they work | 
 | <img src="Screenshots/a11y-voice-over.gif" height="450" alt=""> |
 
+## 📢 Play with the `mov` videos below to see VoiceOver in action
+
+ - Turn the sounds ON within the player (default muted)
 
 https://github.com/arinjoy/next-to-go/assets/7835943/a4b63859-01cb-4ec4-a349-0f273d538bb5
 
@@ -128,4 +130,4 @@ https://github.com/arinjoy/next-to-go/assets/7835943/ca42118b-7d60-4b30-8b71-490
 
 | Potrait Large | Landscape Large  |
 | ------ | ---- |
-| <img src="Screenshots/potrait-mode-large.png" width="300" alt=""> | <img src="Screenshots/landscape-mode-large.png" height="300" alt=""> | 
+| <img src="Screenshots/potrait-mode-large.png" width="250" alt=""> | <img src="Screenshots/landscape-mode-large.png" height="250" alt=""> | 
