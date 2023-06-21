@@ -33,11 +33,11 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 ```
  
 Please refer from the project navigator in Xcode to see the layering.
-<p align="center">
-  <img src="Screenshots/project-structure.png" width="300" alt="">
-  <img src="Screenshots/targets.png" width="300" alt="">
-  <img src="Screenshots/tests.png" width="300" alt="">
-</p>
+
+| Project  | Targets | Tests |
+| ------ | -------- | ---- |
+| <img src="Screenshots/project-structure.png" width="300" alt="">  |  <img src="Screenshots/targets.png" width="300" alt="">   |   <img src="Screenshots/tests.png" width="300" alt="">  |
+
 
 ```mermaid
 graph TB
@@ -86,24 +86,33 @@ graph TB
 - If no races are found from API for some odd reason, then empty state also shows with some messaging
 
 ## Screenshots
-<p align="center">
-  <img src="Screenshots/filtering-logic.gif" width="300" alt="">
- <img src="Screenshots/settings-menu.gif" width="300" alt="">
-  <br/>
-  <img src="Screenshots/races-empty-list.gif" width="300" alt="">
-  <img src="Screenshots/network-error.gif" width="300" alt="">
-  <img src="Screenshots/server-error.gif" width="300" alt="">
-  <br/>
-  <img src="Screenshots/dark-mode-1.png" width="300" alt="">
-  <img src="Screenshots/dark-mode-2.png" width="300" alt="">
-</p>
 
-### A11Y
-<p align="center">
-  <img src="Screenshots/a11y-font-scaling.gif" width="300" alt="">
-  <img src="Screenshots/potrait-mode-large.png" width="300" alt="">
-  <br/>
-  <img src="Screenshots/a11y-voice-over.gif" height="400" alt="">
-  <br/>
-  <img src="Screenshots/landscape-mode-large.png" height="300" alt="">
-</p>
+| Filtering Races | Settings |
+| ------ | ---- |
+|  <img src="Screenshots/filtering-logic.gif" width="300" alt=""> | <img src="Screenshots/settings-menu.gif" width="300" alt="">  |
+
+#### Errors (Test steps included)
+
+| Empty State  | Generic Sever Error | Internet Lost Error |
+| ------ | ---- | --- |
+|  Update code in `NetworkService.swift` to return `[]` | Update the API endpoint in `ApiConstants.swift` to something incorrect | Disconnect WiFi  |
+|   <img src="Screenshots/races-empty-list.gif" width="300" alt=""> |   <img src="Screenshots/server-error.gif" width="300" alt=""> |   <img src="Screenshots/network-error.gif" width="300" alt=""> |
+
+| Dark modes |  |
+| ------ | ---- |
+|   <img src="Screenshots/dark-mode-1.png" width="300" alt=""> |   <img src="Screenshots/dark-mode-2.png" width="300" alt=""> | 
+
+
+### Acessibility
+
+| Font Scaling  |
+| ------ | 
+| <img src="Screenshots/a11y-font-scaling.gif" width="300" alt=""> |
+
+| VoiceOver Labels and Traits  |
+| ---------- | 
+| <img src="Screenshots/a11y-voice-over.gif" height="450" alt=""> |
+
+| Potrait Large | Landscape Large  |
+| ------ | ---- |
+| <img src="Screenshots/potrait-mode-large.png" width="300" alt=""> | <img src="Screenshots/landscape-mode-large.png" height="300" alt=""> | 
