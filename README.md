@@ -2,7 +2,7 @@
 An app made with ❤️ to demonstrate some examples of **clean architecture**, **code organisation**, **loose coupling**, **unit testing**, **accessibility** and some of the best practices used in modern iOS programming using `Swift` & `SwiftUI`
 
 ## 📱 App Goal
-Create an iOS app that displays `Next to Go` top 5 races using Neds free public API.
+Create an iOS app that displays `Next to Go` races using Neds free public API.
 A user should always see top 5 races, and they should be sorted by time ascending. Race should disappear from the list after 1 min past the start time. Take some inspirations from popular betting apps like Neds, Ladbrokes, Sportsbet etc.
 
 ### 💼 Requirements
@@ -10,7 +10,7 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 2.	As a user, I should not see races that are one minute past the advertised start 
 3.	As a user, I should be able to filter my list of races by the following categories: Horse, Harness & Greyhound racing
 4.	As a user, I can deselect all filters to show the next 5 from of all racing categories
-5.	As a user I should see the meeting name, race number and advertised start as a countdown for each race.
+5.	As a user, I should see the meeting name, race number and advertised start as a countdown for each race.
 6.	As a user, I should always see 5 races and data should automatically refresh 
 
 ## 👨🏽‍💻  Solution Approach
@@ -22,8 +22,8 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 - A mix of **`MVVM`** and **`VIPER`** design pattern is used to acheive loose coupling and unit testing via **`Dependency Injection`** patterns and mocks
 - Currently use Apple's `Combine` based `Reactive Binding`
 - ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s `Moden Concurrency Async Await` paradigm (layer by layer where feasible)
-- `Unit Testing` (about 70%) has been added on each layer. (A bit more coverage can still be added in presentation layer code, all view models are tested for now)
-- Some TODO notes left in the code deliberartely for potential improvements and SwfiftLint warns us about those to trace them.
+- `Unit Testing` (about 70%) has been covered on each layer. (A bit more can still be added in presentation layer code, all view models are tested for now, and to some shared utils)
+- Some TODO notes left in the code deliberartely for potential improvements and SwfiftLint warns us about those to trace them
 
 The package depdencies (import logic from one to another) are shown below:
 
@@ -109,15 +109,22 @@ graph TB
 |   <img src="Screenshots/dark-mode-1.png" width="300" alt=""> |   <img src="Screenshots/dark-mode-2.png" width="300" alt=""> | 
 
 
-# Acessibility
+# Accessibility
 
-| Font Scaling  |
-| ------ | 
+| Dynamic Font Scaling  |
+| --------- | 
 | <img src="Screenshots/a11y-font-scaling.gif" width="300" alt=""> |
 
-| VoiceOver Labels and Traits  |
+| 🎧 VoiceOver 📢 Labels and Traits & sounds 🎼 | 
 | ---------- | 
+| Play with the videos below with sound option ON to listen how they work | 
 | <img src="Screenshots/a11y-voice-over.gif" height="450" alt=""> |
+
+
+https://github.com/arinjoy/next-to-go/assets/7835943/a4b63859-01cb-4ec4-a349-0f273d538bb5
+
+https://github.com/arinjoy/next-to-go/assets/7835943/ca42118b-7d60-4b30-8b71-490aea6be443
+
 
 | Potrait Large | Landscape Large  |
 | ------ | ---- |
