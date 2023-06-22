@@ -37,6 +37,7 @@ The package depdencies (import logic from one to another) are shown below:
       B-->D;
       C-->D;
 ```
+
  
 Please refer from the project navigator in Xcode to see the layering.
 
@@ -44,6 +45,45 @@ Please refer from the project navigator in Xcode to see the layering.
 | ------ | -------- | ---- |
 | <img src="Screenshots/project-structure.png" width="300" alt="">  |  <img src="Screenshots/targets.png" width="300" alt="">   |   <img src="Screenshots/tests.png" width="300" alt="">  |
 
+
+## The overall summary in terms of UML 
+
+```mermaid
+sequenceDiagram
+    participant  RaceItemCellUI
+    participant RaceListUI
+    participant ViewModel
+    participant Interactor
+    participant NetworkSevice
+    participant URLSession
+
+    RaceListUI->>ViewModel: Reactively bound to interactor's reponse
+    
+    ViewModel->>Interactor: Get the desired lists of Race domain models (reactively)
+    loop Polling
+        Interactor->>Interactor: Every 5 min to get the full list from Network
+    end
+    loop Polling
+        Interactor->>Interactor: Every 50 sec to sort the latest on top and discard older races
+    end
+
+    Interactor->>NetworkSevice: Get the full max list of RaceSummary data models
+    NetworkSevice->>URLSession: Get the full raw JSON data as HTTP request
+    URLSession->>NetworkSevice: HTTP response body
+    loop Mapping
+        NetworkSevice->>NetworkSevice:  Apply custom JSON decoding into data models and error mapping
+    end
+
+    NetworkSevice->>Interactor: full List of RaceSummary every 5 min
+    Interactor->>ViewModel: Latest sorted list of domain models every 50 sec (reactively)
+
+    ViewModel->>RaceListUI: Pass back list of RaceItemViewModels
+    loop Transformation
+        ViewModel->>ViewModel: Transform & cook raw domain level data into UI friendly RaceItemViewModel
+    end
+
+   RaceListUI->>RaceItemCellUI: SwiftUI binding of RaceItemViewModel
+```
 
 ```mermaid
 graph TB
