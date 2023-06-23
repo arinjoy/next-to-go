@@ -17,7 +17,8 @@ public protocol NextRacesInteracting: AnyObject {
     /// - Parameters:
     ///   - categories: The array of categories (of races) to find.
     ///   - count: The  number of races to find based on the categories provided.
-    ///   - tolerance: The optional hard tolerance (in time interval seconds)  to 100% remove any race which are beyond past this (in negative)
+    ///   - tolerance: The optional hard tolerance (in time interval seconds)  to 100%
+    ///   remove any race which are beyond past this (in negative) value.
     /// - Returns: A publisher that repeatedly emits the found races.
     ///
     func nextRaces(
