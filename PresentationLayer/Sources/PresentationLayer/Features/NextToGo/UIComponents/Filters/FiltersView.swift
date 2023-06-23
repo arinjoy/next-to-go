@@ -66,10 +66,6 @@ struct FiltersView: View {
             }
         }
         .padding(.horizontal, 10)
-
-        Divider()
-            .padding(.top, 8)
-
     }
 }
 

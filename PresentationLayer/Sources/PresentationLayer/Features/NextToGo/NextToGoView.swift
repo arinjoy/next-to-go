@@ -9,6 +9,9 @@ import SharedUtils
 
 public struct NextToGoView: View {
 
+    @State private var selectedCountry = "USA"
+    let countries = ["AUS", "NZ", "USA", "UK"]
+
     // MARK: - Properties
 
     @ObservedObject private var viewModel: NextToGoViewModel
@@ -33,9 +36,16 @@ public struct NextToGoView: View {
 
         NavigationView {
 
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .center, spacing: 16) {
+
+                headingStack
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
 
                 FiltersView(viewModel: viewModel.filterViewModel)
+                    .padding(.bottom, 10)
+
+                Divider()
 
                 CollectionLoadingView(
                     loadingState: viewModel.loadingState,
@@ -60,9 +70,7 @@ public struct NextToGoView: View {
                     }
                 )
             }
-            .navigationBarTitle(Text(viewModel.title), displayMode: .large)
             .toolbar { toolBarContent }
-            .padding(.top, 20)
         }
         .preferredColorScheme(isDarkMode ? .dark : .light) // link dark / light mode
         .onAppear {
@@ -122,6 +130,34 @@ private extension NextToGoView {
                 SettingsView()
             }
         }
+    }
+
+    @ViewBuilder
+    var headingStack: some View {
+        HStack {
+            Text(viewModel.title)
+                .font(.title)
+                .foregroundColor(.primary)
+                .multilineTextAlignment(.leading)
+                .accessibilityAddTraits(.isHeader)
+
+            Spacer()
+
+            countrySelectionMenu
+        }
+    }
+
+    @ViewBuilder
+    var countrySelectionMenu: some View {
+        Picker("country:", selection: $selectedCountry) {
+            ForEach(countries, id: \.self) { countryCode in
+                Text((CountryUtilities.countryFlag(byAlphaCode: countryCode) ?? "") + " " + countryCode)
+                    .font(.caption)
+                    .foregroundColor(.primary)
+            }
+        }
+        .pickerStyle(MenuPickerStyle())
+        .accentColor(.red)
     }
 }
 
