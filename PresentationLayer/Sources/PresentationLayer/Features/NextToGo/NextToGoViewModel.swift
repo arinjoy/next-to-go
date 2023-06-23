@@ -8,6 +8,46 @@ import SwiftUI
 import SharedUtils
 import DomainLayer
 
+enum Country: String, CaseIterable, Identifiable {
+
+    var id: String { rawValue }
+
+    case international = "INTL"
+    case aus = "AUS"
+    case nz = "NZ"
+    case jpn = "JPN"
+    case uk = "UK"
+    case fra = "FRA"
+    case usa = "USA"
+
+    var name: String {
+        switch self {
+        case .international:    return "INTL"
+        case .aus:              return "Australia"
+        case .nz:               return "New Zealand"
+        case .jpn:              return "Japan"
+        case .uk:               return "United Kingdom"
+        case .fra:              return "France"
+        case .usa:              return "USA"
+        }
+    }
+
+    var displayName: String {
+        if self == .international {
+            return "🌏" + " " + name
+        }
+        return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + name
+    }
+
+}
+
+final class CountrySelectionViewModel: ObservableObject {
+
+    @Published var selectedCountry: Country?
+
+    init() { }
+}
+
 final class NextToGoViewModel: ObservableObject {
 
     // MARK: - Outputs
@@ -16,11 +56,16 @@ final class NextToGoViewModel: ObservableObject {
 
     @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
+    @ObservedObject var countrySelectionViewModel: CountrySelectionViewModel
+    private(set) var countries: [Country] = Country.allCases
+
     // MARK: - Dependency
 
     private let interactor: NextRacesInteracting
 
     private var cancellable: AnyCancellable?
+
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -28,10 +73,20 @@ final class NextToGoViewModel: ObservableObject {
 
         self.interactor = interactor
 
+        self.countrySelectionViewModel = CountrySelectionViewModel()
+
         self.filterViewModel = FiltersViewModel()
+
         self.filterViewModel.filterTappedAction = { [weak self] in
             self?.loadNextRaces()
         }
+
+        countrySelectionViewModel.$selectedCountry
+            .compactMap { $0 }
+            .sink { [unowned self] country in
+                loadNextRaces()
+            }
+            .store(in: &cancellables)
     }
 
     deinit {

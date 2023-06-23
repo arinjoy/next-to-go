@@ -9,12 +9,11 @@ import SharedUtils
 
 public struct NextToGoView: View {
 
-    @State private var selectedCountry = "USA"
-    let countries = ["AUS", "NZ", "USA", "UK"]
-
     // MARK: - Properties
 
     @ObservedObject private var viewModel: NextToGoViewModel
+
+    @State private var selectedCountry: String = Country.international.rawValue
 
     @State private var isShowingSettings: Bool = false
 
@@ -149,15 +148,21 @@ private extension NextToGoView {
 
     @ViewBuilder
     var countrySelectionMenu: some View {
-        Picker("country:", selection: $selectedCountry) {
-            ForEach(countries, id: \.self) { countryCode in
-                Text((CountryUtilities.countryFlag(byAlphaCode: countryCode) ?? "") + " " + countryCode)
+        Picker(
+            "country:",
+            selection: $selectedCountry
+        ) {
+            ForEach(viewModel.countries) { country in
+                Text(country.displayName)
                     .font(.caption)
                     .foregroundColor(.primary)
             }
         }
         .pickerStyle(MenuPickerStyle())
         .accentColor(.red)
+        .onChange(of: selectedCountry) { country in
+            viewModel.countrySelectionViewModel.selectedCountry = .init(rawValue: country)
+        }
     }
 }
 
