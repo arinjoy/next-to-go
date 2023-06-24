@@ -18,16 +18,16 @@ final class NextToGoViewModel: ObservableObject {
     @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
     private(set) var countries: [Country] = Country.allCases
+    @Published var selectedCountry: String = Country.international.rawValue // Choose INTL at start
 
-    @Published var selectedCountry: String = Country.international.rawValue
+    private(set) var topCounts: [Int] = [5, 10, 20, 30]
+    @Published var selectedTopCount: Int = 5 // Choose 5 top races at start
 
     // MARK: - Dependency
 
     private let interactor: NextRacesInteracting
 
     private var cancellable: AnyCancellable?
-
-    private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
@@ -40,15 +40,6 @@ final class NextToGoViewModel: ObservableObject {
         self.filterViewModel.filterTappedAction = { [weak self] in
             self?.loadNextRaces()
         }
-
-//        $selectedCountry
-//            .dropFirst()
-////            .removeDuplicates()
-////            .SwitchToLatest()
-//            .sink { [unowned self] _ in
-//                loadNextRaces()
-//            }
-//            .store(in: &cancellables)
     }
 
     deinit {
@@ -67,36 +58,33 @@ final class NextToGoViewModel: ObservableObject {
             .filter { $0.selected }
             .map { $0.category }
 
-        // Note:🤚🏽🤚🏽 As per business need, load 5 races.
-        // Update this value below to load 10 or as many
-        // as you like. 🤩
-
-        // ALSO UPDATE THE NEGATIVE TOLERANCE from -90s to -180s or
-        // even more to show how much older ones you want the users to show
-        // Neds, Ladbrokes app shows up to minus 3 or 4 minutes.
-
-        cancellable = $selectedCountry
-            .removeDuplicates()
+        cancellable = Publishers.CombineLatest(
+            $selectedTopCount.removeDuplicates(),
+            $selectedCountry.removeDuplicates()
+        )
             .setFailureType(to: NetworkError.self)
-            .flatMapLatest { [unowned self] countryCode in
+            .flatMapLatest { [unowned self] topCount, country in
 
                 // For 🌏 `INTL` country code means international
                 // We pass `nil`, as if no specific country is needed
-                // to be filtered.
-                // Means entire globe combined all possible countries,
-                // a truly international racing experience. 🌐
+                // to be filtered. Means entire globe combined all possible
+                // countries, a truly international racing experience. 🌐
 
-                var country: String?
-                if countryCode != Country.international.rawValue {
-                    country = countryCode
+                var countryCode: String?
+                if country != Country.international.rawValue {
+                    countryCode = country
                 }
+
+                // Note: 🤚🏽🤚🏽 UPDATE THE NEGATIVE TOLERANCE from -90s to -180s or
+                // even more to show how much older ones you want to the users.
+                // Neds, Ladbrokes, Sportsbet app show up to minus 3 minutes sometimes.
 
                 return interactor
                     .nextRaces(
                         forCategories: filteredCategories,
-                        andCountry: country,        // Pass the specific country of interest (if any)
-                        numberOfRaces: 5,           // Load the top 5 only
-                        hardNegativeTolerance: -90  // Up to -90 seconds older allowed to show on UI
+                        andCountry: countryCode,    // Pass any specific country of interest (defaults INTL at start)
+                        numberOfRaces: topCount,    // Pass the top desired number of races (defaults 5 at start)
+                        hardNegativeTolerance: -90  // Up to -90 seconds older races allowed to show on the UI
                     )
             }
 
@@ -195,6 +183,7 @@ enum Country: String, CaseIterable, Identifiable {
     case aus =  "AUS"
     case nz =   "NZL"
     case jpn =  "JPN"
+    case ind =  "IND"
     case uk =   "GBR"
     case fra =  "FRA"
     case brz =  "BRA"
@@ -206,6 +195,7 @@ enum Country: String, CaseIterable, Identifiable {
         case .aus:              return "Australia"
         case .nz:               return "New Zealand"
         case .jpn:              return "Japan"
+        case .ind:              return "India"
         case .uk:               return "United Kingdom"
         case .fra:              return "France"
         case .brz:              return "Brazil"
@@ -213,11 +203,18 @@ enum Country: String, CaseIterable, Identifiable {
         }
     }
 
-    var displayName: String {
+    var fullDisplayName: String {
         if self == .international {
             return "🌏" + " " + name
         }
         return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + name
+    }
+
+    var shortDisplayName: String {
+        if self == .international {
+            return "🌏" + " " + self.rawValue
+        }
+        return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + self.rawValue
     }
 
 }

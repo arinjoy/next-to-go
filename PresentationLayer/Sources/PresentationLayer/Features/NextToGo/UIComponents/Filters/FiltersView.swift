@@ -53,7 +53,7 @@ struct FiltersView: View {
                 }
                 .scaleEffect(filter.selected ? 1.04 : 0.96)
                 .animation(
-                    .spring(response: 0.3, dampingFraction: 0.3),
+                    .spring(response: 0.5, dampingFraction: 0.3),
                     value: filter.selected
                 )
                 .accessibilityElement(children: .ignore)

@@ -131,7 +131,7 @@ private extension NextToGoView {
 
     @ViewBuilder
     var headingStack: some View {
-        HStack {
+        VStack(alignment: .leading) {
             Text(viewModel.title)
                 .font(.title2)
                 .fontWeight(.medium)
@@ -139,29 +139,88 @@ private extension NextToGoView {
                 .multilineTextAlignment(.leading)
                 .accessibilityAddTraits(.isHeader)
 
-            Spacer()
-
-            countrySelectionMenu
+            HStack(spacing: 16) {
+                Spacer()
+                topCountSelectionMenu
+                countrySelectionMenu
+            }
         }
     }
 
     @ViewBuilder
-    var countrySelectionMenu: some View {
+    var topCountSelectionMenu: some View {
+        Menu {
+            Picker("", selection: $viewModel.selectedTopCount) {
+                ForEach(viewModel.topCounts, id: \.self) {
+                    Text("\($0)")
+                }
+            }
+        } label: {
+            menuLabel(from: "🔝 \(viewModel.selectedTopCount)")
+        }
+        .menuSelectorStyle()
+    }
 
-        Picker(
-            "country:",
-            selection: $viewModel.selectedCountry
-        ) {
-            ForEach(viewModel.countries) { country in
-                Text(country.displayName)
-                    .font(.caption)
-                    .foregroundColor(.primary)
+    @ViewBuilder
+    var countrySelectionMenu: some View {
+        Menu {
+            Picker("", selection: $viewModel.selectedCountry) {
+                ForEach(viewModel.countries) {
+                    Text($0.fullDisplayName)
+                }
+            }
+        } label: {
+            if let country = Country(rawValue: viewModel.selectedCountry) {
+                menuLabel(from: country.shortDisplayName)
             }
         }
-        .id(UUID())
-        .pickerStyle(MenuPickerStyle())
-        .accentColor(.red)
+        .menuSelectorStyle()
     }
+
+    @ViewBuilder
+    func menuLabel(from title: String) -> some View {
+        HStack(spacing: 0) {
+            Text(title)
+                .font(.body)
+            Spacer().frame(width: 10)
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.body)
+        }
+        .foregroundColor(.red)
+        .onTapGesture {
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+        }
+    }
+
+}
+
+// MARK: - Menu Selector Style
+
+private extension View {
+
+    func menuSelectorStyle() -> some View {
+        self.modifier(MenuSelectorStyle())
+    }
+
+}
+
+private struct MenuSelectorStyle: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .adaptiveScaleFactor()
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(UIColor.systemBackground))
+                    .shadow(color: .primary.opacity(0.25), radius: 2, x: 0, y: 0))
+            .contentShape(Rectangle())
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isButton)
+    }
+
 }
 
 #if DEBUG
