@@ -138,16 +138,21 @@ private extension RaceItemView {
             .font(.callout)
             .fontWeight(.regular)
             .foregroundColor(
-                isAnimatingCountdown ? .red : .primary
+                viewModel.highlightCountdown ? .red : .primary
             )
-            .opacity(isAnimatingCountdown ? 1.0 : 0.8)
+            .opacity(isAnimatingCountdown ? 1.0 : 0.7)
             .scaleEffect(
-                isAnimatingCountdown ? 1.06 : 0.96
+                isAnimatingCountdown ? 1.03 : 0.98
             )
             .animation(
-                .spring().repeatForever(autoreverses: true),
+                .spring(response: 0.5).repeatForever(autoreverses: true),
                 value: isAnimatingCountdown
             )
+            .onAppear {
+                withAnimation {
+                    isAnimatingCountdown = true && viewModel.highlightCountdown
+                }
+            }
     }
 
     @ViewBuilder
