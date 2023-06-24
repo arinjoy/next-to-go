@@ -45,7 +45,10 @@ final class NextRacesInteractorTests: XCTestCase {
 
         // WHEN - being requested to load races
         interactor.nextRaces(
-            for: [.horse, .greyhound, .harness], numberOfRaces: 20, hardNegativeTolerance: nil
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 20,
+            hardNegativeTolerance: nil
         )
         .sink { _ in } receiveValue: { _ in
         }.store(in: &cancellables)
@@ -84,7 +87,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 3 races for `horse`
-        interactor.nextRaces(for: [.horse], numberOfRaces: 3, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.horse],
+            andCountry: nil,
+            numberOfRaces: 3,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -130,7 +138,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races for `greyhound`
-        interactor.nextRaces(for: [.greyhound], numberOfRaces: 5, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.greyhound],
+            andCountry: nil,
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -170,7 +183,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races for `greyhound` & `harness`
-        interactor.nextRaces(for: [.greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 3,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -215,7 +233,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races combining all three categories
-        interactor.nextRaces(for: [.horse, .greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error

@@ -15,7 +15,8 @@ public final class NextRacesInteractorSpy: NextRacesInteracting {
     public var nextRacesCalled: Bool = false
 
     public func nextRaces(
-        for categories: [Race.Category],
+        forCategories categories: [Race.Category],
+        andCountry country: String?,
         numberOfRaces count: Int,
         hardNegativeTolerance tolerance: TimeInterval? = nil
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
@@ -43,7 +44,8 @@ public final class NextRacesInteractorMock: NextRacesInteracting {
     }
 
     public func nextRaces(
-        for categories: [Race.Category],
+        forCategories categories: [Race.Category],
+        andCountry country: String?,
         numberOfRaces count: Int,
         hardNegativeTolerance tolerance: TimeInterval? = nil
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {

@@ -7,46 +7,7 @@ import Combine
 import SwiftUI
 import SharedUtils
 import DomainLayer
-
-enum Country: String, CaseIterable, Identifiable {
-
-    var id: String { rawValue }
-
-    case international = "INTL"
-    case aus = "AUS"
-    case nz = "NZ"
-    case jpn = "JPN"
-    case uk = "UK"
-    case fra = "FRA"
-    case usa = "USA"
-
-    var name: String {
-        switch self {
-        case .international:    return "INTL"
-        case .aus:              return "Australia"
-        case .nz:               return "New Zealand"
-        case .jpn:              return "Japan"
-        case .uk:               return "United Kingdom"
-        case .fra:              return "France"
-        case .usa:              return "USA"
-        }
-    }
-
-    var displayName: String {
-        if self == .international {
-            return "🌏" + " " + name
-        }
-        return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + name
-    }
-
-}
-
-final class CountrySelectionViewModel: ObservableObject {
-
-    @Published var selectedCountry: Country?
-
-    init() { }
-}
+import DataLayer
 
 final class NextToGoViewModel: ObservableObject {
 
@@ -56,8 +17,9 @@ final class NextToGoViewModel: ObservableObject {
 
     @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
-    @ObservedObject var countrySelectionViewModel: CountrySelectionViewModel
     private(set) var countries: [Country] = Country.allCases
+
+    @Published var selectedCountry: String = Country.international.rawValue
 
     // MARK: - Dependency
 
@@ -73,20 +35,20 @@ final class NextToGoViewModel: ObservableObject {
 
         self.interactor = interactor
 
-        self.countrySelectionViewModel = CountrySelectionViewModel()
-
         self.filterViewModel = FiltersViewModel()
 
         self.filterViewModel.filterTappedAction = { [weak self] in
             self?.loadNextRaces()
         }
 
-        countrySelectionViewModel.$selectedCountry
-            .compactMap { $0 }
-            .sink { [unowned self] country in
-                loadNextRaces()
-            }
-            .store(in: &cancellables)
+//        $selectedCountry
+//            .dropFirst()
+////            .removeDuplicates()
+////            .SwitchToLatest()
+//            .sink { [unowned self] _ in
+//                loadNextRaces()
+//            }
+//            .store(in: &cancellables)
     }
 
     deinit {
@@ -113,16 +75,34 @@ final class NextToGoViewModel: ObservableObject {
         // even more to show how much older ones you want the users to show
         // Neds, Ladbrokes app shows up to minus 3 or 4 minutes.
 
-        cancellable = interactor
-            .nextRaces(
-                for: filteredCategories,
-                numberOfRaces: 5,           // Load the top 5 only
-                hardNegativeTolerance: -90  // Up to -90 seconds older allowed to show on UI
-            )
+        cancellable = $selectedCountry
+            .removeDuplicates()
+            .setFailureType(to: NetworkError.self)
+            .flatMapLatest { [unowned self] countryCode in
+
+                // For 🌏 `INTL` country code means international
+                // We pass `nil`, as if no specific country is needed
+                // to be filtered.
+                // Means entire globe combined all possible countries,
+                // a truly international racing experience. 🌐
+
+                var country: String?
+                if countryCode != Country.international.rawValue {
+                    country = countryCode
+                }
+
+                return interactor
+                    .nextRaces(
+                        forCategories: filteredCategories,
+                        andCountry: country,        // Pass the specific country of interest (if any)
+                        numberOfRaces: 5,           // Load the top 5 only
+                        hardNegativeTolerance: -90  // Up to -90 seconds older allowed to show on UI
+                    )
+            }
 
             // FIXME: ‼️ Tweak this 1.0 delay below ‼️
             // Helps in shimmering to show always for a bit.
-            // Else it can be too quick looks glitchy.
+            // Else it can be too quick and looks glitchy.
             // Consult with UX team and find the correct value.
             // Perhaps 0.5 seconds quick shimmer should be enough. 🤩
 
@@ -202,4 +182,42 @@ private extension Race {
         }
         return list
     }
+}
+
+enum Country: String, CaseIterable, Identifiable {
+
+    var id: String { rawValue }
+
+    /// Used as helper to combine all countries internally
+    /// and treat that as an item in the picker to select
+    case international = "INTL"
+
+    case aus =  "AUS"
+    case nz =   "NZL"
+    case jpn =  "JPN"
+    case uk =   "GBR"
+    case fra =  "FRA"
+    case brz =  "BRA"
+    case usa =  "USA"
+
+    var name: String {
+        switch self {
+        case .international:    return "INTL"
+        case .aus:              return "Australia"
+        case .nz:               return "New Zealand"
+        case .jpn:              return "Japan"
+        case .uk:               return "United Kingdom"
+        case .fra:              return "France"
+        case .brz:              return "Brazil"
+        case .usa:              return "USA"
+        }
+    }
+
+    var displayName: String {
+        if self == .international {
+            return "🌏" + " " + name
+        }
+        return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + name
+    }
+
 }

@@ -13,8 +13,6 @@ public struct NextToGoView: View {
 
     @ObservedObject private var viewModel: NextToGoViewModel
 
-    @State private var selectedCountry: String = Country.international.rawValue
-
     @State private var isShowingSettings: Bool = false
 
     private let haptic = UIImpactFeedbackGenerator(style: .medium)
@@ -135,7 +133,8 @@ private extension NextToGoView {
     var headingStack: some View {
         HStack {
             Text(viewModel.title)
-                .font(.title)
+                .font(.title2)
+                .fontWeight(.medium)
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.leading)
                 .accessibilityAddTraits(.isHeader)
@@ -148,9 +147,10 @@ private extension NextToGoView {
 
     @ViewBuilder
     var countrySelectionMenu: some View {
+
         Picker(
             "country:",
-            selection: $selectedCountry
+            selection: $viewModel.selectedCountry
         ) {
             ForEach(viewModel.countries) { country in
                 Text(country.displayName)
@@ -158,11 +158,9 @@ private extension NextToGoView {
                     .foregroundColor(.primary)
             }
         }
+        .id(UUID())
         .pickerStyle(MenuPickerStyle())
         .accentColor(.red)
-        .onChange(of: selectedCountry) { country in
-            viewModel.countrySelectionViewModel.selectedCountry = .init(rawValue: country)
-        }
     }
 }
 

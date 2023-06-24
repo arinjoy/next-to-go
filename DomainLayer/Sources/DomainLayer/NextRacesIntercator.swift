@@ -29,14 +29,17 @@ public final class NextRacesInteractor: NextRacesInteracting {
     // MARK: - NextRacesInteracting
 
     public func nextRaces(
-        for categories: [Race.Category],
+        forCategories categories: [Race.Category],
+        andCountry country: String?,
         numberOfRaces count: Int,
-        hardNegativeTolerance tolerance: TimeInterval? = nil
+        hardNegativeTolerance tolerance: TimeInterval?
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
 
+        print(country ?? "*******")
+
         // 🤚🏽🤚🏽
-        // Always try to load 50 races at once, but then later filter out based
-        // on the exact need by category and number of races to show on UI.
+        // Always try to load 50 races at once, but then later on filter out
+        // based on the exact need by category and number of races to show on UI.
 
         // Perhaps not the best practice to load such heavy volume of data
         // in REST JSON api pattern. GraphQL comes handy here to filter out
@@ -105,6 +108,10 @@ public final class NextRacesInteractor: NextRacesInteracting {
                                 return timeLeft > tolerance
                             }
                             .sorted {  $0.startTime <= $1.startTime }
+                            .filter { race in
+                                guard let country else { return true }
+                                return race.venu.country == country
+                            }
                             .prefix(count)
 
                         return Array(sortedTopRaces)
