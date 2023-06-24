@@ -14,13 +14,24 @@ public final class NextRacesInteractorSpy: NextRacesInteracting {
     // Spied calls
     public var nextRacesCalled: Bool = false
 
+    // Spied values
+    public var categories: [Race.Category] = []
+    public var country: String?
+    public var racesCount: Int = 0
+
     public func nextRaces(
         forCategories categories: [Race.Category],
         andCountry country: String?,
         numberOfRaces count: Int,
         hardNegativeTolerance tolerance: TimeInterval? = nil
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
+
         nextRacesCalled = true
+
+        self.categories = categories
+        self.country = country
+        self.racesCount = count
+
         return .just([]).eraseToAnyPublisher()
     }
 }

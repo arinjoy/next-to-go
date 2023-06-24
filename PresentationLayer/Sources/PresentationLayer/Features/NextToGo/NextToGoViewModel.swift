@@ -17,8 +17,7 @@ final class NextToGoViewModel: ObservableObject {
 
     @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
-
-    private enum Constants {
+    enum Constants {
 
         // Choose INTL at start (or default after reset)
         static let defaultCountry: String = Country.international.rawValue

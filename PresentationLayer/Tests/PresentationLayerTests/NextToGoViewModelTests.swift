@@ -266,4 +266,108 @@ final class NextToGoViewModelTests: XCTestCase {
         XCTAssertEqual(error.message, "next.togo.races.error.network.message".l10n())
     }
 
+    // MARK: - Reset filters
+
+    // swiftlint:disable:next function_body_length
+    func testFilterSelectionAndResetTriggers() {
+
+        let expectation1 = expectation(
+            description: "Race items must be loaded from interactor with initial default filters"
+        )
+
+        let expectation2 = expectation(
+            description: "Race items must be re-loaded from interactor with desired targeted filters"
+        )
+
+        let expectation3 = expectation(
+            description: "Race items must be re-loaded from interactor after all filters being reset"
+        )
+
+        let interactorSpy = NextRacesInteractorSpy()
+
+        // GIVEN - viewModel is configured with interactor spy
+        testSubject = NextToGoViewModel(interactor: interactorSpy)
+
+        // WHEN - next races are requested to be loaded at first
+        testSubject.loadNextRaces()
+
+        testSubject.$loadingState.dropFirst().sink { _ in
+            expectation1.fulfill()
+        }
+        .store(in: &cancellables)
+
+        wait(for: [expectation1], timeout: 1.0)
+
+        // THEN - interactor's method is being called
+        XCTAssertTrue(interactorSpy.nextRacesCalled)
+
+        // AND - spy should receive correct number of categories (i.e. 3 at start)
+        XCTAssertEqual(interactorSpy.categories.count, 3)
+        XCTAssertEqual(interactorSpy.categories[0], .horse)
+        XCTAssertEqual(interactorSpy.categories[1], .greyhound)
+        XCTAssertEqual(interactorSpy.categories[2], .harness)
+
+        // AND - spy should receive correct country (i.e. nil for International at start)
+        XCTAssertNil(interactorSpy.country)
+
+        // AND - spy should receive correct races count (i.e. top 5 at start)
+        XCTAssertEqual(interactorSpy.racesCount, NextToGoViewModel.Constants.defaultTopCount)
+
+        // WHEN - some filters are being applied (de-select `horse`)
+        let filters = testSubject.filterViewModel.filters
+        testSubject.filterViewModel.filterItemTapped(filterItem: filters[0])
+
+        // AND - select a country `United Kingdom`
+        testSubject.selectedCountry = Country.uk.rawValue
+
+        // AND - select top 20 races count
+        testSubject.selectedTopCount = 20
+
+        testSubject.$loadingState.sink { _ in
+            expectation2.fulfill()
+        }
+        .store(in: &cancellables)
+
+        wait(for: [expectation2], timeout: 1.0)
+
+        // THEN - interactor's method is being called again
+        XCTAssertTrue(interactorSpy.nextRacesCalled)
+
+        // AND - spy should receive correct number of categories (i.e. 2 after horse is out)
+        XCTAssertEqual(interactorSpy.categories.count, 2)
+        XCTAssertEqual(interactorSpy.categories[0], .greyhound)
+        XCTAssertEqual(interactorSpy.categories[1], .harness)
+
+        // AND - spy should receive correct filtered country code
+        XCTAssertEqual(interactorSpy.country, "GBR")
+
+        // AND - spy should receive correct filtered top races count
+        XCTAssertEqual(interactorSpy.racesCount, 20)
+
+        // WHEN - next races are requested to be reset and refreshed
+        testSubject.resetFiltersAndRefresh()
+
+        testSubject.$loadingState.sink { _ in
+            expectation3.fulfill()
+        }
+        .store(in: &cancellables)
+
+        wait(for: [expectation3], timeout: 1.0)
+
+        // THEN - interactor's method is being called again
+        XCTAssertTrue(interactorSpy.nextRacesCalled)
+
+        // AND - spy should receive correct (all 3) categories (after reset)
+        XCTAssertEqual(interactorSpy.categories.count, 3)
+        XCTAssertEqual(interactorSpy.categories[0], .horse)
+        XCTAssertEqual(interactorSpy.categories[1], .greyhound)
+        XCTAssertEqual(interactorSpy.categories[2], .harness)
+
+        // AND - spy should receive correct country (i.e. nil for International after reset)
+        XCTAssertNil(interactorSpy.country)
+
+        // AND - spy should receive correct races count (i.e. top 5 after reset)
+        XCTAssertEqual(interactorSpy.racesCount, NextToGoViewModel.Constants.defaultTopCount)
+    }
+
 }
