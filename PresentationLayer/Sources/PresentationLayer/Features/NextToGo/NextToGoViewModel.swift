@@ -17,11 +17,21 @@ final class NextToGoViewModel: ObservableObject {
 
     @ObservedObject private(set) var filterViewModel: FiltersViewModel
 
+
+    private enum Constants {
+
+        // Choose INTL at start (or default after reset)
+        static let defaultCountry: String = Country.international.rawValue
+
+        // Choose 5 top races at start (or default after reset)
+        static let defaultTopCount: Int = 5
+    }
+
     private(set) var countries: [Country] = Country.allCases
-    @Published var selectedCountry: String = Country.international.rawValue // Choose INTL at start
+    @Published var selectedCountry: String = Constants.defaultCountry
 
     private(set) var topCounts: [Int] = [5, 10, 20, 30]
-    @Published var selectedTopCount: Int = 5 // Choose 5 top races at start
+    @Published var selectedTopCount: Int = Constants.defaultTopCount
 
     // MARK: - Dependency
 
@@ -101,6 +111,16 @@ final class NextToGoViewModel: ObservableObject {
             .assign(to: \.loadingState, on: self)
     }
 
+    func resetFiltersAndRefresh() {
+
+        filterViewModel.resetFilters()
+
+        selectedCountry = Constants.defaultCountry
+        selectedTopCount = Constants.defaultTopCount
+
+        loadNextRaces()
+    }
+
     // MARK: - Computed properties
 
     var title: String {
@@ -111,20 +131,20 @@ final class NextToGoViewModel: ObservableObject {
         "figure.equestrian.sports"
     }
 
-    var refreshButtonIcon: String {
-        "arrow.clockwise.circle"
+    var resetFiltersIcon: String {
+        "slider.horizontal.2.gobackward"
     }
 
-    var refreshButtonTitle: String {
-        "next.togo.races.refresh.button.title".l10n()
+    var resetFiltersButtonTitle: String {
+        "next.togo.races.reset.filters.button.title".l10n()
     }
 
-    var refreshButtonAccessibilityHint: String {
-        "next.togo.races.refresh.button.accessibility.hint".l10n()
+    var resetFiltersButtonAccessibilityHint: String {
+        "next.togo.races.reset.filters.button.accessibility.hint".l10n()
     }
 
     var settingsButtonIcon: String {
-        "slider.horizontal.3"
+        "ellipsis.circle"
     }
 
     var settingsButtonTitle: String {

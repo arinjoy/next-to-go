@@ -88,17 +88,17 @@ private extension NextToGoView {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
                 haptic.impactOccurred()
-                viewModel.loadNextRaces()
+                viewModel.resetFiltersAndRefresh()
             } label: {
-                Image(systemName: viewModel.refreshButtonIcon)
+                Image(systemName: viewModel.resetFiltersIcon)
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel(viewModel.refreshButtonTitle)
-                    .accessibilityHint(viewModel.refreshButtonAccessibilityHint)
+                    .accessibilityLabel(viewModel.resetFiltersButtonTitle)
+                    .accessibilityHint(viewModel.resetFiltersButtonAccessibilityHint)
             }
         }
 
@@ -131,7 +131,7 @@ private extension NextToGoView {
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
                     .accessibilityLabel(viewModel.settingsButtonTitle)

@@ -31,7 +31,6 @@ struct FiltersView: View {
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
                         .font(sizeCategory >= .accessibilityExtraLarge ? .body : .title3)
-                        .scaleEffect(1.1)
                 }
                 .accessibilityElement(children: .combine)
                 .foregroundColor(filter.selected ? .red : .primary)
@@ -50,9 +49,9 @@ struct FiltersView: View {
                     haptic.impactOccurred()
                     viewModel.filterItemTapped(filterItem: filter)
                 }
-                .scaleEffect(filter.selected ? 1.04 : 0.96)
+                .scaleEffect(filter.selected ? 1.05 : 0.95)
                 .animation(
-                    .spring(response: 0.5, dampingFraction: 0.3),
+                    .spring(response: 0.35, dampingFraction: 0.25),
                     value: filter.selected
                 )
                 .accessibilityElement(children: .ignore)

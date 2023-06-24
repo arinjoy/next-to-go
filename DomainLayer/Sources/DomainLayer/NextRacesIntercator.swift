@@ -35,8 +35,6 @@ public final class NextRacesInteractor: NextRacesInteracting {
         hardNegativeTolerance tolerance: TimeInterval?
     ) -> AnyPublisher<[Race], DataLayer.NetworkError> {
 
-        print(country ?? "*******")
-
         // 🤚🏽🤚🏽
         // Always try to load 50 races at once, but then later on filter out
         // based on the exact need by category and number of races to show on UI.

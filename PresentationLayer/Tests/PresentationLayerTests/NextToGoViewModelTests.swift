@@ -36,27 +36,26 @@ final class NextToGoViewModelTests: XCTestCase {
         XCTAssertEqual(testSubject.title, "next.togo.races.title".l10n())
     }
 
-    func testRefreshButtonIconName() {
-        XCTAssertEqual(
-            testSubject.refreshButtonIcon, "arrow.clockwise.circle")
+    func testResetFiltersButtonIconName() {
+        XCTAssertEqual(testSubject.resetFiltersIcon, "slider.horizontal.2.gobackward")
     }
 
-    func testRefreshButtonAccessibilityLabel() {
+    func testResetFiltersButtonAccessibilityLabel() {
         XCTAssertEqual(
-            testSubject.refreshButtonTitle,
-            "next.togo.races.refresh.button.title".l10n()
+            testSubject.resetFiltersButtonTitle,
+            "next.togo.races.reset.filters.button.title".l10n()
         )
     }
 
-    func testRefreshButtonAccessibilityHint() {
+    func testResetFiltersButtonAccessibilityHint() {
         XCTAssertEqual(
-            testSubject.refreshButtonAccessibilityHint,
-            "next.togo.races.refresh.button.accessibility.hint".l10n()
+            testSubject.resetFiltersButtonAccessibilityHint,
+            "next.togo.races.reset.filters.button.accessibility.hint".l10n()
         )
     }
 
     func testSettingsButtonIconName() {
-        XCTAssertEqual(testSubject.settingsButtonIcon, "slider.horizontal.3".l10n())
+        XCTAssertEqual(testSubject.settingsButtonIcon, "ellipsis.circle")
     }
 
     func testSettingsButtonAccessibilityLabel() {
