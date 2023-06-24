@@ -186,11 +186,22 @@ private extension NextToGoView {
     func menuLabel(from title: String) -> some View {
         HStack(spacing: 0) {
             Text(title)
+                .lineLimit(1)
+                .font(
+                    sizeCategory >= .accessibilityMedium ?
+                        .system(size: 24, weight: .medium, design: .rounded) :
+                        .title3
+                )
+
             Spacer().frame(width: 10)
+
             Image(systemName: "chevron.up.chevron.down")
+                .font(
+                    sizeCategory >= .accessibilityMedium ?
+                        .system(size: 24, weight: .medium, design: .rounded) :
+                        .body
+                )
         }
-        .font(sizeCategory >= .extraLarge ? .caption : .body)
-        .minimumScaleFactor(0.3)
         .foregroundColor(.red)
         .onTapGesture {
             let haptic = UIImpactFeedbackGenerator(style: .medium)
