@@ -19,6 +19,8 @@ public struct NextToGoView: View {
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
+    @Environment(\.sizeCategory) private var sizeCategory
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initializer
@@ -101,11 +103,23 @@ private extension NextToGoView {
         }
 
         ToolbarItem(placement: .principal) {
-            Image(systemName: viewModel.navBarHeroIcon)
-                .resizable()
-                .frame(width: 36, height: 36)
-                .foregroundColor(.red)
-                .accessibilityHidden(true)
+            HStack(spacing: 10) {
+                Text(viewModel.title)
+                    .font(.title3)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+
+                Image(systemName: viewModel.navBarHeroIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .font(.system(size: 20, weight: .medium, design: .rounded))
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.red)
+                    .accessibilityHidden(true)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -131,19 +145,10 @@ private extension NextToGoView {
 
     @ViewBuilder
     var headingStack: some View {
-        VStack(alignment: .leading) {
-            Text(viewModel.title)
-                .font(.title2)
-                .fontWeight(.medium)
-                .foregroundColor(.primary)
-                .multilineTextAlignment(.leading)
-                .accessibilityAddTraits(.isHeader)
-
-            HStack(spacing: 16) {
-                Spacer()
-                topCountSelectionMenu
-                countrySelectionMenu
-            }
+        HStack(spacing: 16) {
+            Spacer()
+            topCountSelectionMenu
+            countrySelectionMenu
         }
     }
 
@@ -181,11 +186,11 @@ private extension NextToGoView {
     func menuLabel(from title: String) -> some View {
         HStack(spacing: 0) {
             Text(title)
-                .font(.body)
             Spacer().frame(width: 10)
             Image(systemName: "chevron.up.chevron.down")
-                .font(.body)
         }
+        .font(sizeCategory >= .extraLarge ? .caption : .body)
+        .minimumScaleFactor(0.3)
         .foregroundColor(.red)
         .onTapGesture {
             let haptic = UIImpactFeedbackGenerator(style: .medium)
