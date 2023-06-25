@@ -210,7 +210,7 @@ enum Country: String, CaseIterable, Identifiable {
 
     var name: String {
         switch self {
-        case .international:    return "INTL"
+        case .international:    return "INTERNATIONAL"
         case .aus:              return "Australia"
         case .nz:               return "New Zealand"
         case .jpn:              return "Japan"
@@ -224,16 +224,20 @@ enum Country: String, CaseIterable, Identifiable {
 
     var fullDisplayName: String {
         if self == .international {
-            return "🌏" + " " + name
+            return internationalName(from: name)
         }
         return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + name
     }
 
     var shortDisplayName: String {
         if self == .international {
-            return "🌏" + " " + self.rawValue
+            return internationalName(from: self.rawValue)
         }
         return (CountryUtilities.countryFlag(byAlphaCode: self.rawValue) ?? "") + " " + self.rawValue
+    }
+
+    private func internationalName(from name: String) -> String {
+        "🌏" + " " + name
     }
 
 }

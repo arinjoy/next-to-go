@@ -162,8 +162,17 @@ private extension NextToGoView {
             }
         } label: {
             menuLabel(from: "🔝 \(viewModel.selectedTopCount)")
+                .accessibilityLabel(
+                    // TODO: 🤓 move logic into ViewModel, use localised copy and unit test it
+                    "Top \(viewModel.selectedTopCount) races"
+                )
+                .accessibilityAddTraits(.isSelected)
         }
         .menuSelectorStyle()
+        .onTapGesture {
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+        }
     }
 
     @ViewBuilder
@@ -177,20 +186,28 @@ private extension NextToGoView {
         } label: {
             if let country = Country(rawValue: viewModel.selectedCountry) {
                 menuLabel(from: country.shortDisplayName)
+                    .accessibilityLabel(country.name)
+                    .accessibilityAddTraits(.isSelected)
             }
         }
         .menuSelectorStyle()
+        .onTapGesture {
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+        }
     }
 
     @ViewBuilder
     func menuLabel(from title: String) -> some View {
+
         HStack(spacing: 0) {
+
             Text(title)
                 .lineLimit(1)
                 .font(
                     sizeCategory >= .accessibilityMedium ?
                         .system(size: 24, weight: .medium, design: .rounded) :
-                        .title3
+                            .body
                 )
 
             Spacer().frame(width: 10)
@@ -198,15 +215,11 @@ private extension NextToGoView {
             Image(systemName: "chevron.up.chevron.down")
                 .font(
                     sizeCategory >= .accessibilityMedium ?
-                        .system(size: 24, weight: .medium, design: .rounded) :
-                        .body
+                        .system(size: 22, weight: .medium, design: .rounded) :
+                        .subheadline
                 )
         }
         .foregroundColor(.red)
-        .onTapGesture {
-            let haptic = UIImpactFeedbackGenerator(style: .medium)
-            haptic.impactOccurred()
-        }
     }
 
 }
