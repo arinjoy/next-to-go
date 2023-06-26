@@ -14,19 +14,46 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 6.	As a user, I should always see 5 races and data should automatically refresh 
 
 ## 👨🏽‍💻  Solution Approach
- - App is broken down into 4 logical layers (via Swift Packages)
-   1.  `DataLayer` (Network fetching of raw data and JSON decoding via URL, error code mapping etc.)
-   2.  `DomainLayer` (Business logic of polling and combining data based on filters, sorting of top 5 based on timing etc.)
-   3.  `PresentationLayer` (Domain data to SwiftUI binding logic, all UI code etc.)
-   4.  `SharedUtils` (Common utility helpers and extensions)
-- A mix of **`MVVM`** and **`VIPER`** design pattern is used to acheive loose coupling and unit testing via **`Dependency Injection`** patterns and mocks
-- Currently use Apple's `Combine` based `Reactive Binding`
-- ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s `Moden Concurrency Async Await` paradigm (layer by layer where feasible)
-- `Unit Testing` (about 70%) has been covered on each layer. (A bit more can still be added in presentation layer code, all view models are tested for now, and to some shared utils)
-- Some TODO notes left in the code deliberartely for potential improvements and SwfiftLint warns us about those to trace them
-- To achieve the **requirment 2** above, use ⏰ **hard negative tolerance** in the interactor (currently set at -90 seconds). This can be configured to show more old races which are past few minutes with negative countdown timer on the UI. Configurable option in the app logic. 🤓
 
-The package depdencies (import logic from one to another) are shown below:
+> Before we move onto breaking down the app layers and architecture, let's  read some of the best practices and how other SwiftUI developers in the community are feeling about various ways to architect a scalable app. 
+
+>> This article on [clean-architecture-swiftui](https://nalexn.github.io/clean-architecture-swiftui/) summarises the story quite well 🙏🏽
+
+| Clean Architecture with MVVM |
+| ---------------------------  |
+| <img src="Screenshots/clean-architecture.png" width="750" alt=""> |
+
+
+After reading it, I made this following decisions to go ahead and use some aspects of the `VIPER` pattern and mixing in with `MVVM`  while still having core concepts of `clean architecture` from uncle Bob 🧔🏼‍♂️. 
+
+Codebase is broken down into 4 logical layers (via `Swift Packages`)
+- `DataLayer`:
+    - Network fetching of raw data and JSON decoding via URL, error code mapping etc.
+- `DomainLayer`:
+    - Business logic of polling and combining data based on filters, sorting of top 5 based on timing etc.
+    - `Interactor`s live here. (aka. `UseCase` in some codebases)
+- `PresentationLayer`:
+    - Domain data to SwiftUI binding logic
+    - All UI specific code (SwiftUI OR UIKit)
+- `SharedUtils`:
+    - Common light weight utility helpers and extensions
+
+- A mix of **`MVVM`** and **`VIPER`** design pattern is used to achieve loose coupling and unit testing via **`Dependency Injection`** patterns and mocks
+- Currently use Apple's `Combine` based `Reactive Binding`
+- ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s **Modern Concurrency Async Await** paradigm (layer by layer where feasible and makes sense)
+- `Unit Testing` (about 70%) has been covered on each layer. (More being added iteratively...)
+- Some TODO notes left in the code deliberately for potential improvements and SwiftLint warns us about those to trace them
+- To achieve the **requirement 2** above, use ⏰ **hard negative tolerance** in the interactor (currently set at -90 seconds). This can be configured to show more old races which are past few minutes with negative countdown timer on the UI. Configurable option in the app logic. 🤓
+
+### 🏹 Next Steps (TODO) 🏹
+ - Replace the `MVVM` based pattern into **ReDux** which fit very nicely in SwifUI state binding paradigm. Take the inspiration from these great arcitles below:
+   - https://www.kodeco.com/22096649-getting-a-redux-vibe-into-swiftui
+   - https://swiftwithmajid.com/2022/02/17/redux-like-state-container-in-swiftui-part5/
+ - Use **Async Await** paradigm to get the power of modern conurrecny:
+   - https://medium.com/geekculture/from-combine-to-async-await-c08bf1d15b77
+   
+
+The package dependencies (import logic from one to another) are shown below:
 
 ```mermaid
   graph TD;
@@ -54,10 +81,10 @@ sequenceDiagram
     participant RaceListUI
     participant ViewModel
     participant Interactor
-    participant NetworkSevice
+    participant NetworkService
     participant URLSession
 
-    RaceListUI->>ViewModel: Reactively bound to interactor's reponse
+    RaceListUI->>ViewModel: Reactively bound to viewModel's response
     
     ViewModel->>Interactor: Get the desired lists of Race domain models (reactively)
     loop Polling
@@ -67,14 +94,14 @@ sequenceDiagram
         Interactor->>Interactor: Every 50 sec to sort the latest on top and discard older races
     end
 
-    Interactor->>NetworkSevice: Get the full max list of RaceSummary data models
-    NetworkSevice->>URLSession: Get the full raw JSON data as HTTP request
-    URLSession->>NetworkSevice: HTTP response body
+    Interactor->>NetworkService: Get the full max list of RaceSummary data models
+    NetworkService->>URLSession: Get the full raw JSON data as HTTP request
+    URLSession->>NetworkService: HTTP response body
     loop Mapping
-        NetworkSevice->>NetworkSevice:  Apply custom JSON decoding into data models and error mapping
+        NetworkService->>NetworkService:  Apply custom JSON decoding into data models and error mapping
     end
 
-    NetworkSevice->>Interactor: full List of RaceSummary every 5 min
+    NetworkService->>Interactor: full List of RaceSummary every 5 min
     Interactor->>ViewModel: Latest sorted list of domain models every 50 sec (reactively)
 
     ViewModel->>RaceListUI: Pass back list of RaceItemViewModels
@@ -114,11 +141,11 @@ graph TB
 
 ## ♿️ Accessibility
 - Each elements on the app are fully `VoiceOver` compatible (Test on a device to hear the sounds)
-- Some Text elements have been combined to give overall accessbility label (icons are excluded)
-- Custom accessibility hints are also applied to buttons (eg. Fiters)
-- Filters do annouce the VoiceOver labels for visually impaired users, and updates their traits between `button` and `selected`
+- Some Text elements have been combined to give overall accessibility label (icons are excluded)
+- Custom accessibility hints are also applied to buttons (eg. Filters)
+- Filters do announce the VoiceOver labels for visually impaired users, and updates their traits between `button` and `selected`
 - All texts on UI can grow with system level font scaling and auto reposition themselves when needed to fit better within the container
-- UI also adapts to layout chnages - landscape / potrait modes (including iPad support)
+- UI also adapts to layout changes - landscape / portrait modes (including iPad support)
 
 ## 🚀 Extra Features
 - A settings more menu has been made to show extra info and author attribution and demonstrate how easy & fast SwiftUI is to build such layouts
@@ -142,7 +169,7 @@ graph TB
 
 | Empty State  | Generic Sever Error | Internet Lost Error |
 | ------ | ---- | --- |
-|  Update code in `NextRacesInteractor.swift` to return `[]` by commenting out `results.append(..)` statement around line 65 | Update the API endpoint in `ApiConstants` to something incorrect URL | Disconnect WiFi & conect back and test |
+|  Update code in `NextRacesInteractor.swift` to return `[]` by commenting out `results.append(..)` statement around line 65 | Update the API endpoint in `ApiConstants` to something incorrect URL | Disconnect WiFi & connect back and test |
 |   <img src="Screenshots/races-empty-list.gif" width="300" alt=""> |   <img src="Screenshots/server-error.gif" width="300" alt=""> |   <img src="Screenshots/network-error.gif" width="300" alt=""> |
 
 | Dark modes |  |
@@ -169,6 +196,6 @@ https://github.com/arinjoy/next-to-go/assets/7835943/a4b63859-01cb-4ec4-a349-0f2
 https://github.com/arinjoy/next-to-go/assets/7835943/ca42118b-7d60-4b30-8b71-490aea6be443
 
 
-| Potrait Large | Landscape Large  |
+| Portrait Large | Landscape Large  |
 | ------ | ---- |
-| <img src="Screenshots/potrait-mode-large.png" width="250" alt=""> | <img src="Screenshots/landscape-mode-large.png" height="250" alt=""> | 
+| <img src="Screenshots/portrait-mode-large.png" width="250" alt=""> | <img src="Screenshots/landscape-mode-large.png" height="250" alt=""> | 
