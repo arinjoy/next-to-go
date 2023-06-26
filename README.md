@@ -14,15 +14,34 @@ A user should always see top 5 races, and they should be sorted by time ascendin
 6.	As a user, I should always see 5 races and data should automatically refresh 
 
 ## 👨🏽‍💻  Solution Approach
- - App is broken down into 4 logical layers (via Swift Packages)
-   1.  `DataLayer` (Network fetching of raw data and JSON decoding via URL, error code mapping etc.)
-   2.  `DomainLayer` (Business logic of polling and combining data based on filters, sorting of top 5 based on timing etc.)
-   3.  `PresentationLayer` (Domain data to SwiftUI binding logic, all UI code etc.)
-   4.  `SharedUtils` (Common utility helpers and extensions)
+
+> Before we move onto breaking down the app layers and architecture, let's  read some of the best practices and how other SwiftUI developers in the community are feeling about various ways to architect a scalable app. 
+
+>> This article on [clean-architecture-swiftui](https://nalexn.github.io/clean-architecture-swiftui/) summarises the story quite well 🙏🏽
+
+| Clean Architecture with MVVM |
+| ---------------------------  |
+| <img src="Screenshots/clean-architecture.png" width="750" alt=""> |
+
+
+After reading it, I made this following decisions to go ahead and use some aspects of the `VIPER` pattern and mixing in with `MVVM`  while still having core concepts of `clean architecture` from uncle Bob 🧔🏼‍♂️. 
+
+Codebase is broken down into 4 logical layers (via `Swift Packages`)
+- `DataLayer`:
+    - Network fetching of raw data and JSON decoding via URL, error code mapping etc.
+- `DomainLayer`:
+    - Business logic of polling and combining data based on filters, sorting of top 5 based on timing etc.
+    - `Interactor`s live here. (aka. `UseCase` in some codebases)
+- `PresentationLayer`:
+    - Domain data to SwiftUI binding logic
+    - All UI specific code (SwiftUI OR UIKit)
+- `SharedUtils`:
+    - Common light weight utility helpers and extensions
+
 - A mix of **`MVVM`** and **`VIPER`** design pattern is used to achieve loose coupling and unit testing via **`Dependency Injection`** patterns and mocks
 - Currently use Apple's `Combine` based `Reactive Binding`
-- ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s `Modern Concurrency Async Await` paradigm (layer by layer where feasible)
-- `Unit Testing` (about 70%) has been covered on each layer. (A bit more can still be added in presentation layer code, all view models are tested for now, and to some shared utils)
+- ✋🏽`TODO`: Migrate from `Combine` driven Publishers into `Swift`'s **Modern Concurrency Async Await** paradigm (layer by layer where feasible and makes sense)
+- `Unit Testing` (about 70%) has been covered on each layer. (More being added iteratively...)
 - Some TODO notes left in the code deliberately for potential improvements and SwiftLint warns us about those to trace them
 - To achieve the **requirement 2** above, use ⏰ **hard negative tolerance** in the interactor (currently set at -90 seconds). This can be configured to show more old races which are past few minutes with negative countdown timer on the UI. Configurable option in the app logic. 🤓
 
