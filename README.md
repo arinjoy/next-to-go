@@ -135,7 +135,7 @@ graph TB
  - Xcode 14 or later (required)
  - Clean build /DerivedData folder if any
  - Let the Swift package Manager load and sync
- - Build the project and let the Swift Package Manager pulls the remote **`SwiftLint`** pluggin
+ - Build the project and let the Swift Package Manager pulls the remote **`SwiftLint`** plugin
  - **iOS 15** minimum support (SwiftUI v4 used)
  - If you're testing on a device, select `automatically manage signing` options
  - 💗 Please 🙏🏽 test on a real iPhone to play with the **Haptics** feedbacks added :) 💗
@@ -153,6 +153,7 @@ graph TB
 - Some custom SwiftUI animations are applied to many icons (all `SFSymbol`s and some custom made SF symbol such horse, harness etc.)
 - Dark mode toggle can be applied from Settings (there is a minor 🐞 bug there now, after applying this, shimmers go funny and does not update, app kill and restart needed)
 - Loading shimmers are added when refreshing races & changing between race category filters
+- User should be able to filter out top number desired (eg, 5, 10, 20) races and also filter based on a specific country
 
 ## ⛈️ Error Handling UX
 - Custom error UI is shown when loading error occurs
@@ -176,6 +177,16 @@ graph TB
 | Dark modes |  |
 | ------ | ---- |
 |   <img src="Screenshots/dark-mode-1.png" width="300" alt=""> |   <img src="Screenshots/dark-mode-2.png" width="300" alt=""> | 
+
+## 🚀 NEW FEATURES (added recently)
+
+| Country Selection  | Top Races Count Selection  |
+|----------|---------|
+| <img src="Screenshots/country-selection.gif" width="300" alt="">  | <img src="Screenshots/top-count-selection.gif" width="300" alt="">  | 
+
+| Combined Filters Effect |  Reset Filters |
+|----------|---------|
+|  <img src="Screenshots/top-count-county-selection.gif" width="300" alt=""> | <img src="Screenshots/reset-all.gif" width="300" alt=""> | 
 
 
 # Accessibility
