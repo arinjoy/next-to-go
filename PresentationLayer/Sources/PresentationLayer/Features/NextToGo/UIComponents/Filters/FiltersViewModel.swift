@@ -42,7 +42,7 @@ final class FiltersViewModel: ObservableObject {
 
     // MARK: - Private
 
-    private func resetFilters() {
+    func resetFilters() {
         for item in filters {
             filters[item.id].selected = true
         }

@@ -45,6 +45,15 @@ Codebase is broken down into 4 logical layers (via `Swift Packages`)
 - Some TODO notes left in the code deliberately for potential improvements and SwiftLint warns us about those to trace them
 - To achieve the **requirement 2** above, use ⏰ **hard negative tolerance** in the interactor (currently set at -90 seconds). This can be configured to show more old races which are past few minutes with negative countdown timer on the UI. Configurable option in the app logic. 🤓
 
+
+### 🏹 Next Steps (TODO) 🏹
+ - Replace the `MVVM` based pattern into **ReDux** which fit very nicely in SwiftUI state binding paradigm. Take the inspiration from these great articles below:
+   - https://www.kodeco.com/22096649-getting-a-redux-vibe-into-swiftui
+   - https://swiftwithmajid.com/2022/02/17/redux-like-state-container-in-swiftui-part5/
+ - Use **Async Await** paradigm to get the power of modern concurrency:
+   - https://medium.com/geekculture/from-combine-to-async-await-c08bf1d15b77
+   
+
 The package dependencies (import logic from one to another) are shown below:
 
 ```mermaid
@@ -73,10 +82,10 @@ sequenceDiagram
     participant RaceListUI
     participant ViewModel
     participant Interactor
-    participant NetworkSevice
+    participant NetworkService
     participant URLSession
 
-    RaceListUI->>ViewModel: Reactively bound to interactor's response
+    RaceListUI->>ViewModel: Reactively bound to viewModel's response
     
     ViewModel->>Interactor: Get the desired lists of Race domain models (reactively)
     loop Polling

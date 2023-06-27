@@ -78,7 +78,6 @@ struct RaceDetailsView: View {
             Spacer()
         }
         .padding()
-        .adaptiveScaleFactor()
     }
 
 }
