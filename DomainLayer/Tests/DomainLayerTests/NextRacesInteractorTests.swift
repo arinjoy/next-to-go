@@ -3,7 +3,7 @@ import Combine
 @testable import DataLayer
 @testable import DomainLayer
 
-// swiftlint:disable force_unwrapping
+// swiftlint:disable force_unwrapping file_length
 final class NextRacesInteractorTests: XCTestCase {
 
     private var interactor: NextRacesInteracting!
@@ -45,7 +45,10 @@ final class NextRacesInteractorTests: XCTestCase {
 
         // WHEN - being requested to load races
         interactor.nextRaces(
-            for: [.horse, .greyhound, .harness], numberOfRaces: 20, hardNegativeTolerance: nil
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 20,
+            hardNegativeTolerance: nil
         )
         .sink { _ in } receiveValue: { _ in
         }.store(in: &cancellables)
@@ -74,7 +77,9 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertEqual(serviceSpy.parameters?.last?.1.description, "50")
     }
 
-    func testLoadingWithHoseFilterOnly() throws {
+    // MARK: - Race category filers
+
+    func testLoadingWithHorseFilterOnly() throws {
 
         var receivedError: NetworkError?
         var receivedResponse: [Race]?
@@ -84,7 +89,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 3 races for `horse`
-        interactor.nextRaces(for: [.horse], numberOfRaces: 3, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.horse],
+            andCountry: nil,
+            numberOfRaces: 3,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -130,7 +140,12 @@ final class NextRacesInteractorTests: XCTestCase {
         interactor = NextRacesInteractor(networkService: serviceMock)
 
         // WHEN - being requested to load 5 races for `greyhound`
-        interactor.nextRaces(for: [.greyhound], numberOfRaces: 5, hardNegativeTolerance: nil)
+        interactor.nextRaces(
+            forCategories: [.greyhound],
+            andCountry: nil,
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -169,8 +184,13 @@ final class NextRacesInteractorTests: XCTestCase {
         let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
         interactor = NextRacesInteractor(networkService: serviceMock)
 
-        // WHEN - being requested to load 5 races for `greyhound` & `harness`
-        interactor.nextRaces(for: [.greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
+        // WHEN - being requested to load races for `greyhound` & `harness`
+        interactor.nextRaces(
+            forCategories: [.greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -214,8 +234,13 @@ final class NextRacesInteractorTests: XCTestCase {
         let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
         interactor = NextRacesInteractor(networkService: serviceMock)
 
-        // WHEN - being requested to load 5 races combining all three categories
-        interactor.nextRaces(for: [.horse, .greyhound, .harness], numberOfRaces: 5, hardNegativeTolerance: nil)
+        // WHEN - being requested to load races combining all three categories
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
             .sink { completion in
                 if case .failure(let error) = completion {
                     receivedError = error
@@ -264,5 +289,237 @@ final class NextRacesInteractorTests: XCTestCase {
         XCTAssertNil(receivedError)
     }
 
+    // MARK: - Country selection filter
+
+    func testCountryFilterUSA() {
+
+        var receivedError: NetworkError?
+        var receivedResponse: [Race]?
+
+        // GIVEN - the interactor is made out of service mock that returns sample races
+        let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
+        interactor = NextRacesInteractor(networkService: serviceMock)
+
+        // WHEN - being requested to load races across all categories but for "USA" only
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: "USA",
+            numberOfRaces: 20,
+            hardNegativeTolerance: nil
+        )
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - received race response should be correct with filtered "USA" results.
+
+        XCTAssertEqual(receivedResponse?.count, 3)
+
+        XCTAssertEqual(receivedResponse?[0].category, .horse)
+        XCTAssertEqual(receivedResponse?[0].name, "Race 6 - Claiming")
+        XCTAssertEqual(receivedResponse?[0].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[1].category, .horse)
+        XCTAssertEqual(receivedResponse?[1].name, "Race 3 - Trials")
+        XCTAssertEqual(receivedResponse?[1].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[2].category, .harness)
+        XCTAssertEqual(receivedResponse?[2].name, "Race 7 - 1609M")
+        XCTAssertEqual(receivedResponse?[2].venu.country, "USA")
+
+        // AND - the races are sorted
+
+        XCTAssertTrue(
+            receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![1].startTime.timeIntervalSince1970 < receivedResponse![2].startTime.timeIntervalSince1970
+        )
+
+        // AND - there should not any error returned
+        XCTAssertNil(receivedError)
+    }
+
+    func testCountryFilterArgentina() {
+
+        var receivedError: NetworkError?
+        var receivedResponse: [Race]?
+
+        // GIVEN - the interactor is made out of service mock that returns sample races
+        let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
+        interactor = NextRacesInteractor(networkService: serviceMock)
+
+        // WHEN - being requested to load races for "Argentina" only
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound],
+            andCountry: "ARG",
+            numberOfRaces: 5,
+            hardNegativeTolerance: nil
+        )
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - received race response should be correct with filtered ARG results.
+
+        XCTAssertEqual(receivedResponse?.count, 1)
+
+        XCTAssertEqual(receivedResponse?[0].category, .horse)
+        XCTAssertEqual(receivedResponse?[0].name, "1M Stakes")
+        XCTAssertEqual(receivedResponse?[0].venu.country, "ARG")
+
+        // AND - there should not any error returned
+        XCTAssertNil(receivedError)
+    }
+
+    // MARK: - Top number of required races
+
+    func testTopThreeRaces() {
+
+        var receivedError: NetworkError?
+        var receivedResponse: [Race]?
+
+        // GIVEN - the interactor is made out of service mock that returns sample races
+        let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
+        interactor = NextRacesInteractor(networkService: serviceMock)
+
+        // WHEN - being requested to load top 3 races only
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,  // internationally
+            numberOfRaces: 3, // 3 top races
+            hardNegativeTolerance: nil
+        )
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - received race response should be correct with top-3 races only
+
+        XCTAssertEqual(receivedResponse?.count, 3)
+
+        XCTAssertEqual(receivedResponse?[0].category, .horse)
+        XCTAssertEqual(receivedResponse?[0].name, "1M Stakes")
+        XCTAssertEqual(receivedResponse?[0].venu.country, "ARG")
+
+        XCTAssertEqual(receivedResponse?[1].category, .horse)
+        XCTAssertEqual(receivedResponse?[1].name, "Race 6 - Claiming")
+        XCTAssertEqual(receivedResponse?[1].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[2].category, .horse)
+        XCTAssertEqual(receivedResponse?[2].name, "Race 2 - Premio Aiortrophe - 1999")
+        XCTAssertEqual(receivedResponse?[2].venu.country, "BRA")
+
+        // AND - the races are sorted
+
+        XCTAssertTrue(
+            receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![1].startTime.timeIntervalSince1970 < receivedResponse![2].startTime.timeIntervalSince1970
+        )
+
+        // AND - there should not any error returned
+        XCTAssertNil(receivedError)
+    }
+
+    // swiftlint:disable:next function_body_length
+    func testTopFiftyRaces() {
+
+        var receivedError: NetworkError?
+        var receivedResponse: [Race]?
+
+        // GIVEN - the interactor is made out of service mock that returns sample races
+        let serviceMock = NetworkServiceMock(response: TestHelper.sampleRacesList, returningError: false)
+        interactor = NextRacesInteractor(networkService: serviceMock)
+
+        // WHEN - being requested to load top Fifty races only
+        interactor.nextRaces(
+            forCategories: [.horse, .greyhound, .harness],
+            andCountry: nil,  // internationally
+            numberOfRaces: 50, // 10 top races
+            hardNegativeTolerance: nil
+        )
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    receivedError = error
+                }
+            } receiveValue: { response in
+                receivedResponse = response
+            }
+            .store(in: &cancellables)
+
+        // THEN - received race response should be correct with max possible
+        // 6 races found
+
+        XCTAssertEqual(receivedResponse?.count, 6)
+
+        XCTAssertEqual(receivedResponse?[0].category, .horse)
+        XCTAssertEqual(receivedResponse?[0].name, "1M Stakes")
+        XCTAssertEqual(receivedResponse?[0].venu.country, "ARG")
+
+        XCTAssertEqual(receivedResponse?[1].category, .horse)
+        XCTAssertEqual(receivedResponse?[1].name, "Race 6 - Claiming")
+        XCTAssertEqual(receivedResponse?[1].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[2].category, .horse)
+        XCTAssertEqual(receivedResponse?[2].name, "Race 2 - Premio Aiortrophe - 1999")
+        XCTAssertEqual(receivedResponse?[2].venu.country, "BRA")
+
+        XCTAssertEqual(receivedResponse?[3].category, .horse)
+        XCTAssertEqual(receivedResponse?[3].name, "Race 3 - Trials")
+        XCTAssertEqual(receivedResponse?[3].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[4].category, .harness)
+        XCTAssertEqual(receivedResponse?[4].name, "Race 7 - 1609M")
+        XCTAssertEqual(receivedResponse?[4].venu.country, "USA")
+
+        XCTAssertEqual(receivedResponse?[5].category, .greyhound)
+        XCTAssertEqual(receivedResponse?[5].name, "Red Snapper Seafoods, Christchurch C0")
+        XCTAssertEqual(receivedResponse?[5].venu.country, "NZ")
+
+        // AND - the races are sorted
+
+        XCTAssertTrue(
+            receivedResponse![0].startTime.timeIntervalSince1970 < receivedResponse![1].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![1].startTime.timeIntervalSince1970 < receivedResponse![2].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![2].startTime.timeIntervalSince1970 < receivedResponse![3].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![3].startTime.timeIntervalSince1970 < receivedResponse![4].startTime.timeIntervalSince1970
+        )
+
+        XCTAssertTrue(
+            receivedResponse![4].startTime.timeIntervalSince1970 < receivedResponse![5].startTime.timeIntervalSince1970
+        )
+
+        // AND - there should not any error returned
+        XCTAssertNil(receivedError)
+    }
+
 }
-// swiftlint:enable force_unwrapping
+// swiftlint:enable force_unwrapping file_length

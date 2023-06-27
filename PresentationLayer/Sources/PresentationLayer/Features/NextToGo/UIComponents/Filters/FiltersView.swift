@@ -11,6 +11,8 @@ struct FiltersView: View {
 
     @StateObject var viewModel: FiltersViewModel
 
+    @Environment(\.sizeCategory) private var sizeCategory
+
     // NOTE: 💗 Test more and find the perfect haptic feelings you need. 💗
     let haptic = UIImpactFeedbackGenerator(style: .heavy)
 
@@ -21,21 +23,17 @@ struct FiltersView: View {
         HStack {
 
             ForEach(viewModel.filters) { filter in
-
-                HStack(spacing: 10) {
-
+                HStack(spacing: 8) {
                     Image(filter.category.iconName, bundle: .module)
-                        .font(.largeTitle)
-                        .scaleEffect(1.4)
+                        .font(sizeCategory >= .accessibilityExtraLarge ? .title : .largeTitle)
+                        .scaleEffect(1.3)
 
                     Image(systemName: filter.selected ?
                           "checkmark.circle.fill" : "circle")
-                        .font(.title3)
-                        .scaleEffect(1.1)
+                        .font(sizeCategory >= .accessibilityExtraLarge ? .body : .title3)
                 }
                 .accessibilityElement(children: .combine)
                 .foregroundColor(filter.selected ? .red : .primary)
-                .adaptiveScaleFactor()
                 .padding(.vertical, 6)
                 .padding(.horizontal, 14)
                 .background(
@@ -51,6 +49,11 @@ struct FiltersView: View {
                     haptic.impactOccurred()
                     viewModel.filterItemTapped(filterItem: filter)
                 }
+                .scaleEffect(filter.selected ? 1.05 : 0.95)
+                .animation(
+                    .spring(response: 0.35, dampingFraction: 0.25),
+                    value: filter.selected
+                )
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(filter.category.accessibilityLabel)
                 .accessibilityHint(
@@ -61,10 +64,6 @@ struct FiltersView: View {
             }
         }
         .padding(.horizontal, 10)
-
-        Divider()
-            .padding(.top, 8)
-
     }
 }
 

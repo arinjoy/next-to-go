@@ -19,6 +19,8 @@ public struct NextToGoView: View {
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
+    @Environment(\.sizeCategory) private var sizeCategory
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initializer
@@ -33,9 +35,16 @@ public struct NextToGoView: View {
 
         NavigationView {
 
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .center, spacing: 16) {
+
+                headingStack
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
 
                 FiltersView(viewModel: viewModel.filterViewModel)
+                    .padding(.bottom, 10)
+
+                Divider()
 
                 CollectionLoadingView(
                     loadingState: viewModel.loadingState,
@@ -60,9 +69,7 @@ public struct NextToGoView: View {
                     }
                 )
             }
-            .navigationBarTitle(Text(viewModel.title), displayMode: .large)
             .toolbar { toolBarContent }
-            .padding(.top, 20)
         }
         .preferredColorScheme(isDarkMode ? .dark : .light) // link dark / light mode
         .onAppear {
@@ -81,26 +88,38 @@ private extension NextToGoView {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
                 haptic.impactOccurred()
-                viewModel.loadNextRaces()
+                viewModel.resetFiltersAndRefresh()
             } label: {
-                Image(systemName: viewModel.refreshButtonIcon)
+                Image(systemName: viewModel.resetFiltersIcon)
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel(viewModel.refreshButtonTitle)
-                    .accessibilityHint(viewModel.refreshButtonAccessibilityHint)
+                    .accessibilityLabel(viewModel.resetFiltersButtonTitle)
+                    .accessibilityHint(viewModel.resetFiltersButtonAccessibilityHint)
             }
         }
 
         ToolbarItem(placement: .principal) {
-            Image(systemName: viewModel.navBarHeroIcon)
-                .resizable()
-                .frame(width: 36, height: 36)
-                .foregroundColor(.red)
-                .accessibilityHidden(true)
+            HStack(spacing: 10) {
+                Text(viewModel.title)
+                    .font(.title3)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.leading)
+
+                Image(systemName: viewModel.navBarHeroIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .font(.system(size: 20, weight: .medium, design: .rounded))
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.red)
+                    .accessibilityHidden(true)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -112,7 +131,7 @@ private extension NextToGoView {
                     .resizable()
                     .scaledToFit()
                     .font(.system(size: 18, weight: .medium, design: .rounded))
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .foregroundColor(.primary)
                     .accessibilityAddTraits(.isButton)
                     .accessibilityLabel(viewModel.settingsButtonTitle)
@@ -123,6 +142,114 @@ private extension NextToGoView {
             }
         }
     }
+
+    @ViewBuilder
+    var headingStack: some View {
+        HStack(spacing: 16) {
+            Spacer()
+            topCountSelectionMenu
+            countrySelectionMenu
+        }
+    }
+
+    @ViewBuilder
+    var topCountSelectionMenu: some View {
+        Menu {
+            Picker("", selection: $viewModel.selectedTopCount) {
+                ForEach(viewModel.topCounts, id: \.self) {
+                    Text("\($0)")
+                }
+            }
+        } label: {
+            menuLabel(from: "🔝 \(viewModel.selectedTopCount)")
+                .accessibilityLabel(
+                    // TODO: 🤓 move logic into ViewModel, use localised copy and unit test it
+                    "Top \(viewModel.selectedTopCount) races"
+                )
+                .accessibilityAddTraits(.isSelected)
+        }
+        .menuSelectorStyle()
+        .onTapGesture {
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+        }
+    }
+
+    @ViewBuilder
+    var countrySelectionMenu: some View {
+        Menu {
+            Picker("", selection: $viewModel.selectedCountry) {
+                ForEach(viewModel.countries) {
+                    Text($0.fullDisplayName)
+                }
+            }
+        } label: {
+            if let country = Country(rawValue: viewModel.selectedCountry) {
+                menuLabel(from: country.shortDisplayName)
+                    .accessibilityLabel(country.name)
+                    .accessibilityAddTraits(.isSelected)
+            }
+        }
+        .menuSelectorStyle()
+        .onTapGesture {
+            let haptic = UIImpactFeedbackGenerator(style: .medium)
+            haptic.impactOccurred()
+        }
+    }
+
+    @ViewBuilder
+    func menuLabel(from title: String) -> some View {
+
+        HStack(spacing: 0) {
+
+            Text(title)
+                .lineLimit(1)
+                .font(
+                    sizeCategory >= .accessibilityMedium ?
+                        .system(size: 24, weight: .medium, design: .rounded) :
+                            .body
+                )
+
+            Spacer().frame(width: 10)
+
+            Image(systemName: "chevron.up.chevron.down")
+                .font(
+                    sizeCategory >= .accessibilityMedium ?
+                        .system(size: 22, weight: .medium, design: .rounded) :
+                        .subheadline
+                )
+        }
+        .foregroundColor(.red)
+    }
+
+}
+
+// MARK: - Menu Selector Style
+
+private extension View {
+
+    func menuSelectorStyle() -> some View {
+        self.modifier(MenuSelectorStyle())
+    }
+
+}
+
+private struct MenuSelectorStyle: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .adaptiveScaleFactor()
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(UIColor.systemBackground))
+                    .shadow(color: .primary.opacity(0.25), radius: 2, x: 0, y: 0))
+            .contentShape(Rectangle())
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isButton)
+    }
+
 }
 
 #if DEBUG
