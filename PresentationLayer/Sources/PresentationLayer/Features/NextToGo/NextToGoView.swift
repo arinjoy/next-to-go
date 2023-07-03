@@ -71,6 +71,9 @@ public struct NextToGoView: View {
             }
             .toolbar { toolBarContent }
         }
+        .sheet(isPresented: $isShowingSettings) {
+            SettingsView()
+        }
         .preferredColorScheme(isDarkMode ? .dark : .light) // link dark / light mode
         .onAppear {
             viewModel.loadNextRaces()
@@ -136,9 +139,6 @@ private extension NextToGoView {
                     .accessibilityAddTraits(.isButton)
                     .accessibilityLabel(viewModel.settingsButtonTitle)
                     .accessibilityHint(viewModel.settingsButtonAccessibilityHint)
-            }
-            .sheet(isPresented: $isShowingSettings) {
-                SettingsView()
             }
         }
     }

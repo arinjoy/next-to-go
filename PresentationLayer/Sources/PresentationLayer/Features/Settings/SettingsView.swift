@@ -181,8 +181,8 @@ struct SettingsView: View {
                             label: {
                                 Image(systemName: "multiply.circle.fill")
                                     .resizable()
-                                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                                    .frame(width: 30, height: 30)
+                                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                                    .frame(width: 28, height: 28)
                                     .foregroundColor(Color(uiColor: UIColor.lightGray))
                                     .accessibilityLabel("Close")
                             }
